@@ -78,10 +78,9 @@
 
 路德宗在音乐上最独特的贡献，是分节歌式的会众赞美诗，德语叫 Choral 或 Kirchenlied，英语叫**众赞歌**（chorale）。
 
-今天多数人熟悉的是四部和声版，所以必须指出：众赞歌和素歌、民歌一样，本质上只有两个要素——**词与曲**；但同样和素歌、民歌一样，它可以被和声与对位增色，也可以扩展成大型音乐形式。16 世纪多数天主教教会音乐是素歌的延伸，17、18 世纪多数路德宗教会音乐则是众赞歌的延伸。
+今天多数人熟悉的是四部和声版，但必须指出：众赞歌和素歌、民歌一样，本质上只有两个要素——**词与曲**。16 世纪多数天主教教会音乐是素歌的延伸，17、18 世纪多数路德宗教会音乐则是众赞歌的延伸。
 
 1524 年出版了四部众赞歌集，此后不断有新的。从一开始，这些歌就是给会众**齐唱**用的，不加和声、不加伴奏。演唱时大概用比较均匀的时值，每个乐句的末音上有长短不定的停顿。
-
 > 出处：同上，p.311
 
 ### 三、旋律从哪儿来：contrafacta
@@ -90,7 +89,7 @@
 
 许多旋律是新作的，但更多是全部或部分取自世俗或宗教歌曲。例如格里高利圣咏《Veni Redemptor gentium》变成了《Nun komm' der Heiden Heiland》；灵修歌也被接收，如拉丁-德文混写的圣诞歌《In dulci jubilo》。
 
-一类特别重要的是世俗歌曲的 contrafacta（可译作「填词改作」）：旋律保留，歌词或完全换新，或改写以赋予正当的灵性含义。最有名也最美的一例是《O Welt, ich muss dich lassen》，改编自伊萨克（Isaac）的利德《Innsbruck, ich muss dich lassen》。更出人意料的一例是哈斯勒的利德《Mein Gmitth ist mir verwirret》，约 1600 年被配上圣词《Herzlich thut mich verlangen》，后来又配上《O Haupt voll Blut und Wunden》——巴赫《马太受难曲》里两次用到的就是它。
+一类特别重要的是世俗歌曲的 contrafacta（可译作「填词改作」）：旋律保留，歌词或完全换新，或改写以赋予正当的灵性含义。最有名也最美的一例是《O Welt, ich muss dich lassen》，改编自伊萨克（Isaac）的利德《Innsbruck, ich muss dich lassen》。更出人意料的一例是哈斯勒的利德《Mein Gmüth ist mir verwirret》，约 1600 年被配上圣词《Herzlich tut mich verlangen》，后来又配上《O Haupt voll Blut und Wunden》——巴赫《马太受难曲》里两次用到的就是它。
 
 > 出处：同上，p.312–313
 

@@ -132,6 +132,15 @@ export function renderMarkdown(src) {
     const bq = line.match(/^\s*(?:&gt;|>)\s?(.*)$/);
     if (bq) { flushList(); flushTable(); quote.push(inline(bq[1])); continue; }
     if (/^\s*(-{3,}|\*{3,})\s*$/.test(line)) { flushAll(); out.push('<hr>'); continue; }
+    // 独占一行的图片成为 figure，图注用 alt
+    const fig = line.match(/^!\[([^\]]*)\]\(([^)\s]+)\)\s*$/);
+    if (fig) {
+      flushAll();
+      const alt = fig[1];
+      out.push(`<figure class="figure"><img src="${fig[2]}" alt="${alt}" loading="lazy" decoding="async">`
+        + (alt ? `<figcaption>${alt}</figcaption>` : '') + '</figure>');
+      continue;
+    }
     if (/^\s*\|.*\|\s*$/.test(line)) {
       flushList(); flushQuote();
       if (/^\s*\|[\s:|-]+\|\s*$/.test(line)) continue;

@@ -1,6 +1,35 @@
 {
   "albums": [
     {
+      "id": "songs-for-drella",
+      "title": "Songs for Drella",
+      "artist": "Lou Reed & John Cale",
+      "year": "1990",
+      "kicker": "专辑解析",
+      "byline": "Lou Reed & John Cale · 1990",
+      "cover": "data/albums/songs-for-drella/cover.jpg",
+      "coverAlt": "Songs for Drella 专辑封面",
+      "facts": [
+        { "k": "艺人", "v": "Lou Reed & John Cale" },
+        { "k": "发行", "v": "1990" },
+        { "k": "厂牌", "v": "Sire Records" },
+        { "k": "形式", "v": "15 首 · 约 53 分钟" },
+        { "k": "副题", "v": "A Fiction" }
+      ],
+      "listen": [
+        { "platform": "Apple Music", "url": "https://music.apple.com/us/album/songs-for-drella/979404543" },
+        { "platform": "网易云音乐", "url": "https://music.163.com/#/album?id=1943066" }
+      ],
+      "more": [
+        { "platform": "The Guardian", "url": "https://www.theguardian.com/artanddesign/2022/apr/14/they-didnt-go-round-the-corner-for-beer-lou-reed-and-john-cales-songs-for-drella" },
+        { "platform": "Lincoln Center", "url": "https://www.filmlinc.org/nyff2021/films/songs-for-drella/" },
+        { "platform": "Warhol Museum", "url": "https://www.warhol.org" },
+        { "platform": "The Believer", "url": "https://www.thebeliever.net/an-interview-with-john-cale/" }
+      ],
+      "summary": "为 Andy Warhol 而写的 15 首歌：Lou Reed 与 John Cale 在决裂二十年后，用一部没有解决任何旧账的作品完成告别",
+      "addedAt": "2026-11-03"
+    },
+    {
       "id": "soul-mining",
       "title": "Soul Mining",
       "artist": "The The",
