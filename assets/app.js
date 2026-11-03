@@ -262,6 +262,8 @@ async function renderDetail() {
       byline.hidden = true;
     }
     $('detailFacts').hidden = true;
+    $('albumCover').hidden = true;
+    $('albumListen').hidden = true;
 
     let html = '';
     if (md.trim()) {
@@ -287,6 +289,7 @@ async function renderDetail() {
     $('detailBody').appendChild(wrap);
     decorateArticle($('detailBody'));
     buildLessonNav(day);
+    buildToc();
 
     const progress = loadProgress();
     const btn = $('markDone');
@@ -340,20 +343,14 @@ async function renderDetail() {
     }
 
     // 封面：专辑页的视觉锚点
-    const head = $('detailHead');
     const coverFig = $('albumCover');
     if (info?.cover) {
       const img = $('albumCoverImg');
       img.src = info.cover;
       img.alt = info.coverAlt || `${title} 专辑封面`;
-      const cap = $('albumCoverCaption');
-      cap.textContent = info.coverCaption || '';
-      cap.hidden = !info.coverCaption;
       coverFig.hidden = false;
-      head.classList.add('has-cover');
     } else {
       coverFig.hidden = true;
-      head.classList.remove('has-cover');
     }
 
     // 在线收听与资料链接
@@ -377,6 +374,7 @@ async function renderDetail() {
     $('detailBody').innerHTML = renderMarkdown(md);
     decorateArticle($('detailBody'));
     $('lessonNav').hidden = true;
+    $('lessonToc').hidden = true;
     skeleton.hidden = true;
     $('content').hidden = false;
     initReadProgress();
@@ -396,6 +394,41 @@ function decorateArticle(root) {
   const first = root.firstElementChild;
   if (first && first.tagName === 'BLOCKQUOTE' && !first.classList.contains('cite')) {
     first.classList.add('lede');
+  }
+}
+
+/* 本课大纲：桌面右栏的导航，窄屏收成一行链接 */
+function buildToc() {
+  const el = $('lessonToc');
+  const body = $('detailBody');
+  if (!el || !body) return;
+  // 固定小节不进目录，它们每篇都一样，只会淹没真正的结构
+  const SKIP = new Set(['今日练习', '今日思考', '今日小结', '参考出处']);
+  const heads = [...body.querySelectorAll('h2, h3')]
+    .filter(h => h.textContent.trim() && !SKIP.has(h.textContent.trim()));
+  if (heads.length < 2) { el.hidden = true; return; }
+
+  const items = heads.map((h, i) => {
+    const id = `sec-${i + 1}`;
+    h.id = id;
+    return { id, level: h.tagName === 'H2' ? 2 : 3, text: h.textContent.trim() };
+  });
+
+  el.innerHTML = '<div class="toc-title">本课大纲</div>'
+    + items.map(it => `<a class="toc-item toc-item--h${it.level}" href="#${it.id}">${esc(it.text)}</a>`).join('');
+  el.hidden = false;
+
+  const linkOf = new Map(items.map(it => [it.id, el.querySelector(`a[href="#${it.id}"]`)]));
+  const setActive = id => linkOf.forEach((a, key) => a.classList.toggle('is-active', key === id));
+
+  if ('IntersectionObserver' in window) {
+    const visible = new Map();
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => visible.set(e.target.id, e.isIntersecting));
+      const current = items.find(it => visible.get(it.id));
+      if (current) setActive(current.id);
+    }, { rootMargin: '-8% 0px -72% 0px', threshold: 0 });
+    heads.forEach(h => io.observe(h));
   }
 }
 

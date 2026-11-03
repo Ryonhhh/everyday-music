@@ -14,8 +14,10 @@
 </head>
 <body style="background:var(--ground)">
 <div class="read-progress" id="readProgress" aria-hidden="true"></div>
-<div class="detail-wrap">
+
+<div class="read-shell">
   <a class="detail-back" href="index.html">← 返回主页</a>
+
   <div id="skeleton">
     <div class="skeleton skeleton-title"></div>
     <div class="skeleton skeleton-line" style="width:60%"></div>
@@ -23,26 +25,36 @@
     <div class="skeleton skeleton-line" style="width:92%"></div>
     <div class="skeleton skeleton-line" style="width:84%"></div>
   </div>
+
   <div id="content" hidden>
-    <header class="detail-head" id="detailHead">
-      <div class="kicker" id="detailKicker"></div>
-      <h1 id="detailTitle"></h1>
-      <p class="byline" id="detailByline"></p>
-      <figure class="album-cover" id="albumCover" hidden>
-        <img id="albumCoverImg" alt="" loading="eager">
-        <figcaption id="albumCoverCaption"></figcaption>
-      </figure>
-      <dl class="facts" id="detailFacts" hidden></dl>
-      <nav class="listen" id="albumListen" hidden aria-label="在线收听"></nav>
-    </header>
-    <div class="article" id="detailBody"></div>
-    <nav class="lesson-nav" id="lessonNav" hidden></nav>
+    <div class="read-layout">
+      <header class="detail-head" id="detailHead">
+        <div class="kicker" id="detailKicker"></div>
+        <h1 id="detailTitle"></h1>
+        <p class="byline" id="detailByline"></p>
+      </header>
+
+      <aside class="read-rail">
+        <figure class="album-cover" id="albumCover" hidden>
+          <img id="albumCoverImg" alt="">
+        </figure>
+        <dl class="facts" id="detailFacts" hidden></dl>
+        <nav class="listen" id="albumListen" hidden aria-label="在线收听与资料"></nav>
+        <nav class="toc" id="lessonToc" hidden aria-label="本课大纲"></nav>
+      </aside>
+
+      <article class="article" id="detailBody"></article>
+
+      <nav class="lesson-nav" id="lessonNav" hidden></nav>
+    </div>
   </div>
+
   <div id="error" hidden>
     <h1>没有找到这一页</h1>
     <div class="detail-meta">该内容不存在或已被删除。<a href="index.html">返回主页</a></div>
   </div>
 </div>
+
 <script type="module" src="assets/app.js"></script>
 </body>
 </html>

@@ -19,14 +19,70 @@
   z-index: 30;
 }
 
-/* ---------- 版心 ---------- */
-.detail-wrap {
-  max-width: var(--read-measure);
+/* ---------- 版心：桌面双栏，窄屏单栏 ---------- */
+.read-shell {
+  /* 660 正文 + 68 间距 + 268 右栏 + 36×2 内边距 = 1068 */
+  max-width: 1068px;
   margin: 0 auto;
-  padding: 56px 24px 104px;
+  padding: 48px 36px 104px;
 }
+
+.read-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 660px) 268px;
+  grid-template-areas:
+    "head rail"
+    "body rail"
+    "nav  rail";
+  column-gap: 68px;
+  align-items: start;
+}
+
+.detail-head { grid-area: head; margin-bottom: 34px; }
+.article { grid-area: body; }
+.lesson-nav { grid-area: nav; }
+
+.read-rail {
+  grid-area: rail;
+  position: sticky;
+  top: 40px;
+  display: grid;
+  gap: 26px;
+  align-content: start;
+}
+
+@media (min-width: 921px) {
+  .read-rail {
+    padding-left: 30px;
+    border-left: 1px solid var(--rule);
+  }
+}
+
+/* 1024 以下把右栏收窄，920 以下落回单栏 */
+@media (max-width: 1080px) {
+  .read-shell { padding: 44px 28px 96px; }
+  .read-layout {
+    grid-template-columns: minmax(0, 1fr) 236px;
+    column-gap: 44px;
+  }
+}
+
+@media (max-width: 920px) {
+  .read-layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "rail"
+      "body"
+      "nav";
+    column-gap: 0;
+  }
+  .read-rail { position: static; margin-bottom: 30px; }
+  .read-shell { padding: 32px 20px 80px; }
+}
+
 @media (max-width: 640px) {
-  .detail-wrap { padding: 30px 18px 80px; }
+  .read-shell { padding: 26px 18px 72px; }
 }
 
 .detail-back {
@@ -134,6 +190,13 @@
 }
 .article h2 + p,
 .article h3 + p { margin-top: 0; }
+
+/* 正文第一段标题紧接页头，不再叠加上边距 */
+.article > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
 
 .article h3 {
   font-size: 18px;
@@ -268,47 +331,41 @@
   color: var(--faint);
 }
 
-/* 有封面时页头变成「封面 + 文字」两栏 */
-.detail-head.has-cover {
-  display: grid;
-  grid-template-columns: 172px minmax(0, 1fr);
-  grid-template-areas:
-    "cover kicker"
-    "cover title"
-    "cover byline"
-    "facts facts"
-    "listen listen";
-  column-gap: 28px;
-  row-gap: 0;
-  align-items: start;
+/* 右栏：封面、发行信息、收听链接、本课大纲 */
+.album-cover { margin: 0; }
+.album-cover[hidden] { display: none; }
+.album-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1px var(--border);
 }
-.detail-head.has-cover .album-cover { grid-area: cover; }
-.detail-head.has-cover .kicker { grid-area: kicker; }
-.detail-head.has-cover h1 { grid-area: title; }
-.detail-head.has-cover .byline { grid-area: byline; }
-.detail-head.has-cover .facts { grid-area: facts; }
-.detail-head.has-cover .listen { grid-area: listen; }
+
+.read-rail .facts {
+  margin: 0;
+  padding: 20px 0 0;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+.read-rail .facts .fact:last-child:nth-child(3n + 2) { grid-column: auto; }
 
 .listen {
   display: grid;
-  gap: 10px;
-  margin-top: 26px;
+  gap: 12px;
+  margin: 0;
 }
 .listen[hidden] { display: none; }
 .listen-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: grid;
+  gap: 7px;
 }
 .listen-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 .listen-label {
-  flex: none;
-  width: 5.8em;
-  white-space: nowrap;
   font-size: 11px;
   letter-spacing: .14em;
   color: var(--faint);
@@ -333,18 +390,69 @@
 .listen-pill--stream:hover { background: #fff8ef; }
 
 @media (max-width: 640px) {
-  .detail-head.has-cover {
-    grid-template-columns: 132px minmax(0, 1fr);
-    grid-template-areas:
-      "cover kicker"
-      "cover title"
-      "cover byline"
-      "facts facts"
-      "listen listen";
-    column-gap: 16px;
-  }
-  .listen { margin-top: 20px; }
+  .listen { gap: 10px; }
   .listen-pill { height: 30px; padding: 0 12px; font-size: 12.5px; }
+}
+
+/* ---------- 本课大纲（右栏 / 窄屏标题下） ---------- */
+.toc {
+  display: grid;
+  gap: 1px;
+}
+.toc[hidden] { display: none; }
+.toc-title {
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--faint);
+  margin-bottom: 10px;
+}
+.toc-item {
+  display: block;
+  padding: 5px 0 5px 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.toc-item--h2 {
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 10px;
+}
+.toc-item--h2:first-of-type { margin-top: 0; }
+.toc-item:hover { color: var(--text); }
+.toc-item--h3 {
+  font-size: 12.5px;
+  padding-left: 24px;
+  color: var(--faint);
+}
+.toc-item.is-active {
+  color: var(--text);
+  border-left-color: var(--accent);
+}
+.toc-item--h3.is-active { color: var(--muted); border-left-color: var(--control); }
+
+@media (max-width: 920px) {
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .toc[hidden] { display: none; }
+  .toc-title { width: 100%; margin-bottom: 2px; }
+  .toc-item {
+    border-left: 0;
+    padding: 0;
+    font-size: 12.5px;
+  }
+  .toc-item--h2 { margin-top: 0; font-weight: 500; }
+  .toc-item--h3 { display: none; }
+  .toc-item.is-active { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 }
 
 /* ---------- 课后动作 ---------- */
