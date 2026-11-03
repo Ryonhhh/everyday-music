@@ -77,7 +77,7 @@ conductus（孔杜克图斯）最初可能唱于这样的时刻：礼仪剧中�
 
 它有一个重要特征：照例**旋律是新作的**，而不是从素歌借来改编。第 3 天的附加段是「在别人的圣咏上加东西」，conductus 则从零写起——**「作曲」这件事，是在这两步之间成形的。**
 
-> 出处：Grout & Palisca, *A History of Western Music*, 4th ed., Ch.2, p.83（自此以下均用印刷页码）
+> 出处：Grout & Palisca, *A History of Western Music*, 4th ed., Ch.2, p.83（自此以下均用码）
 
 ### 二、方言歌曲与游方艺人
 
@@ -134,4 +134,4 @@ trouvère 的歌常带**叠句**（refrain）：文本中反复出现的行或�
 ## 参考出处
 
 - 李重光《基本乐理通用教材》第二讲「音律」第三至六节，p.12–15
-- Donald Jay Grout & Claude V. Palisca, *A History of Western Music*, 4th ed., Ch.2: Nonliturgical and Secular Monody; Medieval Instrumental Music and Instruments, p.83–92（印刷页）；Ch.1: The Early Christian Church, p.34
+- Donald Jay Grout & Claude V. Palisca, *A History of Western Music*, 4th ed., Ch.2: Nonliturgical and Secular Monody; Medieval Instrumental Music and Instruments, p.83–92（）；Ch.1: The Early Christian Church, p.34
