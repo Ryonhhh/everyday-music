@@ -129,6 +129,8 @@
   padding-top: .85em;
   border-top: 1px solid var(--border);
   text-wrap: balance;
+  /* 标题绝不能继承正文的两端对齐，否则换行时字距会被拉散 */
+  text-align: left;
 }
 .article h2 + p,
 .article h3 + p { margin-top: 0; }
@@ -139,12 +141,14 @@
   line-height: 1.55;
   letter-spacing: .01em;
   margin: 1.9em 0 .65em;
+  text-align: left;
 }
 
 .article h4 {
   font-size: 15px;
   font-weight: 600;
   margin: 1.5em 0 .5em;
+  text-align: left;
 }
 
 @media (max-width: 640px) {
