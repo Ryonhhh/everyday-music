@@ -21,3 +21,6 @@ __pycache__/
 *.pyc
 .vscode/
 .idea/
+
+# 根目录的临时截图（docs/preview 里的保留）
+/*.png
