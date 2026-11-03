@@ -95,6 +95,11 @@ a.btn {
   padding: 0 20px;
 }
 
+/* 窄屏下 KPI 会换行，去掉换行后的孤立分隔线 */
+@media (max-width: 700px) {
+  .kpis .kpi + .kpi { border-left: none; }
+}
+
 /* 表格（课程正文里可能出现） */
 .article table {
   width: 100%;
