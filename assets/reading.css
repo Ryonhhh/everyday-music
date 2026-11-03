@@ -1,0 +1,291 @@
+/* 阅读层：课程正文与专辑解析
+   目标是一页有节制的学术读本——书眉、衬线标题、收窄的行长、降级的出处引注。 */
+
+:root {
+  --read-measure: 660px;
+  --read-fs: 17px;
+  --read-lh: 1.9;
+}
+
+/* ---------- 顶部阅读进度 ---------- */
+.read-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform .12s linear;
+  z-index: 30;
+}
+
+/* ---------- 版心 ---------- */
+.detail-wrap {
+  max-width: var(--read-measure);
+  margin: 0 auto;
+  padding: 56px 24px 104px;
+}
+@media (max-width: 640px) {
+  .detail-wrap { padding: 30px 18px 80px; }
+}
+
+.detail-back {
+  display: inline-block;
+  margin-bottom: 30px;
+  font-size: 13px;
+  letter-spacing: .02em;
+  color: var(--faint);
+  text-decoration: none;
+}
+.detail-back:hover { color: var(--accent); }
+
+/* ---------- 页头 ---------- */
+.detail-head { margin-bottom: 34px; }
+
+.detail-head .kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.detail-head h1 {
+  font-family: "Instrument Serif", "Songti SC", Georgia, serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin: 14px 0 0;
+  text-wrap: balance;
+}
+@media (max-width: 640px) {
+  .detail-head h1 { font-size: 29px; line-height: 1.28; }
+}
+
+.detail-head .byline {
+  margin: 12px 0 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* 专辑元信息：标签 + 值，紧凑网格 */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+  margin: 28px 0 0;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--rule);
+}
+/* display:grid 会盖掉 UA 的 [hidden]{display:none}，必须显式关掉，
+   否则隐藏的元信息仍占高度并留下一条边线 */
+.facts[hidden] { display: none; }
+@media (min-width: 680px) {
+  .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.fact dt {
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--faint);
+  margin: 0 0 5px;
+}
+.fact dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  text-wrap: pretty;
+}
+/* 五项填三列时，最后一项跨两列：既不留空洞，也避免长值孤字换行 */
+@media (min-width: 680px) {
+  .facts .fact:last-child:nth-child(3n + 2) { grid-column: span 2; }
+}
+
+/* ---------- 正文 ---------- */
+.article {
+  font-size: var(--read-fs);
+  line-height: var(--read-lh);
+  color: var(--text);
+  text-align: justify;
+  text-justify: inter-ideograph;
+  hyphens: none;
+}
+
+.article > p { margin: 0 0 1.15em; }
+.article > p:last-child { margin-bottom: 0; }
+
+.article h2 {
+  font-family: "Instrument Serif", "Songti SC", Georgia, serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.32;
+  letter-spacing: -0.005em;
+  color: var(--text);
+  margin: 2.4em 0 .85em;
+  padding-top: .85em;
+  border-top: 1px solid var(--border);
+  text-wrap: balance;
+}
+.article h2 + p,
+.article h3 + p { margin-top: 0; }
+
+.article h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: .01em;
+  margin: 1.9em 0 .65em;
+}
+
+.article h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 1.5em 0 .5em;
+}
+
+@media (max-width: 640px) {
+  .article { font-size: 16px; line-height: 1.85; text-align: left; }
+  .article h2 { font-size: 24px; margin-top: 2em; }
+  .article h3 { font-size: 17px; }
+}
+
+.article strong { font-weight: 600; }
+.article em { font-style: italic; }
+
+.article a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* 列表：序号用表格数字、弱色，条目之间留呼吸 */
+.article ul,
+.article ol {
+  margin: 1em 0 1.25em;
+  padding-left: 1.55em;
+}
+.article li {
+  margin: .45em 0;
+  padding-left: .2em;
+}
+.article li::marker {
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+.article li > ul,
+.article li > ol { margin: .5em 0; }
+
+/* 开篇导语：不是引用，是这一页的引子——衬线、略大、无左线 */
+.article > blockquote.lede {
+  margin: 0 0 2.2em;
+  padding: 0;
+  border: 0;
+  font-family: "Instrument Serif", "Songti SC", Georgia, serif;
+  font-size: 20px;
+  line-height: 1.7;
+  letter-spacing: .004em;
+  color: var(--muted);
+  text-align: left;
+}
+@media (max-width: 640px) {
+  .article > blockquote.lede { font-size: 18px; }
+}
+
+/* 引语：左线 + 弱色，不铺底色 */
+.article blockquote {
+  margin: 1.7em 0;
+  padding: 0 0 0 18px;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.85;
+  text-align: left;
+}
+.article blockquote p { margin: 0 0 .55em; }
+.article blockquote p:last-child { margin-bottom: 0; }
+
+/* 出处引注：降级为贴边细注，扫读时可被忽略 */
+.article blockquote.cite {
+  margin: 1.05em 0 1.7em;
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+  font-size: 12.5px;
+  line-height: 1.7;
+  letter-spacing: .01em;
+  color: var(--faint);
+}
+
+.article hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2.4em 0;
+}
+
+.article code {
+  background: var(--surface);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: .88em;
+}
+.article pre {
+  background: var(--surface);
+  padding: 14px 16px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: left;
+}
+.article pre code { background: none; padding: 0; }
+
+/* ---------- 课后动作 ---------- */
+.progress-action {
+  margin-top: 52px;
+  padding-top: 26px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  gap: 12px;
+}
+
+/* ---------- 上一课 / 下一课 ---------- */
+.lesson-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 20px;
+  padding-top: 4px;
+}
+.nav-card {
+  display: grid;
+  gap: 6px;
+  padding: 15px 17px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color .15s ease, background .15s ease;
+}
+.nav-card:hover { border-color: var(--accent); background: #fffdf8; }
+.nav-card--empty { border: none; padding: 0; }
+.nav-dir {
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--faint);
+}
+.nav-title {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.lesson-nav .nav-card:nth-child(2) { text-align: right; }
+.lesson-nav .nav-card:nth-child(2) .nav-dir { justify-self: end; }
+
+@media (max-width: 640px) {
+  .lesson-nav { grid-template-columns: 1fr; }
+  .lesson-nav .nav-card:nth-child(2) { text-align: left; }
+  .lesson-nav .nav-card:nth-child(2) .nav-dir { justify-self: start; }
+}

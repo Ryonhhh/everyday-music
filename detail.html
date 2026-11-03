@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="assets/app.css">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/site-extra.css">
+<link rel="stylesheet" href="assets/reading.css">
 </head>
 <body style="background:var(--ground)">
+<div class="read-progress" id="readProgress" aria-hidden="true"></div>
 <div class="detail-wrap">
   <a class="detail-back" href="index.html">← 返回主页</a>
   <div id="skeleton">
@@ -22,9 +24,14 @@
     <div class="skeleton skeleton-line" style="width:84%"></div>
   </div>
   <div id="content" hidden>
-    <h1 id="detailTitle"></h1>
-    <div class="detail-meta" id="detailMeta"></div>
+    <header class="detail-head">
+      <div class="kicker" id="detailKicker"></div>
+      <h1 id="detailTitle"></h1>
+      <p class="byline" id="detailByline"></p>
+      <dl class="facts" id="detailFacts" hidden></dl>
+    </header>
     <div class="article" id="detailBody"></div>
+    <nav class="lesson-nav" id="lessonNav" hidden></nav>
   </div>
   <div id="error" hidden>
     <h1>没有找到这一页</h1>

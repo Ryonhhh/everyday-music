@@ -237,11 +237,23 @@ async function renderDetail() {
       } catch { md = ''; }
     }
 
-    document.title = `第 ${day} 天 · ${dayData.units[0]?.title || ''} · 每日音乐学习`;
-    $('detailTitle').textContent = `第 ${day} 天 · ${dayData.units.map(u => u.title).join(' / ')}`;
-    const meta = [`课程日 ${day}`];
-    if (metaInfo?.minutes) meta.push(`约 ${metaInfo.minutes} 分钟`);
-    $('detailMeta').innerHTML = meta.map(m => `<span>${esc(m)}</span>`).join('<span aria-hidden="true">·</span>');
+    const mainUnit = dayData.units[0];
+    const secondUnit = dayData.units[1];
+    document.title = `第 ${day} 天 · ${mainUnit?.title || ''} · 每日音乐学习`;
+    $('detailKicker').textContent = `课程日 ${String(day).padStart(2, '0')}`
+      + (metaInfo?.minutes ? ` · 约 ${metaInfo.minutes} 分钟` : '');
+    // 单元标题多为「A；B」两段，按分号断行比让浏览器随机折行讲究
+    const titleParts = (mainUnit?.title || `第 ${day} 天`).split('；').map(s => esc(s.trim())).filter(Boolean);
+    $('detailTitle').innerHTML = titleParts.join('<br>');
+    const byline = $('detailByline');
+    if (secondUnit) {
+      byline.textContent = `并读 · ${secondUnit.track === 'theory' ? '乐理' : '音乐史'}「${secondUnit.title}」`;
+    } else if (mainUnit?.book) {
+      byline.textContent = mainUnit.book;
+    } else {
+      byline.hidden = true;
+    }
+    $('detailFacts').hidden = true;
 
     let html = '';
     if (md.trim()) {
@@ -265,6 +277,8 @@ async function renderDetail() {
     wrap.innerHTML = '<button class="btn btn-primary" id="markDone" type="button">标记本课已学完</button>';
     $('detailBody').innerHTML = html;
     $('detailBody').appendChild(wrap);
+    decorateArticle($('detailBody'));
+    buildLessonNav(day);
 
     const progress = loadProgress();
     const btn = $('markDone');
@@ -286,6 +300,7 @@ async function renderDetail() {
 
     skeleton.hidden = true;
     $('content').hidden = false;
+    initReadProgress();
     return;
   }
 
@@ -299,16 +314,80 @@ async function renderDetail() {
     } catch { return fail(); }
     const title = info?.title || id;
     document.title = `${title} · 每日音乐学习`;
+    $('detailKicker').textContent = info?.kicker || '专辑解析';
     $('detailTitle').textContent = title;
-    const metaItems = [info?.artist, info?.year].filter(Boolean);
-    $('detailMeta').innerHTML = metaItems.map(m => `<span>${esc(m)}</span>`).join('<span aria-hidden="true">·</span>');
+    const byline = $('detailByline');
+    const bylineText = info?.byline || [info?.artist, info?.year].filter(Boolean).join(' · ');
+    if (bylineText) byline.textContent = bylineText;
+    else byline.hidden = true;
+
+    const factsEl = $('detailFacts');
+    if (info?.facts?.length) {
+      factsEl.innerHTML = info.facts
+        .map(f => `<div class="fact"><dt>${esc(f.k)}</dt><dd>${esc(f.v)}</dd></div>`)
+        .join('');
+      factsEl.hidden = false;
+    } else {
+      factsEl.hidden = true;
+    }
+
     $('detailBody').innerHTML = renderMarkdown(md);
+    decorateArticle($('detailBody'));
+    $('lessonNav').hidden = true;
     skeleton.hidden = true;
     $('content').hidden = false;
+    initReadProgress();
     return;
   }
 
   fail();
+}
+
+/* 把「出处」引注降级成贴边细注；开篇那条做成导语 */
+function decorateArticle(root) {
+  if (!root) return;
+  root.querySelectorAll('blockquote').forEach(bq => {
+    const t = bq.textContent.trim();
+    if (t.startsWith('出处')) bq.classList.add('cite');
+  });
+  const first = root.firstElementChild;
+  if (first && first.tagName === 'BLOCKQUOTE' && !first.classList.contains('cite')) {
+    first.classList.add('lede');
+  }
+}
+
+/* 上下课导航 */
+function buildLessonNav(day) {
+  const nav = $('lessonNav');
+  if (!nav) return;
+  const total = CURRICULUM.totalDays;
+  const prev = day > 1 ? day - 1 : null;
+  const next = day < total ? day + 1 : null;
+  if (!prev && !next) { nav.hidden = true; return; }
+  const titleOf = d => CURRICULUM.days.find(x => x.day === d)?.units[0]?.title || '';
+  const card = (d, dir) => d
+    ? `<a class="nav-card" href="detail.html?type=lesson&day=${d}">
+         <span class="nav-dir">${dir}</span>
+         <span class="nav-title">第 ${d} 天 · ${esc(titleOf(d))}</span>
+       </a>`
+    : '<span class="nav-card nav-card--empty" aria-hidden="true"></span>';
+  nav.innerHTML = card(prev, '上一课') + card(next, '下一课');
+  nav.hidden = false;
+}
+
+/* 顶部阅读进度 */
+function initReadProgress() {
+  const bar = $('readProgress');
+  if (!bar) return;
+  const update = () => {
+    const el = document.documentElement;
+    const max = el.scrollHeight - el.clientHeight;
+    const p = max > 12 ? Math.min(1, el.scrollTop / max) : 0;
+    bar.style.transform = `scaleX(${p})`;
+  };
+  update();
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update);
 }
 
 function saveProgressSafe(p) {

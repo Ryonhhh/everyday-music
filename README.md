@@ -34,13 +34,23 @@
 
 ## 界面
 
-| 课程目录 | 资料库 |
+| 首页 | 课程目录 |
 | --- | --- |
-| ![课程目录](docs/preview/lessons.png) | ![资料库](docs/preview/library.png) |
+| ![首页](docs/preview/home.png) | ![课程目录](docs/preview/lessons.png) |
 
-手机端同样可用：
+读一节课是一页安静的读本：书眉交代场次与时长，衬线标题，36 字一行的正文，「出处」退到边角 —— 需要核对时再去找。
 
-![移动端](docs/preview/mobile.png)
+| 课程正文 | 专辑解析 |
+| --- | --- |
+| ![课程正文](docs/preview/reading.png) | ![专辑解析](docs/preview/album.png) |
+
+| 资料库 | 手机端 |
+| --- | --- |
+| ![资料库](docs/preview/library.png) | ![移动端](docs/preview/mobile.png) |
+
+本地知识库管理界面（拖拽上传新书 + 全文检索）：
+
+![本地知识库](docs/preview/rag.png)
 
 ## 用法
 
