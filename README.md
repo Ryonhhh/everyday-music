@@ -8,6 +8,20 @@
 网站是**纯静态**的：没有服务器、没有数据库、没有登录。课程正文提前写好，随仓库一起发布。
 书籍全文检索在**本地**运行，书籍原文不会上传到 GitHub。
 
+## 预览
+
+| 首页 | 课程目录 |
+| --- | --- |
+| ![首页](docs/preview/home.png) | ![课程目录](docs/preview/lessons.png) |
+
+| 资料库 | 手机端 |
+| --- | --- |
+| ![资料库](docs/preview/library.png) | ![移动端](docs/preview/mobile.png) |
+
+本地知识库管理界面（拖拽上传新书 + 全文检索）：
+
+![本地知识库](docs/preview/rag.png)
+
 ---
 
 ## 为什么以前跑不起来
