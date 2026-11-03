@@ -11,14 +11,32 @@ class Searcher:
         rows = store.all_chunks(conn)
         self.rows = rows
         self.by_id = {r['id']: r for r in rows}
+        self.by_ord = {(r['book_id'], r['ord']): r for r in rows}
         docs = [{'id': r['id'], 'text': r['text']} for r in rows]
         self.bm25 = BM25(docs)
 
-    def search(self, query, top_k=8, book=None, window=320, page_range=None):
-        hits = self.bm25.search(query, top_k=max(top_k * 6, 24))
+    def _neighbors(self, row, n):
+        """命中块之后的 n 块。
+
+        小节标题常常单独一页，正文在下一页，且不会重复标题词，
+        单靠标题检索抓不到；顺延取相邻块能补上。
+        """
+        out = []
+        for step in range(1, n + 1):
+            nb = self.by_ord.get((row['book_id'], row['ord'] + step))
+            if nb is not None:
+                out.append(nb)
+        return out
+
+    def search(self, query, top_k=8, book=None, window=320, page_range=None, expand=0):
+        # 限定页码时必须先放宽候选，否则范围内的好段落会被全局排序挤掉
+        pool = max(top_k * 40, 400) if page_range else max(top_k * 6, 24)
+        hits = self.bm25.search(query, top_k=pool)
         out = []
         q_terms = [t for t in tokenize(query) if len(t) >= 2]
         taken_pages = []
+        seen_ids = set()
+        scored = 0  # 只统计真正命中的块；承接块不占 top_k 配额
         pmin = pmax = None
         if page_range:
             pmin, pmax = page_range
@@ -35,6 +53,8 @@ class Searcher:
             if any(_overlaps(span, t) for t in taken_pages):
                 continue
             taken_pages.append(span)
+            seen_ids.add(row['id'])
+            scored += 1
             out.append({
                 'chunkId': row['id'],
                 'book': row['book_title'],
@@ -45,7 +65,23 @@ class Searcher:
                 'snippet': make_snippet(row['text'], q_terms, window),
                 'text': row['text'],
             })
-            if len(out) >= top_k:
+            if expand:
+                for nb in self._neighbors(row, expand):
+                    if nb['id'] in seen_ids:
+                        continue
+                    seen_ids.add(nb['id'])
+                    out.append({
+                        'chunkId': nb['id'],
+                        'book': nb['book_title'],
+                        'bookSlug': nb['book_slug'],
+                        'pageStart': nb['page_start'],
+                        'pageEnd': nb['page_end'],
+                        'score': 0.0,
+                        'snippet': make_snippet(nb['text'], q_terms, window),
+                        'text': nb['text'],
+                        'follower': True,
+                    })
+            if scored >= top_k:
                 break
         return out
 

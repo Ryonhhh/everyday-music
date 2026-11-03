@@ -1,4 +1,4 @@
-"""取出指定单元的检索原文，供写课程正文用。
+﻿"""取出指定单元的检索原文，供写课程正文用。
 
 用法：
   python tools/unit_context.py T01 H01 --out .tmp/ctx.txt
@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.join(ROOT, 'rag', '.pylibs'))
 from rag import store  # noqa: E402
 from rag.search import Searcher  # noqa: E402
 
-TRACK_BOOK = {'theory': '乐理', 'history': 'Grout'}
+TRACK_BOOK = {'theory': '基本乐理通用教材', 'history': 'western-music-history'}
 CJK_RUN = re.compile(r'[\u4e00-\u9fff：，、；！？“”‘’（）]+')
 PAGES = re.compile(r'p\.\s*(\d+)\s*[-–]\s*(\d+)')
 
@@ -38,6 +38,15 @@ def page_range_of(unit):
         return None
     a, b = int(m.group(1)), int(m.group(2))
     return (a, b) if a <= b else (b, a)
+
+
+def resolve_book_id(conn, track):
+    """track -> books.id；找不到返回 None（此时不按书过滤）。"""
+    needle = TRACK_BOOK.get(track)
+    if not needle:
+        return None
+    row = store.get_book(conn, needle)
+    return row['id'] if row else None
 
 
 def main():
@@ -63,15 +72,19 @@ def main():
         track = u.get('track')
         book = TRACK_BOOK.get(track)
         english = track == 'history'
-        prange = page_range_of(u)
+        printed = page_range_of(u)
+        book_id = resolve_book_id(conn, track)
+        offset = store.book_page_offset(conn, book_id) if book_id else 0
+        prange = (printed[0] + offset, printed[1] + offset) if printed else None
         lines.append('=' * 78)
         lines.append(f'单元 {uid}  [{track}]  {u.get("title", "")}')
         if u.get('lecture'):
             lines.append(f'讲次：{u["lecture"]}')
         if u.get('chapter'):
             lines.append(f'章节：{u["chapter"]}')
-        if prange:
-            lines.append(f'页码范围：p.{prange[0]}-{prange[1]}（检索时优先限定在此范围）')
+        if printed:
+            lines.append(f'印刷页码 p.{printed[0]}-{printed[1]}'
+                         f'（物理页偏移 +{offset} → 检索范围 p.{prange[0]}-{prange[1]}）')
         for sec in u.get('sections') or []:
             lines.append(f'  · {sec}')
 
@@ -84,16 +97,19 @@ def main():
 
         seen = set()
         for q in queries:
-            hits = s.search(q, top_k=args.per, book=book, window=10000, page_range=prange)
+            hits = s.search(q, top_k=args.per, book=book, window=10000,
+                            page_range=prange, expand=3)
             if not hits:
                 # 页码范围太窄时退化为全书检索，避免空手而归
-                hits = s.search(q, top_k=args.per, book=book, window=10000)
+                hits = s.search(q, top_k=args.per, book=book, window=10000, expand=3)
             for h in hits:
                 if h['chunkId'] in seen:
                     continue
                 seen.add(h['chunkId'])
+                tag = '（承接上文）' if h.get('follower') else ''
                 lines.append('')
-                lines.append(f'--- 检索「{q}」 → {h["book"]} p.{h["pageStart"]}-{h["pageEnd"]} (score {h["score"]})')
+                lines.append(f'--- 检索「{q}」{tag} → {h["book"]} '
+                             f'p.{h["pageStart"]}-{h["pageEnd"]} (score {h["score"]})')
                 lines.append(h['text'])
     conn.close()
 

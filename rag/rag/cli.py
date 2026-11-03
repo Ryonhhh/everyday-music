@@ -104,7 +104,10 @@ def cmd_search(args):
             return 0
         for i, h in enumerate(hits, 1):
             print(f'--- {i}. [{h["book"]}] p.{h["pageStart"]}-{h["pageEnd"]}  score={h["score"]}')
-            print('   ' + h['snippet'])
+            if getattr(args, 'full', False):
+                print(h['text'])
+            else:
+                print('   ' + h['snippet'])
         return 0
     finally:
         conn.close()
@@ -201,6 +204,7 @@ def build_parser():
     s.add_argument('query')
     s.add_argument('--book', default=None)
     s.add_argument('--top', type=int, default=5)
+    s.add_argument('--full', action='store_true', help='输出整块原文而不是片段')
     s.set_defaults(func=cmd_search)
 
     w = sub.add_parser('show', help='查看书的原文')

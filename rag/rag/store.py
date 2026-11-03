@@ -2,6 +2,7 @@
 import hashlib
 import json
 import os
+import re
 import sqlite3
 import time
 
@@ -61,7 +62,6 @@ def file_sha256(path, limit_bytes=None):
 
 
 def slugify(text):
-    import re
     text = text.lower().strip()
     keep = []
     for ch in text:
@@ -135,6 +135,40 @@ def page_text(conn, book_id, page_no):
     row = conn.execute('SELECT text FROM pages WHERE book_id=? AND page_no=?',
                        (book_id, page_no)).fetchone()
     return row['text'] if row else ''
+
+
+_NUM = re.compile(r'(?<![\d.])(\d{1,4})(?![\d])')
+
+
+def book_page_offset(conn, book_id):
+    """返回「物理页序号 - 印刷页码」的偏移量（众数）。
+
+    课程规划里的 `p.42-96` 是书上印的页码，而 chunks 存的是 PDF 物理页序号，
+    两者通常差十几到几十页。检索前必须换算，否则限定范围会把正确段落排除掉。
+    """
+    rows = conn.execute('SELECT page_no, text FROM pages WHERE book_id=? ORDER BY page_no',
+                        (book_id,)).fetchall()
+    votes = {}
+    for r in rows:
+        text = (r['text'] or '').strip()
+        if not text:
+            continue
+        lines = text.split('\n')
+        for area in (lines[0][:120], lines[-1][:120]):
+            m = _NUM.search(area)
+            if not m:
+                continue
+            printed = int(m.group(1))
+            if not (1 <= printed <= 2000) or printed >= r['page_no']:
+                continue
+            diff = r['page_no'] - printed
+            votes[diff] = votes.get(diff, 0) + 1
+            break
+    if not votes:
+        return 0
+    best = max(votes.items(), key=lambda kv: kv[1])
+    # 票数太少说明页码不可靠，宁可不偏移
+    return best[0] if best[1] >= max(3, len(rows) // 20) else 0
 
 
 def list_books(conn):
