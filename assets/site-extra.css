@@ -1,0 +1,113 @@
+/* 站点补充样式：补齐 app.css 中未定义的列表行结构。
+   app.css 只定义了 .rows 容器与 .row + .row 分隔线，.row / .row-main /
+   .row-title / .row-sub / .row-meta 缺失，导致有真实数据时文字溢出面板。 */
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 0;
+  min-width: 0;
+}
+.row-main {
+  display: grid;
+  gap: 3px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.row-title {
+  display: block;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.45;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.row-title:hover { color: var(--accent); }
+.row-sub {
+  color: var(--faint);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.row-meta {
+  flex: none;
+  white-space: nowrap;
+  color: var(--faint);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 面板与网格项一律允许收缩，否则长内容会把面板撑出网格 */
+.panel,
+.rows,
+.grid > * { min-width: 0; }
+
+/* 面板按内容高度排列，不要互相拉伸 */
+.grid { align-items: start; }
+
+/* 面板内边距（若 app.css 未给出则生效） */
+.panel { padding: var(--card-pad); border-radius: var(--radius-card); }
+
+/* 侧栏在桌面端是常驻列，不是抽屉 */
+@media (min-width: 861px) {
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 12px;
+    background: var(--ground);
+    border-right: 1px solid var(--rule);
+    transform: none;
+    z-index: 1;
+    overflow-y: auto;
+  }
+}
+
+/* 导航当前项 */
+.nav-item[aria-current="page"] {
+  background: var(--active);
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* 详情页正文的操作区 */
+.progress-action {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  gap: 12px;
+}
+
+/* 按钮作为链接时保持按钮外观 */
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: var(--control-height);
+  border-radius: var(--radius-control);
+  padding: 0 20px;
+}
+
+/* 表格（课程正文里可能出现） */
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0;
+  font-size: 14px;
+}
+.article th,
+.article td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+.article th,
+.article table th { font-weight: 600; color: var(--text); background: var(--surface); }

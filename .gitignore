@@ -1,0 +1,23 @@
+# ---------- 书籍原文：绝不进仓库（版权 + 体积） ----------
+*.pdf
+rag/books/
+rag/db/
+rag/.pylibs/
+.tmp/
+
+# ---------- 已废弃的 Qoder 云端后端与旧产物 ----------
+_archive/
+dist/
+
+# ---------- 工具过程文件 ----------
+.playwright-mcp/
+.taste-skill/inspect/
+
+# ---------- 系统与编辑器 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+__pycache__/
+*.pyc
+.vscode/
+.idea/

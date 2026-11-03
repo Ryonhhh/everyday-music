@@ -1,0 +1,1142 @@
+{
+  "title": "每日音乐学习",
+  "generatedAt": "2026-11-03T13:09:43",
+  "totalDays": 36,
+  "tracks": {
+    "theory": 26,
+    "history": 36
+  },
+  "scheduleNote": "每学习日包含两个板块：乐理（李重光）+ 音乐史（Grout/Palisca）。Day 1-26 双轨并行；Day 27-36 乐理已学完，仅音乐史。",
+  "books": [
+    {
+      "id": "theory",
+      "title": "基本乐理通用教材",
+      "author": "李重光",
+      "publisher": "高等教育出版社",
+      "totalUnits": 26,
+      "structure": "16讲",
+      "subtitle": "Basic Music Theory",
+      "note": "中文教材，按「讲」组织，共 16 讲",
+      "label": "李重光《基本乐理通用教材》",
+      "pages": 196,
+      "chunks": 160
+    },
+    {
+      "id": "history",
+      "title": "A History of Western Music (4th Edition)",
+      "author": "Donald Jay Grout & Claude V. Palisca",
+      "publisher": "W. W. Norton",
+      "totalUnits": 36,
+      "structure": "20章",
+      "subtitle": "A History of Western Music",
+      "note": "英文教材，4th Edition，20 章",
+      "label": "Grout & Palisca《西方音乐史》",
+      "pages": 936,
+      "chunks": 2754
+    }
+  ],
+  "days": [
+    {
+      "day": 1,
+      "units": [
+        {
+          "id": "T01",
+          "track": "theory",
+          "title": "乐音体系（一）：音及音的性质；乐音与噪音",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第一讲 乐音体系",
+            "chapter": "",
+            "sections": [
+              "音及音的性质（音高、音值、音量、音色）",
+              "乐音与噪音",
+              "乐音体系"
+            ]
+          }
+        },
+        {
+          "id": "H01",
+          "track": "history",
+          "title": "古代世界结束时的音乐状况",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.1 The State of Music at the End of the Ancient World (p.1-41)",
+            "sections": [
+              "The Greek Heritage（希腊遗产：音乐与神话、哲学、教育）",
+              "The Greek Musical System（希腊音乐体系：调式、音阶理论）",
+              "The Early Christian Church（早期基督教会）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 2,
+      "units": [
+        {
+          "id": "T02",
+          "track": "theory",
+          "title": "乐音体系（二）：音名与音组；音域与音区",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第一讲 乐音体系",
+            "chapter": "",
+            "sections": [
+              "音名与音组（大字组、小字组）",
+              "标准音与中央C的位置",
+              "音域与音区"
+            ]
+          }
+        },
+        {
+          "id": "H02",
+          "track": "history",
+          "title": "中世纪圣咏（一）：罗马圣咏与宗教礼仪",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)",
+            "sections": [
+              "Roman Chant and Liturgy（罗马圣咏与礼仪：日课、弥撒）",
+              "Classes, Forms and Types of Chant（圣咏的类型、形式与分类）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "units": [
+        {
+          "id": "T03",
+          "track": "theory",
+          "title": "音律（一）：标准音和中央C；复合音与分音列",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第二讲 音律",
+            "chapter": "",
+            "sections": [
+              "标准音 a1 与中央C c1",
+              "复合音与分音列（泛音列）",
+              "基音与泛音"
+            ]
+          }
+        },
+        {
+          "id": "H03",
+          "track": "history",
+          "title": "中世纪圣咏（二）：晚期发展与音乐理论",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)",
+            "sections": [
+              "Later Developments of the Chant（附加段、继叙咏、宗教剧）",
+              "Medieval Musical Theory and Practice（中世纪音乐理论与记谱法、圭多）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 4,
+      "units": [
+        {
+          "id": "T04",
+          "track": "theory",
+          "title": "音律（二）：三种律制；半音与全音",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第二讲 音律",
+            "chapter": "",
+            "sections": [
+              "十二平均律",
+              "五度相生律",
+              "纯律",
+              "自然半音与变化半音、自然全音与变化全音"
+            ]
+          }
+        },
+        {
+          "id": "H04",
+          "track": "history",
+          "title": "中世纪圣咏（三）：世俗单声歌曲与乐器",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)",
+            "sections": [
+              "Nonliturgical and Secular Monody（游吟诗人、恋诗歌手）",
+              "Medieval Instrumental Music and Instruments（中世纪器乐与乐器）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "units": [
+        {
+          "id": "T05",
+          "track": "theory",
+          "title": "记谱法（一）：音符与休止符；增长时值的记号",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第三讲 五线谱记谱法",
+            "chapter": "",
+            "sections": [
+              "什么是记谱法",
+              "音符与休止符（全、二分、四分、八分、十六分…）",
+              "附点、延音线、延长记号"
+            ]
+          }
+        },
+        {
+          "id": "H05",
+          "track": "history",
+          "title": "复调的开端（一）：早期奥尔加农",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)",
+            "sections": [
+              "Historical Background of Early Polyphony（复调的历史背景）",
+              "Early Organum（早期奥尔加农）",
+              "Florid Organum（华丽奥尔加农）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 6,
+      "units": [
+        {
+          "id": "T06",
+          "track": "theory",
+          "title": "记谱法（二）：线与间；谱号；变音记号",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第三讲 五线谱记谱法",
+            "chapter": "",
+            "sections": [
+              "五线谱的线与间",
+              "谱号（高音、低音、中音、次中音）",
+              "变音记号（升、降、重升、重降、还原）"
+            ]
+          }
+        },
+        {
+          "id": "H06",
+          "track": "history",
+          "title": "复调的开端（二）：节奏模式与圣母院乐派",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)",
+            "sections": [
+              "The Rhythmic Modes（节奏模式）",
+              "Notre Dame Organum（圣母院奥尔加农：莱奥南与佩罗坦）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "units": [
+        {
+          "id": "T07",
+          "track": "theory",
+          "title": "记谱法（三）：省略记号；演奏法记号；装饰音记号",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第三讲 五线谱记谱法",
+            "chapter": "",
+            "sections": [
+              "省略记号",
+              "演奏法记号（连音、断音、保持音等）",
+              "装饰音记号（倚音、波音、回音、颤音）",
+              "乐谱的正确写法"
+            ]
+          }
+        },
+        {
+          "id": "H07",
+          "track": "history",
+          "title": "复调的开端（三）：孔杜克图斯与经文歌",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)",
+            "sections": [
+              "Polyphonic Conductus（复调孔杜克图斯）",
+              "The Motet（经文歌的诞生与13世纪发展）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 8,
+      "units": [
+        {
+          "id": "T08",
+          "track": "theory",
+          "title": "节奏节拍（一）：节奏与节拍；各种拍子",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第四讲 节奏节拍",
+            "chapter": "",
+            "sections": [
+              "节奏与节拍的概念",
+              "拍号",
+              "各种拍子（单拍子、复拍子、混合拍子）"
+            ]
+          }
+        },
+        {
+          "id": "H08",
+          "track": "history",
+          "title": "14世纪音乐（一）：法国新艺术",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.4 French and Italian Music of the 14th Century (p.137-171)",
+            "sections": [
+              "General Background（时代背景：14世纪的社会与文化）",
+              "The Ars Nova in France（法国新艺术：维特里、马肖）",
+              "等节奏技术"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 9,
+      "units": [
+        {
+          "id": "T09",
+          "track": "theory",
+          "title": "节奏节拍（二）：音值组合法；强弱关系",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第四讲 节奏节拍",
+            "chapter": "",
+            "sections": [
+              "各种拍子的音值组合法",
+              "节奏中音的强弱关系",
+              "弱起小节"
+            ]
+          }
+        },
+        {
+          "id": "H09",
+          "track": "history",
+          "title": "14世纪音乐（二）：意大利与法国晚期",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.4 French and Italian Music of the 14th Century (p.137-171)",
+            "sections": [
+              "Italian Trecento Music（意大利14世纪音乐：兰迪尼）",
+              "French Music of the Late Fourteenth Century（14世纪末法国音乐）",
+              "Musica Ficta（伪音）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 10,
+      "units": [
+        {
+          "id": "T10",
+          "track": "theory",
+          "title": "节奏节拍（三）：切分音；特殊划分；表现作用",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第四讲 节奏节拍",
+            "chapter": "",
+            "sections": [
+              "切分音、切分节奏、切分效果",
+              "音符均分的特殊形式（三连音、五连音等）",
+              "节奏节拍在音乐表现中的作用"
+            ]
+          }
+        },
+        {
+          "id": "H10",
+          "track": "history",
+          "title": "15世纪：英国音乐与勃艮第乐派",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.5 Medieval to Renaissance: England and the Burgundian Lands (p.172-198)",
+            "sections": [
+              "English Music（英国音乐：邓斯泰布尔）",
+              "Music in the Burgundian Lands（勃艮第乐派：迪费、班舒瓦）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 11,
+      "units": [
+        {
+          "id": "T11",
+          "track": "theory",
+          "title": "速度与力度：标记及其表现意义",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第五讲 音乐的速度与力度",
+            "chapter": "",
+            "sections": [
+              "速度在音乐表现中的意义",
+              "音乐速度的标记",
+              "力度在音乐表现中的意义",
+              "音乐力度的标记"
+            ]
+          }
+        },
+        {
+          "id": "H11",
+          "track": "history",
+          "title": "文艺复兴（一）：奥克冈到若斯坎",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.6 The Age of the Renaissance: Ockeghem to Josquin (p.199-241)",
+            "sections": [
+              "General Characteristics（文艺复兴音乐总体特征）",
+              "Ockeghem and Busnois（奥克冈与比斯努瓦）",
+              "Josquin des Prez（若斯坎·德·普雷）",
+              "Obrecht 与同代作曲家"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "units": [
+        {
+          "id": "T12",
+          "track": "theory",
+          "title": "音程（一）：名称与标记；单音程与复音程",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第六讲 音程",
+            "chapter": "",
+            "sections": [
+              "什么是音程（旋律音程、和声音程）",
+              "音程的名称与标记（度数、音数）",
+              "单音程与复音程"
+            ]
+          }
+        },
+        {
+          "id": "H12",
+          "track": "history",
+          "title": "16世纪新趋势（一）：法-佛兰德一代与民族风格",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)",
+            "sections": [
+              "The Franco-Flemish Generation of 1520-1550（贡贝尔、克莱芒等）",
+              "The Rise of National Styles（民族风格的兴起：意大利、法国、德国、西班牙、英国）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "units": [
+        {
+          "id": "T13",
+          "track": "theory",
+          "title": "音程（二）：自然与变化音程；协和与不协和",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第六讲 音程",
+            "chapter": "",
+            "sections": [
+              "自然音程与变化音程",
+              "度数相同而音数不同的音程的相互关系",
+              "协和音程与不协和音程"
+            ]
+          }
+        },
+        {
+          "id": "H13",
+          "track": "history",
+          "title": "16世纪新趋势（二）：牧歌与相关体裁",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)",
+            "sections": [
+              "The Madrigal and Related Forms（意大利牧歌：杰苏阿尔多、蒙特威尔第早期）",
+              "法国尚松",
+              "英国牧歌"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "units": [
+        {
+          "id": "T14",
+          "track": "theory",
+          "title": "音程（三）：转位；等音程",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第六讲 音程",
+            "chapter": "",
+            "sections": [
+              "音程的转位",
+              "等音程"
+            ]
+          }
+        },
+        {
+          "id": "H14",
+          "track": "history",
+          "title": "16世纪新趋势（三）：器乐的兴起",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)",
+            "sections": [
+              "Instrumental Music of the Sixteenth Century（16世纪器乐）",
+              "琉特琴、键盘乐器",
+              "变奏曲、托卡塔、利切卡尔"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 15,
+      "units": [
+        {
+          "id": "T15",
+          "track": "theory",
+          "title": "和弦（一）：三和弦",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第七讲 和弦",
+            "chapter": "",
+            "sections": [
+              "什么是和弦",
+              "三和弦（大、小、增、减）",
+              "三和弦的转位"
+            ]
+          }
+        },
+        {
+          "id": "H15",
+          "track": "history",
+          "title": "文艺复兴后期教会音乐（一）：宗教改革",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.8 Church Music in the Late Renaissance (p.310-344)",
+            "sections": [
+              "The Music of the Reformation in Germany（路德教音乐、众赞歌）",
+              "Reformation Church Music Outside Germany（加尔文教、英国国教音乐）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 16,
+      "units": [
+        {
+          "id": "T16",
+          "track": "theory",
+          "title": "和弦（二）：七和弦；和弦转位",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第七讲 和弦",
+            "chapter": "",
+            "sections": [
+              "七和弦（大七、小七、属七、减七、半减七等）",
+              "七和弦的转位",
+              "和弦的等和弦"
+            ]
+          }
+        },
+        {
+          "id": "H16",
+          "track": "history",
+          "title": "文艺复兴后期教会音乐（二）：反宗教改革与威尼斯乐派",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.8 Church Music in the Late Renaissance (p.310-344)",
+            "sections": [
+              "The Counter-Reformation（反宗教改革、特伦托公会议）",
+              "Palestrina（帕莱斯特里那）",
+              "The Venetian School（威尼斯乐派：维拉尔特、加布里埃利）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 17,
+      "units": [
+        {
+          "id": "T17",
+          "track": "theory",
+          "title": "调及调关系",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第八讲 调及调关系",
+            "chapter": "",
+            "sections": [
+              "调与调号",
+              "升号调与降号调",
+              "调的五度循环（等音调）"
+            ]
+          }
+        },
+        {
+          "id": "H17",
+          "track": "history",
+          "title": "早期巴洛克（一）：总体特征与歌剧的诞生",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.9 Music of the Early Baroque Period (p.345-404)",
+            "sections": [
+              "General Characteristics（通奏低音、第二实践）",
+              "Early Opera（歌剧的诞生：佛罗伦萨卡梅拉塔、蒙特威尔第《奥菲欧》）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 18,
+      "units": [
+        {
+          "id": "T18",
+          "track": "theory",
+          "title": "调式（一）：大调式与小调式",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第九讲 调式",
+            "chapter": "",
+            "sections": [
+              "调式与音阶",
+              "大调式（自然、和声、旋律）",
+              "小调式（自然、和声、旋律）",
+              "平行大小调与同主音大小调"
+            ]
+          }
+        },
+        {
+          "id": "H18",
+          "track": "history",
+          "title": "早期巴洛克（二）：声乐室内乐、教会音乐与器乐",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.9 Music of the Early Baroque Period (p.345-404)",
+            "sections": [
+              "Vocal Chamber Music（独唱牧歌、康塔塔）",
+              "Church Music（大协奏风格）",
+              "Instrumental Music（奏鸣曲、托卡塔、里切尔卡）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 19,
+      "units": [
+        {
+          "id": "T19",
+          "track": "theory",
+          "title": "调式（二）：民族调式",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第九讲 调式",
+            "chapter": "",
+            "sections": [
+              "五声调式（宫商角徵羽）",
+              "六声调式",
+              "七声调式（雅乐、清乐、燕乐）"
+            ]
+          }
+        },
+        {
+          "id": "H19",
+          "track": "history",
+          "title": "17世纪晚期（一）：歌剧",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.10 Opera and Vocal Music in the Late 17th Century (p.405-443)",
+            "sections": [
+              "Opera（意大利歌剧：威尼斯、那不勒斯乐派）",
+              "法国歌剧（吕利）",
+              "英国歌剧（普赛尔）",
+              "德国歌剧"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 20,
+      "units": [
+        {
+          "id": "T20",
+          "track": "theory",
+          "title": "调与调式：调性分析",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第十讲 调与调式",
+            "chapter": "",
+            "sections": [
+              "调与调式的区别",
+              "调性判断（调号与主音的确定）"
+            ]
+          }
+        },
+        {
+          "id": "H20",
+          "track": "history",
+          "title": "17世纪晚期（二）：康塔塔、歌曲与清唱剧",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.10 Opera and Vocal Music in the Late 17th Century (p.405-443)",
+            "sections": [
+              "Cantata and Song（康塔塔与歌曲：许茨）",
+              "Church Music and Oratorio（教会音乐与清唱剧：卡里西米）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 21,
+      "units": [
+        {
+          "id": "T21",
+          "track": "theory",
+          "title": "调式中的音程",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第十一讲 调式中的音程",
+            "chapter": "",
+            "sections": [
+              "调式中音程的构成",
+              "稳定音程与不稳定音程",
+              "音程的解决"
+            ]
+          }
+        },
+        {
+          "id": "H21",
+          "track": "history",
+          "title": "巴洛克晚期器乐",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.11 Instrumental Music in the Late Baroque Period (p.444-479)",
+            "sections": [
+              "Keyboard Music（键盘音乐：库普兰、组曲、赋格）",
+              "Ensemble Music（合奏音乐：科雷利、三重奏鸣曲、大协奏曲）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 22,
+      "units": [
+        {
+          "id": "T22",
+          "track": "theory",
+          "title": "调式中的和弦",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第十二讲 调式中的和弦",
+            "chapter": "",
+            "sections": [
+              "调式正三和弦与副三和弦",
+              "正三和弦的功能（T-S-D）",
+              "属七和弦与导七和弦的解决"
+            ]
+          }
+        },
+        {
+          "id": "H22",
+          "track": "history",
+          "title": "18世纪早期（一）：维瓦尔第与拉莫",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)",
+            "sections": [
+              "Antonio Vivaldi（维瓦尔第与协奏曲）",
+              "Jean-Philippe Rameau（拉莫：歌剧与和声理论）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 23,
+      "units": [
+        {
+          "id": "T23",
+          "track": "theory",
+          "title": "转调",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第十三讲 转调",
+            "chapter": "",
+            "sections": [
+              "什么是转调",
+              "转调的类型（近关系调、远关系调）",
+              "转调的识别"
+            ]
+          }
+        },
+        {
+          "id": "H23",
+          "track": "history",
+          "title": "18世纪早期（二）：巴赫",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)",
+            "sections": [
+              "J. S. Bach 生平",
+              "Bach's Instrumental Music（器乐：赋格、勃兰登堡协奏曲、平均律）",
+              "Bach's Vocal Music（声乐：康塔塔、受难曲、b小调弥撒）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 24,
+      "units": [
+        {
+          "id": "T24",
+          "track": "theory",
+          "title": "调式变音及半音音阶",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第十四讲 调式变音及半音音阶",
+            "chapter": "",
+            "sections": [
+              "调式变音（辅助音、经过音）",
+              "半音音阶"
+            ]
+          }
+        },
+        {
+          "id": "H24",
+          "track": "history",
+          "title": "18世纪早期（三）：亨德尔",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)",
+            "sections": [
+              "George Frideric Handel 生平",
+              "歌剧与清唱剧（《弥赛亚》）",
+              "管弦乐与器乐"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 25,
+      "units": [
+        {
+          "id": "T25",
+          "track": "theory",
+          "title": "移调",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第十五讲 移调",
+            "chapter": "",
+            "sections": [
+              "移调的概念与用途",
+              "移调的方法（按音程移调、改调号移调）",
+              "移调乐器"
+            ]
+          }
+        },
+        {
+          "id": "H25",
+          "track": "history",
+          "title": "古典风格的源泉（一）：启蒙运动与器乐",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.13 Sources of the Classic Style (p.541-583)",
+            "sections": [
+              "The Enlightenment（启蒙运动与音乐趣味）",
+              "Instrumental Music: Sonata, Symphony, and Concerto（奏鸣曲、交响曲、协奏曲：曼海姆乐派、C.P.E.巴赫）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 26,
+      "units": [
+        {
+          "id": "T26",
+          "track": "theory",
+          "title": "旋律的基础知识",
+          "book": "基本乐理通用教材",
+          "source": {
+            "lecture": "第十六讲 关于旋律的基础知识",
+            "chapter": "",
+            "sections": [
+              "旋律的定义与形态",
+              "旋律的发展手法",
+              "乐曲的基本形式"
+            ]
+          }
+        },
+        {
+          "id": "H26",
+          "track": "history",
+          "title": "古典风格的源泉（二）：歌剧与歌曲",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.13 Sources of the Classic Style (p.541-583)",
+            "sections": [
+              "Opera, Song, and Church Music（喜歌剧之争、格鲁克改革）",
+              "J. C. 巴赫与交响曲的成熟"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 27,
+      "units": [
+        {
+          "id": "H27",
+          "track": "history",
+          "title": "18世纪晚期（一）：海顿",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.14 The Late Eighteenth Century (p.584-623)",
+            "sections": [
+              "Franz Josef Haydn 生平",
+              "Haydn's Instrumental Works（交响曲、弦乐四重奏）",
+              "Haydn's Vocal Works（清唱剧《创世纪》）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 28,
+      "units": [
+        {
+          "id": "H28",
+          "track": "history",
+          "title": "18世纪晚期（二）：莫扎特",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.14 The Late Eighteenth Century (p.584-623)",
+            "sections": [
+              "Wolfgang Amadeus Mozart 生平",
+              "Mozart's First Masterworks（早期杰作）",
+              "The Vienna Period（维也纳时期：歌剧、交响曲、协奏曲、安魂曲）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 29,
+      "units": [
+        {
+          "id": "H29",
+          "track": "history",
+          "title": "贝多芬（1770-1827）",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.15 Ludwig van Beethoven (p.624-655)",
+            "sections": [
+              "The Man and His Music（其人其乐）",
+              "First Period（第一时期：模仿与探索）",
+              "Second Period（第二时期：英雄风格）",
+              "Third Period（第三时期：晚期风格）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 30,
+      "units": [
+        {
+          "id": "H30",
+          "track": "history",
+          "title": "19世纪（一）：浪漫主义与声乐",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.16 The 19th Century: Romanticism; Vocal Music (p.656-679)",
+            "sections": [
+              "Classicism and Romanticism（古典主义与浪漫主义）",
+              "Characteristics of Romantic Music（浪漫主义音乐特征）",
+              "The Lied（艺术歌曲：舒伯特、舒曼）",
+              "Choral Music（合唱音乐）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 31,
+      "units": [
+        {
+          "id": "H31",
+          "track": "history",
+          "title": "19世纪（二）：器乐",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.17 The 19th Century: Instrumental Music (p.680-724)",
+            "sections": [
+              "The Piano（钢琴与钢琴音乐：肖邦、李斯特）",
+              "Chamber Music（室内乐）",
+              "Music for Orchestra（管弦乐：柏辽兹、门德尔松、勃拉姆斯）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 32,
+      "units": [
+        {
+          "id": "H32",
+          "track": "history",
+          "title": "19世纪（三）：歌剧（上）法国、意大利与威尔第",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.18 The 19th Century: Opera and Music Drama (p.725-754)",
+            "sections": [
+              "France（法国大歌剧、喜歌剧）",
+              "Italy（意大利歌剧：罗西尼、贝里尼、多尼采蒂）",
+              "Giuseppe Verdi（威尔第）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 33,
+      "units": [
+        {
+          "id": "H33",
+          "track": "history",
+          "title": "19世纪（四）：歌剧（下）德国与瓦格纳",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.18 The 19th Century: Opera and Music Drama (p.725-754)",
+            "sections": [
+              "German Romantic Opera（德国浪漫主义歌剧：韦伯）",
+              "Richard Wagner: The Music Drama（瓦格纳与乐剧：主导动机、特里斯坦与伊索尔德、指环）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 34,
+      "units": [
+        {
+          "id": "H34",
+          "track": "history",
+          "title": "一个时代的终结",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.19 The End of an Era (p.755-806)",
+            "sections": [
+              "Post-Romanticism（后浪漫主义：马勒、理查·施特劳斯）",
+              "Nationalism（民族主义：俄罗斯五人团、格里格、德沃夏克等）",
+              "New Currents in France（法国新潮流：德彪西的印象主义）",
+              "Italian Opera（意大利歌剧：真实主义）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 35,
+      "units": [
+        {
+          "id": "H35",
+          "track": "history",
+          "title": "20世纪（一）：斯特拉文斯基与多元潮流",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.20 The Twentieth Century (p.807-884)",
+            "sections": [
+              "Introduction（20世纪总论）",
+              "Musical Styles Related to Folk Idioms（民间音乐风格：巴托克）",
+              "Neo-Classicism and Related Movements（新古典主义）",
+              "Stravinsky（斯特拉文斯基：《春之祭》到新古典）"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "day": 36,
+      "units": [
+        {
+          "id": "H36",
+          "track": "history",
+          "title": "20世纪（二）：勋伯格与韦伯恩之后",
+          "book": "A History of Western Music (4th Edition)",
+          "source": {
+            "lecture": "",
+            "chapter": "Ch.20 The Twentieth Century (p.807-884)",
+            "sections": [
+              "Schoenberg and His Followers（勋伯格与追随者：无调性、十二音体系、贝尔格、韦伯恩）",
+              "After Webern（韦伯恩之后：整体序列主义）",
+              "Conclusion（结论）"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

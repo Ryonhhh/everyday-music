@@ -1,0 +1,12 @@
+{
+  "albums": [
+    {
+      "id": "soul-mining",
+      "title": "Soul Mining",
+      "artist": "The The",
+      "year": "1983",
+      "summary": "马特·约翰逊的私人化新浪潮杰作：鼓机与马林巴琴、Jools Holland 的两分钟钢琴尾奏",
+      "addedAt": "2026-10-30"
+    }
+  ]
+}

@@ -1,0 +1,354 @@
+/* 每日音乐学习 · 纯静态前端
+   数据全部来自 data/*.json，不依赖任何后端、登录或数据库。 */
+import {
+  $, esc, fmtDate, fetchJson, fetchText, loadProgress, markDayComplete,
+  completedCount, drawStaff, renderMarkdown,
+} from './core.js';
+
+const VIEW_NAMES = { today: '今日学习', lessons: '课程目录', albums: '专辑解析', library: '资料库' };
+const isDetail = /detail\.html/.test(location.pathname);
+
+let CURRICULUM = null;
+let LESSONS = [];     // [{day,title,summary,minutes,units}]
+let ALBUMS = [];      // [{id,title,artist,year,summary,addedAt}]
+
+/* ---------- 数据加载 ---------- */
+async function loadData() {
+  CURRICULUM = await fetchJson('data/curriculum.json');
+  LESSONS = await optionalJson('data/lessons/index.json', 'lessons');
+  ALBUMS = await optionalJson('data/albums/index.json', 'albums');
+}
+
+/* 正文可能还没生成：404 视为空，而不是报错 */
+async function optionalJson(path, key) {
+  try {
+    const data = await fetchJson(path);
+    return Array.isArray(data[key]) ? data[key] : [];
+  } catch {
+    return [];
+  }
+}
+
+function lessonByDay(day) { return LESSONS.find(l => Number(l.day) === Number(day)) || null; }
+
+/* ---------- 今日学习 ---------- */
+function currentDay(progress, total) {
+  for (let d = 1; d <= total; d++) {
+    if (!progress.completed[String(d)]) return d;
+  }
+  return total;
+}
+
+function renderToday() {
+  const total = CURRICULUM.totalDays;
+  const progress = loadProgress();
+  const done = completedCount(progress, total);
+  const allDone = done >= total;
+  const day = currentDay(progress, total);
+  const dayData = CURRICULUM.days.find(d => d.day === day);
+
+  $('scopeDay').textContent = done;
+  $('scopeTotal').textContent = total;
+
+  let theoryDone = 0;
+  let historyDone = 0;
+  for (const d of CURRICULUM.days) {
+    if (!progress.completed[String(d.day)]) continue;
+    for (const u of d.units) {
+      if (u.track === 'theory') theoryDone++;
+      else if (u.track === 'history') historyDone++;
+    }
+  }
+  const theoryTotal = CURRICULUM.tracks?.theory || 26;
+  const historyTotal = CURRICULUM.tracks?.history || 36;
+
+  $('kpiDays').innerHTML = `${done}<span class="unit" style="font-size:var(--fs-small);color:var(--faint);font-weight:400"> / ${total}</span>`;
+  $('kpiTheory').innerHTML = `${theoryDone}<span class="unit" style="font-size:var(--fs-small);color:var(--faint);font-weight:400"> / ${theoryTotal}</span>`;
+  $('kpiHistory').innerHTML = `${historyDone}<span class="unit" style="font-size:var(--fs-small);color:var(--faint);font-weight:400"> / ${historyTotal}</span>`;
+
+  if (allDone) {
+    $('dayFigure').innerHTML = '课程已完成';
+    $('greetingH1').textContent = `${total} 天课程，全部完成`;
+    $('todaySub').textContent = '可以回顾任意一课。';
+    $('nextUnits').innerHTML = '<div class="empty" style="grid-column:1/-1">课程已全部完成 🎉</div>';
+    $('learnAction').style.display = 'none';
+  } else {
+    $('dayFigure').innerHTML = `第 <span class="num">${day}</span> 天<span class="unit">/ ${total}</span>`;
+    $('greetingH1').textContent = `今天是第 ${day} 天`;
+    const firstUnit = dayData?.units?.[0];
+    $('todaySub').textContent = firstUnit ? `今日主题：${firstUnit.title}` : '今日课程';
+    $('nextUnits').innerHTML = (dayData?.units || []).map(u => `
+      <div class="next-unit">
+        <span class="track-label">${u.track === 'theory' ? '乐理' : '音乐史'} · ${esc(u.book)}</span>
+        <span class="unit-title">${esc(u.title)}</span>
+        ${u.source?.lecture ? `<span class="unit-src">${esc(u.source.lecture)}</span>` : ''}
+        ${u.source?.chapter ? `<span class="unit-src">${esc(u.source.chapter)}</span>` : ''}
+      </div>`).join('') || '<div class="empty" style="grid-column:1/-1">这一天没有排课</div>';
+    const has = !!lessonByDay(day);
+    const btn = $('startBtn');
+    btn.href = `detail.html?type=lesson&day=${day}`;
+    btn.textContent = has ? `开始第 ${day} 天学习` : `查看第 ${day} 天大纲`;
+  }
+
+  $('staffs').innerHTML = drawStaff('乐理', theoryTotal, theoryDone)
+    + drawStaff('音乐史', historyTotal, historyDone);
+
+  const lastDone = Object.entries(progress.completed)
+    .map(([d, at]) => ({ day: Number(d), at }))
+    .sort((a, b) => (a.day < b.day ? 1 : -1))[0];
+  if (lastDone) {
+    $('lastRow').style.display = 'flex';
+    const l = lessonByDay(lastDone.day);
+    $('lastLessonLink').textContent = `第 ${lastDone.day} 天${l ? ' · ' + l.title : ''} · ${fmtDate(lastDone.at)}`;
+    $('lastLessonLink').href = `detail.html?type=lesson&day=${lastDone.day}`;
+  }
+
+  renderRows($('recentLessons'), CURRICULUM.days.slice(0, 6), d => ({
+    href: `detail.html?type=lesson&day=${d.day}`,
+    title: `第 ${d.day} 天 · ${d.units.map(u => u.title).join(' / ')}`,
+    sub: d.units.map(u => u.track === 'theory' ? '乐理' : '音乐史').join(' + '),
+    meta: progress.completed[String(d.day)] ? '✓ ' + fmtDate(progress.completed[String(d.day)]) : '未开始',
+  }), '还没有学习记录');
+
+  renderRows($('recentAlbums'), ALBUMS.slice(0, 6), a => ({
+    href: `detail.html?type=album&id=${encodeURIComponent(a.id)}`,
+    title: a.title,
+    sub: [a.artist, a.year].filter(Boolean).join(' · '),
+    meta: fmtDate(a.addedAt),
+  }), '还没有专辑解析');
+}
+
+function renderRows(el, items, mapper, emptyText) {
+  if (!el) return;
+  if (!items || !items.length) {
+    el.innerHTML = `<div class="empty">${esc(emptyText)}</div>`;
+    return;
+  }
+  el.innerHTML = items.map(it => {
+    const r = mapper(it);
+    return `<div class="row">
+      <div class="row-main">
+        <a class="row-title" href="${r.href}">${esc(r.title)}</a>
+        ${r.sub ? `<div class="row-sub">${esc(r.sub)}</div>` : ''}
+      </div>
+      <div class="row-meta">${esc(r.meta || '')}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- 课程目录 ---------- */
+function renderLessons() {
+  const progress = loadProgress();
+  const total = CURRICULUM.totalDays;
+  const done = completedCount(progress, total);
+  $('lessonsStamp').textContent = `共 ${total} 天 · 已学 ${done} 天 · 进度存在本机浏览器`;
+
+  const el = $('allLessons');
+  el.innerHTML = CURRICULUM.days.map(d => {
+    const has = lessonByDay(d.day);
+    const isDone = !!progress.completed[String(d.day)];
+    const units = d.units.map(u => `${u.track === 'theory' ? '乐理' : '音乐史'}：${esc(u.title)}`).join('　');
+    const status = isDone ? `✓ 已学 ${fmtDate(progress.completed[String(d.day)])}`
+      : (has ? '待学习' : '正文待生成');
+    return `<div class="row">
+      <div class="row-main">
+        <a class="row-title" href="detail.html?type=lesson&day=${d.day}">第 ${d.day} 天 · ${esc(d.units[0]?.title || '')}</a>
+        <div class="row-sub">${units}</div>
+      </div>
+      <div class="row-meta">${esc(status)}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- 专辑 ---------- */
+function renderAlbums() {
+  $('albumsStamp').textContent = `${ALBUMS.length} 张专辑`;
+  renderRows($('allAlbums'), ALBUMS, a => ({
+    href: `detail.html?type=album&id=${encodeURIComponent(a.id)}`,
+    title: a.title,
+    sub: [a.artist, a.year].filter(Boolean).join(' · '),
+    meta: fmtDate(a.addedAt),
+  }), '还没有专辑解析');
+}
+
+/* ---------- 资料库 ---------- */
+function renderLibrary() {
+  const books = CURRICULUM.books || [];
+  const el = $('libraryBooks');
+  if (!books.length) {
+    el.innerHTML = '<div class="empty">还没有资料</div>';
+    return;
+  }
+  el.innerHTML = books.map(b => `<div class="row">
+    <div class="row-main">
+      <div class="row-title">${esc(b.title)}</div>
+      <div class="row-sub">${esc(b.author)}${b.publisher ? ' · ' + esc(b.publisher) : ''}${b.note ? ' · ' + esc(b.note) : ''}</div>
+    </div>
+    <div class="row-meta">${b.pages ? `${b.pages} 页` : ''}${b.pages ? ` · ${b.chunks} 段` : ''}</div>
+  </div>`).join('');
+
+  $('libraryNote').innerHTML = renderMarkdown([
+    '这个网站是**纯静态**的：没有服务器、没有数据库、没有登录，所有内容都是已经生成好的 JSON 文件，随仓库一起发布。',
+    '',
+    '**所以它永远不会「跑不起来」。**',
+    '',
+    '课程内容由本地知识库（RAG）从上述两本书中检索原文段落，再整理成讲稿。全文检索与书库管理在本地运行，不占用网站空间，也不上传书籍原文：',
+    '',
+    '```',
+    'python rag/run.py search "五度相生律"',
+    'python rag/run.py add "新书.pdf" --title "书名" --author "作者"',
+    'python rag/run.py serve        # 打开本地管理界面，可拖拽上传新书',
+    '```',
+  ].join('\n'));
+}
+
+/* ---------- 视图切换 ---------- */
+function showView(name) {
+  const target = VIEW_NAMES[name] ? name : 'today';
+  for (const key of Object.keys(VIEW_NAMES)) {
+    const el = $(`view-${key}`);
+    if (el) el.hidden = key !== target;
+  }
+  $('viewName').textContent = VIEW_NAMES[target];
+  document.querySelectorAll('.nav-item, .sheet a[data-view]').forEach(a => {
+    if (a.dataset.view === target) a.setAttribute('aria-current', 'page');
+    else a.removeAttribute('aria-current');
+  });
+  $('navSheet').classList.remove('open');
+}
+
+/* ---------- 详情页 ---------- */
+async function renderDetail() {
+  const params = new URLSearchParams(location.search);
+  const type = params.get('type');
+  const skeleton = $('skeleton');
+  const fail = () => { skeleton.hidden = true; $('error').hidden = false; };
+
+  if (type === 'lesson') {
+    const day = Number(params.get('day'));
+    const dayData = CURRICULUM.days.find(d => d.day === day);
+    if (!dayData) return fail();
+    const metaInfo = lessonByDay(day);
+    let md = '';
+    try {
+      md = await fetchText(`data/lessons/day-${String(day).padStart(2, '0')}.md`);
+    } catch { md = ''; }
+
+    document.title = `第 ${day} 天 · ${dayData.units[0]?.title || ''} · 每日音乐学习`;
+    $('detailTitle').textContent = `第 ${day} 天 · ${dayData.units.map(u => u.title).join(' / ')}`;
+    const meta = [`课程日 ${day}`];
+    if (metaInfo?.minutes) meta.push(`约 ${metaInfo.minutes} 分钟`);
+    $('detailMeta').innerHTML = meta.map(m => `<span>${esc(m)}</span>`).join('<span aria-hidden="true">·</span>');
+
+    let html = '';
+    if (md.trim()) {
+      html += renderMarkdown(md);
+    } else {
+      html += renderMarkdown([
+        `> 这一天的正文还没有生成。下面是课程大纲，可以先看要学什么。`,
+        '',
+        ...dayData.units.map(u => [
+          `## ${u.track === 'theory' ? '乐理' : '音乐史'} · ${u.title}`,
+          '',
+          `**出处**：${u.book}${u.source.lecture ? ' · ' + u.source.lecture : ''}${u.source.chapter ? ' · ' + u.source.chapter : ''}`,
+          '',
+          ...(u.source.sections || []).map(s => `- ${s}`),
+          '',
+        ].join('\n')),
+      ].join('\n'));
+    }
+    const wrap = document.createElement('div');
+    wrap.className = 'progress-action';
+    wrap.innerHTML = '<button class="btn btn-primary" id="markDone" type="button">标记本课已学完</button>';
+    $('detailBody').innerHTML = html;
+    $('detailBody').appendChild(wrap);
+
+    const progress = loadProgress();
+    const btn = $('markDone');
+    if (progress.completed[String(day)]) {
+      btn.textContent = '✓ 已学完（点击取消）';
+      btn.disabled = false;
+    }
+    btn.addEventListener('click', () => {
+      const p = loadProgress();
+      if (p.completed[String(day)]) {
+        delete p.completed[String(day)];
+        saveProgressSafe(p);
+        btn.textContent = '标记本课已学完';
+      } else {
+        markDayComplete(day);
+        btn.textContent = '✓ 已学完（点击取消）';
+      }
+    });
+
+    skeleton.hidden = true;
+    $('content').hidden = false;
+    return;
+  }
+
+  if (type === 'album') {
+    const id = params.get('id');
+    if (!id) return fail();
+    const info = ALBUMS.find(a => a.id === id) || null;
+    let md = '';
+    try {
+      md = await fetchText(`data/albums/${encodeURIComponent(id)}.md`);
+    } catch { return fail(); }
+    const title = info?.title || id;
+    document.title = `${title} · 每日音乐学习`;
+    $('detailTitle').textContent = title;
+    const metaItems = [info?.artist, info?.year].filter(Boolean);
+    $('detailMeta').innerHTML = metaItems.map(m => `<span>${esc(m)}</span>`).join('<span aria-hidden="true">·</span>');
+    $('detailBody').innerHTML = renderMarkdown(md);
+    skeleton.hidden = true;
+    $('content').hidden = false;
+    return;
+  }
+
+  fail();
+}
+
+function saveProgressSafe(p) {
+  try { localStorage.setItem('music-everyday:progress:v1', JSON.stringify(p)); } catch { /* ignore */ }
+}
+
+/* ---------- 启动 ---------- */
+async function boot() {
+  try {
+    await loadData();
+  } catch (err) {
+    $('todaySub').textContent = '课程数据读取失败。';
+    const el = $('nextUnits');
+    if (el) el.innerHTML = `<div class="empty" style="grid-column:1/-1">无法读取 data/curriculum.json。<br>${esc(err.message)}<br><br>如果是本地打开文件，请用 HTTP 服务器访问（浏览器不允许 file:// 读取 JSON）。</div>`;
+    return;
+  }
+
+  const bookLabel = $('bookLabel');
+  if (bookLabel && CURRICULUM.books?.length) {
+    bookLabel.innerHTML = CURRICULUM.books
+      .map(b => esc(b.label || `${b.author}《${b.title}》`))
+      .join('<br>');
+  }
+
+  if (isDetail) {
+    renderDetail();
+  } else {
+    renderToday();
+    renderLessons();
+    renderAlbums();
+    renderLibrary();
+    showView(location.hash.replace('#/', '') || 'today');
+
+    window.addEventListener('hashchange', () => showView(location.hash.replace('#/', '') || 'today'));
+    $('menuBtn')?.addEventListener('click', () => $('navSheet').classList.toggle('open'));
+    $('skipBtn')?.addEventListener('click', () => {
+      const total = CURRICULUM.totalDays;
+      const day = currentDay(loadProgress(), total);
+      markDayComplete(day);
+      renderToday();
+      renderLessons();
+    });
+  }
+}
+
+boot();

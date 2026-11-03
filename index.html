@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日音乐学习</title>
+<meta name="description" content="以李重光《基本乐理通用教材》与 Grout《西方音乐史》为底本的 36 天音乐学习课程。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site-extra.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="wordmark">
+      <span class="mark" aria-hidden="true">
+        <svg width="22" height="26" viewBox="0 0 22 26"><path d="M14.5 1.5c-4.2 2-5.8 5.2-5.8 10.6v9.2c0 1.8-1.1 2.9-2.8 2.9-1.6 0-2.6-.9-2.6-2.4 0-1.4 1-2.4 2.5-2.4 1 0 1.7.4 2.2 1.1V9.6c1.3-1.3 2.5-2 4.3-2.6V1.5z" fill="#b45309"/><circle cx="16.8" cy="14.6" r="3.4" fill="#1f201d"/></svg>
+      </span>
+      每日音乐学习
+    </div>
+    <div class="scope-box">课程 · 第 <span class="num" id="scopeDay">0</span> / <span id="scopeTotal">36</span> 天</div>
+    <nav aria-label="主导航">
+      <a class="nav-item" href="#/today" data-view="today">今日学习</a>
+      <a class="nav-item" href="#/lessons" data-view="lessons">课程目录</a>
+      <a class="nav-item" href="#/albums" data-view="albums">专辑解析</a>
+      <a class="nav-item" href="#/library" data-view="library">资料库</a>
+    </nav>
+    <div class="nav-group-label" id="bookLabel" style="margin-top:auto">李重光《基本乐理通用教材》<br>Grout &amp; Palisca《西方音乐史》</div>
+  </aside>
+
+  <div class="main">
+    <div class="mobile-topbar">
+      <button class="btn menu-toggle" id="menuBtn" aria-label="打开菜单" type="button">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4.5h12M2 8h12M2 11.5h12" stroke="#1f201d" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+      <div class="view-name" id="viewName">今日学习</div>
+    </div>
+
+    <div class="canvas">
+      <noscript><p>此页面需要启用 JavaScript 才能显示课程内容。</p></noscript>
+
+      <!-- 今日学习 -->
+      <section id="view-today">
+        <div class="greeting-row">
+          <h1 id="greetingH1">每日音乐学习</h1>
+          <span class="stamp" id="todaySub">正在读取课程…</span>
+        </div>
+
+        <div class="grid">
+          <div class="panel next-block" style="grid-column: span 12">
+            <div class="next-head">
+              <div class="day-figure" id="dayFigure">第 <span class="num">—</span> 天<span class="unit">/ 36</span></div>
+              <span class="stamp" id="learnStamp"></span>
+            </div>
+            <div class="kpis" style="border:none; background:transparent">
+              <div class="kpi">
+                <div class="kpi-label">学习天数</div>
+                <div class="kpi-value num" id="kpiDays">0<span class="unit" style="font-size:var(--fs-small);color:var(--faint);font-weight:400"> / 36</span></div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">乐理单元</div>
+                <div class="kpi-value num" id="kpiTheory">0<span class="unit" style="font-size:var(--fs-small);color:var(--faint);font-weight:400"> / 26</span></div>
+              </div>
+              <div class="kpi">
+                <div class="kpi-label">音乐史单元</div>
+                <div class="kpi-value num" id="kpiHistory">0<span class="unit" style="font-size:var(--fs-small);color:var(--faint);font-weight:400"> / 36</span></div>
+              </div>
+            </div>
+            <div class="next-units" id="nextUnits">
+              <div class="empty" style="grid-column:1/-1">正在读取今日课程…</div>
+            </div>
+            <div id="learnAction" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+              <a class="btn btn-primary" id="startBtn" href="#">开始今日学习</a>
+              <button class="btn" id="skipBtn" type="button">标记本日已学完</button>
+            </div>
+            <div id="lastRow" style="display:none; gap:10px; align-items:center; font-size:var(--fs-small); color:var(--faint); margin-top:12px">
+              <span>上次学习：</span><a class="card-link" id="lastLessonLink" href="#" style="font-size:var(--fs-small)"></a>
+            </div>
+          </div>
+
+          <div class="panel staff-block" style="grid-column: span 12">
+            <div class="chart-head">
+              <span>课程乐谱</span>
+              <span class="stamp">每一个音符是一个单元 · 实心为已完成</span>
+            </div>
+            <div id="staffs"><div class="empty">正在读取课程进度…</div></div>
+          </div>
+
+          <div class="panel" style="grid-column: span 6">
+            <div class="chart-head"><span>最近的课</span><a class="card-link" href="#/lessons">全部课程 →</a></div>
+            <div class="rows" id="recentLessons"><div class="empty">还没有学习记录</div></div>
+          </div>
+
+          <div class="panel" style="grid-column: span 6">
+            <div class="chart-head"><span>专辑解析</span><a class="card-link" href="#/albums">全部专辑 →</a></div>
+            <div class="rows" id="recentAlbums"><div class="empty">还没有专辑解析</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 课程目录 -->
+      <section id="view-lessons" hidden>
+        <div class="title-row">
+          <div><h1>课程目录</h1><div class="stamp" id="lessonsStamp"></div></div>
+        </div>
+        <div class="panel">
+          <div class="rows" id="allLessons"><div class="empty">正在读取课程目录…</div></div>
+        </div>
+      </section>
+
+      <!-- 专辑解析 -->
+      <section id="view-albums" hidden>
+        <div class="title-row">
+          <div><h1>专辑解析</h1><div class="stamp" id="albumsStamp"></div></div>
+        </div>
+        <div class="panel">
+          <div class="rows" id="allAlbums"><div class="empty">还没有专辑解析</div></div>
+        </div>
+      </section>
+
+      <!-- 资料库 -->
+      <section id="view-library" hidden>
+        <div class="title-row">
+          <div><h1>资料库</h1><div class="stamp" id="libraryStamp">课程内容取自以下两本书</div></div>
+        </div>
+        <div class="panel">
+          <div class="rows" id="libraryBooks"><div class="empty">正在读取…</div></div>
+        </div>
+        <div class="panel" style="margin-top:16px">
+          <div class="chart-head"><span>全文检索说明</span></div>
+          <div class="article" id="libraryNote"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="sheet" id="navSheet" role="dialog" aria-label="导航菜单">
+  <a href="#/today" data-view="today">今日学习</a>
+  <a href="#/lessons" data-view="lessons">课程目录</a>
+  <a href="#/albums" data-view="albums">专辑解析</a>
+  <a href="#/library" data-view="library">资料库</a>
+</div>
+
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>
