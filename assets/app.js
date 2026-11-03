@@ -242,9 +242,14 @@ async function renderDetail() {
     document.title = `第 ${day} 天 · ${mainUnit?.title || ''} · 每日音乐学习`;
     $('detailKicker').textContent = `课程日 ${String(day).padStart(2, '0')}`
       + (metaInfo?.minutes ? ` · 约 ${metaInfo.minutes} 分钟` : '');
-    // 单元标题多为「A；B」两段，按分号断行比让浏览器随机折行讲究
-    const titleParts = (mainUnit?.title || `第 ${day} 天`).split('；').map(s => esc(s.trim())).filter(Boolean);
-    $('detailTitle').innerHTML = titleParts.join('<br>');
+    // 单元标题多为「A；B；C」的递进结构，只在第一个分号处断行：
+    // 两行标题比三行碎句稳定，后面几项仍留在第二行里
+    const fullTitle = (mainUnit?.title || `第 ${day} 天`).trim();
+    const cut = fullTitle.indexOf('；');
+    const titleHtml = cut > 0
+      ? `${esc(fullTitle.slice(0, cut))}<br>${esc(fullTitle.slice(cut + 1))}`
+      : esc(fullTitle);
+    $('detailTitle').innerHTML = titleHtml;
     const byline = $('detailByline');
     if (secondUnit) {
       byline.textContent = `并读 · ${secondUnit.track === 'theory' ? '乐理' : '音乐史'}「${secondUnit.title}」`;
