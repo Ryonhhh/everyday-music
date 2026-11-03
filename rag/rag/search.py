@@ -69,7 +69,13 @@ class Searcher:
                 for nb in self._neighbors(row, expand):
                     if nb['id'] in seen_ids:
                         continue
+                    # 承接块若与已选块页码重叠，说明那几页已经在上下文里了，
+                    # 再加一份只会让材料变长、拖慢阅读，跳过
+                    nb_span = (nb['book_slug'], nb['page_start'], nb['page_end'])
+                    if any(_overlaps(nb_span, t) for t in taken_pages):
+                        continue
                     seen_ids.add(nb['id'])
+                    taken_pages.append(nb_span)
                     out.append({
                         'chunkId': nb['id'],
                         'book': nb['book_title'],

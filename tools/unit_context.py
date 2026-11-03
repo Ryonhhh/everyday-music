@@ -55,6 +55,8 @@ def main():
     ap.add_argument('--plan', default=os.path.join(ROOT, 'curriculum', 'plan.json'))
     ap.add_argument('--out', default=os.path.join(ROOT, '.tmp', 'ctx.txt'))
     ap.add_argument('--per', type=int, default=3, help='每个查询取几段')
+    ap.add_argument('--digest', action='store_true',
+                    help='精简模式：每条截断到 900 字、每单元最多 6 段，便于快速写作')
     args = ap.parse_args()
 
     with open(args.plan, encoding='utf-8') as f:
@@ -96,7 +98,10 @@ def main():
                 queries.append(cq)
 
         seen = set()
+        unit_passages = 0
         for q in queries:
+            if args.digest and unit_passages >= 6:
+                break
             hits = s.search(q, top_k=args.per, book=book, window=10000,
                             page_range=prange, expand=3)
             if not hits:
@@ -105,14 +110,20 @@ def main():
             for h in hits:
                 if h['chunkId'] in seen:
                     continue
+                if args.digest and unit_passages >= 6:
+                    break
                 seen.add(h['chunkId'])
+                unit_passages += 1
                 tag = '（承接上文）' if h.get('follower') else ''
                 lines.append('')
                 pp = f'{h["pageStart"] - offset}-{h["pageEnd"] - offset}'
                 lines.append(f'--- 检索「{q}」{tag} → {h["book"]} '
                              f'印刷页 p.{pp}（PDF 页 {h["pageStart"]}-{h["pageEnd"]}）'
                              f' (score {h["score"]})')
-                lines.append(h['text'])
+                body = h['text']
+                if args.digest and len(body) > 900:
+                    body = body[:900] + '……'
+                lines.append(body)
     conn.close()
 
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
