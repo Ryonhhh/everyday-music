@@ -44,6 +44,8 @@
 | --- | --- |
 | ![课程正文](docs/preview/reading.png) | ![专辑解析](docs/preview/album.png) |
 
+专辑页带封面、发行信息，以及可直接点开的**在线收听**与资料链接（Apple Music、网易云音乐、Discogs、AllMusic、RateYourMusic、Wikipedia）。
+
 | 资料库 | 手机端 |
 | --- | --- |
 | ![资料库](docs/preview/library.png) | ![移动端](docs/preview/mobile.png) |

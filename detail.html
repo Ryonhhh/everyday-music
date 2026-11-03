@@ -24,11 +24,16 @@
     <div class="skeleton skeleton-line" style="width:84%"></div>
   </div>
   <div id="content" hidden>
-    <header class="detail-head">
+    <header class="detail-head" id="detailHead">
       <div class="kicker" id="detailKicker"></div>
       <h1 id="detailTitle"></h1>
       <p class="byline" id="detailByline"></p>
+      <figure class="album-cover" id="albumCover" hidden>
+        <img id="albumCoverImg" alt="" loading="eager">
+        <figcaption id="albumCoverCaption"></figcaption>
+      </figure>
       <dl class="facts" id="detailFacts" hidden></dl>
+      <nav class="listen" id="albumListen" hidden aria-label="在线收听"></nav>
     </header>
     <div class="article" id="detailBody"></div>
     <nav class="lesson-nav" id="lessonNav" hidden></nav>

@@ -115,6 +115,7 @@ function renderToday() {
     title: a.title,
     sub: [a.artist, a.year].filter(Boolean).join(' · '),
     meta: fmtDate(a.addedAt),
+    thumb: a.cover,
   }), '还没有专辑解析');
 }
 
@@ -126,7 +127,8 @@ function renderRows(el, items, mapper, emptyText) {
   }
   el.innerHTML = items.map(it => {
     const r = mapper(it);
-    return `<div class="row">
+    return `<div class="row${r.thumb ? ' has-thumb' : ''}">
+      ${r.thumb ? `<img class="row-thumb" src="${esc(r.thumb)}" alt="" loading="lazy">` : ''}
       <div class="row-main">
         <a class="row-title" href="${r.href}">${esc(r.title)}</a>
         ${r.sub ? `<div class="row-sub">${esc(r.sub)}</div>` : ''}
@@ -168,6 +170,7 @@ function renderAlbums() {
     title: a.title,
     sub: [a.artist, a.year].filter(Boolean).join(' · '),
     meta: fmtDate(a.addedAt),
+    thumb: a.cover,
   }), '还没有专辑解析');
 }
 
@@ -334,6 +337,41 @@ async function renderDetail() {
       factsEl.hidden = false;
     } else {
       factsEl.hidden = true;
+    }
+
+    // 封面：专辑页的视觉锚点
+    const head = $('detailHead');
+    const coverFig = $('albumCover');
+    if (info?.cover) {
+      const img = $('albumCoverImg');
+      img.src = info.cover;
+      img.alt = info.coverAlt || `${title} 专辑封面`;
+      const cap = $('albumCoverCaption');
+      cap.textContent = info.coverCaption || '';
+      cap.hidden = !info.coverCaption;
+      coverFig.hidden = false;
+      head.classList.add('has-cover');
+    } else {
+      coverFig.hidden = true;
+      head.classList.remove('has-cover');
+    }
+
+    // 在线收听与资料链接
+    const listenEl = $('albumListen');
+    const listen = info?.listen || [];
+    const more = info?.more || [];
+    if (listen.length || more.length) {
+      const pill = (item, kind) =>
+        `<a class="listen-pill listen-pill--${kind}" href="${esc(item.url)}"
+            target="_blank" rel="noopener noreferrer">${esc(item.platform)}</a>`;
+      const row = (label, items, kind) => (items.length
+        ? `<div class="listen-row"><span class="listen-label">${label}</span>
+             <span class="listen-items">${items.map(i => pill(i, kind)).join('')}</span></div>`
+        : '');
+      listenEl.innerHTML = row('在线收听', listen, 'stream') + row('资料', more, 'ref');
+      listenEl.hidden = false;
+    } else {
+      listenEl.hidden = true;
     }
 
     $('detailBody').innerHTML = renderMarkdown(md);

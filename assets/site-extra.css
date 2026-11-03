@@ -40,6 +40,17 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 列表里带封面缩略图的行走势 */
+.row-thumb {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px var(--border);
+}
+.row.has-thumb { align-items: center; gap: 14px; }
+
 /* 面板与网格项一律允许收缩，否则长内容会把面板撑出网格 */
 .panel,
 .rows,

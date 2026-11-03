@@ -7,12 +7,24 @@
       "year": "1983",
       "kicker": "专辑解析",
       "byline": "The The（马特·约翰逊 Matt Johnson）· 1983",
+      "cover": "data/albums/soul-mining/cover.jpg",
+      "coverAlt": "Soul Mining 专辑封面",
       "facts": [
         { "k": "艺人", "v": "The The" },
         { "k": "发行", "v": "1983-10-21" },
         { "k": "厂牌", "v": "Some Bizzare / Epic" },
         { "k": "风格", "v": "后朋克 / 合成器流行" },
         { "k": "制作", "v": "Matt Johnson、Paul Hardiman" }
+      ],
+      "listen": [
+        { "platform": "Apple Music", "url": "https://music.apple.com/us/album/soul-mining/210039073" },
+        { "platform": "网易云音乐", "url": "https://music.163.com/#/album?id=122901677" }
+      ],
+      "more": [
+        { "platform": "Discogs", "url": "https://www.discogs.com/master/20901" },
+        { "platform": "AllMusic", "url": "https://www.allmusic.com/album/mw0000650882" },
+        { "platform": "RateYourMusic", "url": "https://rateyourmusic.com/release/album/the_the/soul_mining/" },
+        { "platform": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Soul_Mining" }
       ],
       "summary": "马特·约翰逊的私人化新浪潮杰作：鼓机与马林巴琴、Jools Holland 的两分钟钢琴尾奏",
       "addedAt": "2026-10-30"

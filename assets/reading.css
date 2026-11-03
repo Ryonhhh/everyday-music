@@ -247,6 +247,106 @@
 }
 .article pre code { background: none; padding: 0; }
 
+/* ---------- 专辑：封面与收听 ---------- */
+.album-cover {
+  margin: 0;
+  width: 100%;
+}
+.album-cover[hidden] { display: none; }
+.album-cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  /* 发丝线定边，不用投影 */
+  box-shadow: 0 0 0 1px var(--border);
+}
+.album-cover figcaption {
+  margin-top: 8px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--faint);
+}
+
+/* 有封面时页头变成「封面 + 文字」两栏 */
+.detail-head.has-cover {
+  display: grid;
+  grid-template-columns: 172px minmax(0, 1fr);
+  grid-template-areas:
+    "cover kicker"
+    "cover title"
+    "cover byline"
+    "facts facts"
+    "listen listen";
+  column-gap: 28px;
+  row-gap: 0;
+  align-items: start;
+}
+.detail-head.has-cover .album-cover { grid-area: cover; }
+.detail-head.has-cover .kicker { grid-area: kicker; }
+.detail-head.has-cover h1 { grid-area: title; }
+.detail-head.has-cover .byline { grid-area: byline; }
+.detail-head.has-cover .facts { grid-area: facts; }
+.detail-head.has-cover .listen { grid-area: listen; }
+
+.listen {
+  display: grid;
+  gap: 10px;
+  margin-top: 26px;
+}
+.listen[hidden] { display: none; }
+.listen-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.listen-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.listen-label {
+  flex: none;
+  width: 5.8em;
+  white-space: nowrap;
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: var(--faint);
+}
+.listen-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control, 999px);
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.listen-pill:hover { background: var(--surface); }
+.listen-pill--stream {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.listen-pill--stream:hover { background: #fff8ef; }
+
+@media (max-width: 640px) {
+  .detail-head.has-cover {
+    grid-template-columns: 132px minmax(0, 1fr);
+    grid-template-areas:
+      "cover kicker"
+      "cover title"
+      "cover byline"
+      "facts facts"
+      "listen listen";
+    column-gap: 16px;
+  }
+  .listen { margin-top: 20px; }
+  .listen-pill { height: 30px; padding: 0 12px; font-size: 12.5px; }
+}
+
 /* ---------- 课后动作 ---------- */
 .progress-action {
   margin-top: 52px;
