@@ -128,7 +128,9 @@ export function renderMarkdown(src) {
       items.push(`<li>${inline(ol[2])}</li>`);
       continue;
     }
-    if (/^\s*>/.test(line)) { flushList(); flushTable(); quote.push(inline(line.replace(/^\s*>\s?/, ''))); continue; }
+    // 注意：源文本已做过 HTML 转义，">" 此时是 "&gt;"
+    const bq = line.match(/^\s*(?:&gt;|>)\s?(.*)$/);
+    if (bq) { flushList(); flushTable(); quote.push(inline(bq[1])); continue; }
     if (/^\s*(-{3,}|\*{3,})\s*$/.test(line)) { flushAll(); out.push('<hr>'); continue; }
     if (/^\s*\|.*\|\s*$/.test(line)) {
       flushList(); flushQuote();
