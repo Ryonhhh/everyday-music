@@ -126,6 +126,9 @@ python tools/unit_context.py T02 H02 --out ".tmp\ctx-day02.txt" --per 2
    会从页眉页脚自动测出偏移量并在检索前换算，不需要手工填。
    命中后还会自动带出后面 2–3 个相邻段落，因为小节标题常常单独占一页、正文在下一页且不重复标题词。
 
+   **引注统一用印刷页码**（与书本、与 `plan.json` 一致）。工具输出里同时给了「印刷页」和「PDF 页」，
+   写 `> 出处：…，p.X–Y` 时取印刷页即可。`tools/fix_citations.py` 用于批量校正历史引注。
+
 2. 照着 `data/lessons/day-01.md` 的结构写 `data/lessons/day-02.md`
    （乐理 + 音乐史 + 今日练习 + 今日思考 + 今日小结 + 参考出处）。
 

@@ -230,9 +230,12 @@ async function renderDetail() {
     if (!dayData) return fail();
     const metaInfo = lessonByDay(day);
     let md = '';
-    try {
-      md = await fetchText(`data/lessons/day-${String(day).padStart(2, '0')}.md`);
-    } catch { md = ''; }
+    // 先查清单再取文件：避免对尚未生成的课文产生 404 请求（会在控制台留红字）
+    if (metaInfo) {
+      try {
+        md = await fetchText(`data/lessons/day-${String(day).padStart(2, '0')}.md`);
+      } catch { md = ''; }
+    }
 
     document.title = `第 ${day} 天 · ${dayData.units[0]?.title || ''} · 每日音乐学习`;
     $('detailTitle').textContent = `第 ${day} 天 · ${dayData.units.map(u => u.title).join(' / ')}`;

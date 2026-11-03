@@ -1,4 +1,4 @@
-﻿"""取出指定单元的检索原文，供写课程正文用。
+"""取出指定单元的检索原文，供写课程正文用。
 
 用法：
   python tools/unit_context.py T01 H01 --out .tmp/ctx.txt
@@ -108,8 +108,10 @@ def main():
                 seen.add(h['chunkId'])
                 tag = '（承接上文）' if h.get('follower') else ''
                 lines.append('')
+                pp = f'{h["pageStart"] - offset}-{h["pageEnd"] - offset}'
                 lines.append(f'--- 检索「{q}」{tag} → {h["book"]} '
-                             f'p.{h["pageStart"]}-{h["pageEnd"]} (score {h["score"]})')
+                             f'印刷页 p.{pp}（PDF 页 {h["pageStart"]}-{h["pageEnd"]}）'
+                             f' (score {h["score"]})')
                 lines.append(h['text'])
     conn.close()
 
