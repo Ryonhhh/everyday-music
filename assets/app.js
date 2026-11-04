@@ -446,7 +446,11 @@ function buildLessonNav(day) {
          <span class="nav-dir">${dir}</span>
          <span class="nav-title">第 ${d} 天 · ${esc(titleOf(d))}</span>
        </a>`
-    : '<span class="nav-card nav-card--empty" aria-hidden="true"></span>';
+    // 头尾两端没有邻课时，用「课程目录」补位，避免留下空框
+    : `<a class="nav-card nav-card--index" href="index.html#/lessons">
+         <span class="nav-dir">课程目录</span>
+         <span class="nav-title">回到 ${total} 天全部课程</span>
+       </a>`;
   nav.innerHTML = card(prev, '上一课') + card(next, '下一课');
   nav.hidden = false;
 }
