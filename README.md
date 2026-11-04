@@ -93,6 +93,15 @@ python rag/run.py list
 
 **加书之后要做什么：** 新书入的是**本地知识库**，不会自动变成网站内容。要写新课程，用 `python tools/unit_context.py <单元编号> --per 2 --digest` 取原文（会自动换算成书上印的页码），照着已有课文的结构写 `data/lessons/day-NN.md`，再跑 `python tools/build_lessons_index.py` 更新目录。
 
+## 创作台（在线生成专辑解析）
+
+打开 **`studio.html`**（侧栏「创作台」）：搜一张唱片 → 填自己的 API Key → 调用云端模型，生成一篇与站内同标准的长文。
+
+- **密钥只存在你的浏览器里。** 请求从浏览器直连服务商（OpenAI / DeepSeek / Kimi / OpenRouter / Anthropic 均可），本站是纯静态页，没有任何服务器能收到它。出门在外别勾「记住密钥」。
+- **生成是流式的**，边出字边按站内排版渲染，可随时停止。
+- 完成后三个按钮：**下载 .md**、**复制正文**、**复制 index.json 条目**——配合下一节三步就能发布。
+- **prompt 可改**：`data/prompts/album-analysis.md` 就是这个生成器的写作规范（结构、事实纪律、禁用词、自检清单），页面每次加载都会读最新版。
+
 ## 加一张专辑解析
 
 三步，全在 `data/albums/` 里完成：

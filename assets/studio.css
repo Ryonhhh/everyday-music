@@ -1,0 +1,271 @@
+/* 创作台：编辑型工具页，沿用站内的排版语言 */
+/* 兜底：本页大量用 hidden 控制显隐，不能被 display:flex/grid 覆盖 */
+.studio-shell [hidden] { display: none !important; }
+
+.studio-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 28px 120px;
+}
+
+.studio-head { margin-bottom: 44px; }
+.studio-head .kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.studio-head h1 {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 14px 0 16px;
+  letter-spacing: -.01em;
+}
+.studio-head .lede {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--muted);
+  margin: 0;
+  max-width: 40em;
+}
+
+.step {
+  padding: 30px 0;
+  border-top: 1px solid var(--rule);
+}
+.step-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.step-num {
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+.step-head h2 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.search-row { display: flex; gap: 10px; }
+.search-row input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 14px;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: var(--font);
+}
+.search-row input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--raised);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s ease, border-color .15s ease;
+}
+.btn:hover { background: var(--surface); }
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 500;
+}
+.btn-primary:hover { background: #9a4708; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+.hint {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--faint);
+  margin-top: 10px;
+}
+.warn {
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--muted);
+  background: var(--surface);
+  border-left: 2px solid var(--accent);
+  padding: 12px 14px;
+  border-radius: 0 8px 8px 0;
+  margin: 14px 0 0;
+}
+
+/* 搜索结果 */
+.results {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.result {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--raised);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font);
+  width: 100%;
+}
+.result:hover { background: var(--surface); }
+.result img {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex: none;
+  box-shadow: 0 0 0 1px var(--border);
+}
+.result-main { min-width: 0; }
+.result-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.result-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+
+/* 选中卡片 */
+.picked {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.picked img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px var(--border);
+}
+.picked h3 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0 0 6px;
+}
+.picked .byline { font-size: 14px; color: var(--muted); margin: 0 0 8px; }
+.picked .link { font-size: 13px; color: var(--accent); text-decoration: none; }
+.picked .link:hover { text-decoration: underline; }
+
+/* 表单 */
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+.field {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--faint);
+}
+.field--wide { grid-column: 1 / -1; }
+.field input, .field select {
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.row-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+.check { font-size: 13px; color: var(--muted); display: inline-flex; gap: 8px; align-items: center; }
+.link-btn {
+  border: 0;
+  background: none;
+  color: var(--faint);
+  font-size: 12.5px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font);
+}
+.link-btn:hover { color: var(--accent); }
+
+.status { font-size: 13px; color: var(--muted); }
+.status.is-error { color: #b91c1c; }
+.presets { display: inline-flex; gap: 12px; flex-wrap: wrap; font-size: 13px; }
+
+.out-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+.out-actions .btn { height: 38px; font-size: 13px; }
+
+/* 输出区 */
+.studio-output {
+  margin-top: 8px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  font-size: 17px;
+  line-height: 1.9;
+}
+.studio-output:empty { display: none; }
+
+.prompt-view {
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--faint);
+}
+.prompt-view summary { cursor: pointer; }
+.prompt-view pre {
+  margin-top: 12px;
+  padding: 16px;
+  max-height: 340px;
+  overflow: auto;
+  background: var(--surface);
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media (max-width: 680px) {
+  .studio-shell { padding: 30px 18px 90px; }
+  .studio-head h1 { font-size: 30px; }
+  .fields { grid-template-columns: minmax(0, 1fr); }
+  .picked { grid-template-columns: 96px minmax(0, 1fr); gap: 16px; }
+  .search-row { flex-direction: column; }
+  .search-row .btn { width: 100%; }
+}
