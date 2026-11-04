@@ -91,6 +91,60 @@ python rag/run.py list
 
 中文检索做了专门处理（汉字单字 + 相邻二元组 + BM25），术语像「五度相生律」能被精确命中，不需要额外的分词器。
 
+**加书之后要做什么：** 新书入的是**本地知识库**，不会自动变成网站内容。要写新课程，用 `python tools/unit_context.py <单元编号> --per 2 --digest` 取原文（会自动换算成书上印的页码），照着已有课文的结构写 `data/lessons/day-NN.md`，再跑 `python tools/build_lessons_index.py` 更新目录。
+
+## 加一张专辑解析
+
+三步，全在 `data/albums/` 里完成：
+
+**1. 放封面**
+
+```
+data/albums/<slug>/cover.jpg
+```
+
+**2. 写正文** `data/albums/<slug>.md`
+
+```markdown
+> 一句话引言（整篇的钩子）
+
+## 一个人（或：背景）
+
+正文……可以用 ![图注](data/albums/<slug>/cover.jpg) 插图，
+渲染成 320px 的书页式插页，图注就是 alt 文字。
+
+#### 01 · 曲名（谁主唱）
+逐曲简析。
+
+## 参考出处
+
+- 来源说明：[链接文字](https://…)
+```
+
+约定：`##` 是章节，`####` 是单曲，`>` 出处用单行引用，末尾必须有 `## 参考出处` 且链接可点。
+
+**3. 登记** `data/albums/index.json` 的 `albums` 数组加一条：
+
+```json
+{
+  "id": "<slug>",
+  "title": "专辑名",
+  "artist": "艺人",
+  "year": "1990",
+  "kicker": "专辑解析",
+  "byline": "艺人 · 年份",
+  "cover": "data/albums/<slug>/cover.jpg",
+  "coverAlt": "封面描述",
+  "facts": [{ "k": "发行", "v": "1990" }],
+  "listen": [{ "platform": "Apple Music", "url": "https://…" }],
+  "more": [{ "platform": "Discogs", "url": "https://…" }],
+  "summary": "列表页显示的一句话",
+  "addedAt": "2026-11-04"
+}
+```
+
+提交推送，Pages 一两分钟自动重建。右栏的封面、档案、收听链接、列表缩略图都会自动出现，**不用改任何代码**。
+
 ## 本地运行
 
 必须用 HTTP 服务器打开，直接双击 HTML 不行（浏览器不允许读取本地 JSON）：

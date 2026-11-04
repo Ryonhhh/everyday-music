@@ -36,7 +36,8 @@
   --fs-kpi: 32px;
   --fs-body: 14px;
   --fs-small: 12px;
-  --font: "Instrument Sans", Inter, system-ui, sans-serif;
+  --font: "Noto Sans SC", "Instrument Sans", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", "Noto Serif SC", "Songti SC", "SimSun", Georgia, serif;
 }
 
 /* ---------- 品牌与侧栏 ---------- */
@@ -54,7 +55,7 @@
 .kpis .kpi + .kpi { border-left: 1px solid var(--border); }
 .greeting-row { margin: 28px 0 24px; text-align: center; }
 .greeting-row h1 {
-  font-family: "Instrument Serif", "Songti SC", Georgia, serif;
+  font-family: var(--font-serif);
   font-size: var(--fs-title); font-weight: 400; letter-spacing: 0;
   line-height: 1.25; color: var(--text);
 }

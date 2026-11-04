@@ -21,20 +21,21 @@
 
 /* ---------- 版心：桌面双栏，窄屏单栏 ---------- */
 .read-shell {
-  /* 660 正文 + 68 间距 + 268 右栏 + 36×2 内边距 = 1068 */
-  max-width: 1068px;
+  /* 720 正文 + 84 间距 + 300 右栏 + 48×2 内边距 = 1200，宽屏居中 */
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 48px 36px 104px;
+  padding: 56px 48px 120px;
 }
 
 .read-layout {
   display: grid;
-  grid-template-columns: minmax(0, 660px) 268px;
+  grid-template-columns: minmax(0, 720px) 300px;
   grid-template-areas:
     "head rail"
     "body rail"
     "nav  rail";
-  column-gap: 68px;
+  column-gap: 84px;
+  justify-content: center;
   align-items: start;
 }
 
@@ -108,7 +109,7 @@
 }
 
 .detail-head h1 {
-  font-family: "Instrument Serif", "Songti SC", Georgia, serif;
+  font-family: var(--font-serif);
   font-weight: 400;
   font-size: 40px;
   line-height: 1.2;
@@ -171,11 +172,22 @@
   hyphens: none;
 }
 
+/* 大屏再放一点字号，避免"宽屏小字"的空旷感 */
+@media (min-width: 1400px) {
+  .read-layout {
+    grid-template-columns: minmax(0, 760px) 320px;
+    column-gap: 96px;
+  }
+  .article {
+    font-size: calc(var(--read-fs) + 1px);
+  }
+}
+
 .article > p { margin: 0 0 1.15em; }
 .article > p:last-child { margin-bottom: 0; }
 
 .article h2 {
-  font-family: "Instrument Serif", "Songti SC", Georgia, serif;
+  font-family: var(--font-serif);
   font-weight: 400;
   font-size: 30px;
   line-height: 1.32;
@@ -252,7 +264,7 @@
   margin: 0 0 2.2em;
   padding: 0;
   border: 0;
-  font-family: "Instrument Serif", "Songti SC", Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 20px;
   line-height: 1.7;
   letter-spacing: .004em;

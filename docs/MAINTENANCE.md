@@ -100,3 +100,8 @@ python tools/build_lessons_index.py
 是纯静态托管，没有后端，所以那套代码在仓库里永远跑不起来。
 
 相关文件已移入 `_archive/` 并在 `.gitignore` 中排除，仅作留档，不再参与构建。
+
+## 静态资源缓存
+
+改了 CSS / JS 之后，把 index.html 与 detail.html 里 ssets/*.css?v=、ssets/*.js?v= 的版本号改掉（例如 ?v=20261104），否则浏览器会用旧缓存。
+
