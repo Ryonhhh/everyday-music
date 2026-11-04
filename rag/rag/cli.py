@@ -102,8 +102,18 @@ def cmd_search(args):
         if not hits:
             print('没有命中。')
             return 0
+        offsets = {}
+        def offset_of(book_name):
+            if book_name not in offsets:
+                row = store.get_book(conn, book_name)
+                offsets[book_name] = store.book_page_offset(conn, row['id']) if row else 0
+            return offsets[book_name]
+
         for i, h in enumerate(hits, 1):
-            print(f'--- {i}. [{h["book"]}] p.{h["pageStart"]}-{h["pageEnd"]}  score={h["score"]}')
+            # 库里存的是 PDF 物理页；显示时换算成书上的印刷页，避免引用页码错位
+            off = offset_of(h['book'])
+            a, b = h['pageStart'] - off, h['pageEnd'] - off
+            print(f'--- {i}. [{h["book"]}] 印刷页 p.{a}-{b}（PDF 页 {h["pageStart"]}-{h["pageEnd"]}）  score={h["score"]}')
             if getattr(args, 'full', False):
                 print(h['text'])
             else:
