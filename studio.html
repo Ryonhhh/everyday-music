@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/site.css?v=20261104">
 <link rel="stylesheet" href="assets/site-extra.css?v=20261104">
 <link rel="stylesheet" href="assets/reading.css?v=20261104">
-<link rel="stylesheet" href="assets/studio.css?v=20261106">
+<link rel="stylesheet" href="assets/studio.css?v=20261106b">
 </head>
 <body style="background:var(--ground)">
 <div class="studio-shell">
@@ -40,6 +40,17 @@
       <label class="field">年份<input id="fYear" type="text" inputmode="numeric"></label>
       <label class="field">厂牌<input id="fLabel" type="text" placeholder="不确定就留空"></label>
       <label class="field field--wide">想强调的角度<input id="fNote" type="text" placeholder="例如：录音过程、歌词、和同期作品的对照（可留空）"></label>
+    </div>
+
+    <div class="material-box">
+      <div class="row-inline">
+        <button class="btn btn-mini" id="fetchMaterial" type="button">抓取资料</button>
+        <span class="model-hint" id="materialHint">从维基百科（中/英）与 MusicBrainz 抓发行信息、曲目表和背景，作为写作依据。</span>
+      </div>
+      <div class="sources" id="sources" hidden></div>
+      <label class="check material-toggle" id="useMaterialRow" hidden>
+        <input type="checkbox" id="useMaterial" checked> 把这些资料作为写作依据（强烈建议）
+      </label>
     </div>
   </section>
 
@@ -94,6 +105,6 @@
     </details>
   </section>
 </div>
-<script type="module" src="assets/studio.js?v=20261106"></script>
+<script type="module" src="assets/studio.js?v=20261106f"></script>
 </body>
 </html>

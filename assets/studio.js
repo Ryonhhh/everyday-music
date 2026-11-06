@@ -1,4 +1,5 @@
 import { $, esc, renderMarkdown, fetchText } from './core.js';
+import { gatherMaterials } from './grounding.js';
 
 /* ---------- 常量 ---------- */
 const LS = {
@@ -28,6 +29,8 @@ const state = {
   controller: null,
   markdown: '',
   busy: false,
+  sources: [],
+  digest: '',
 };
 
 /* ---------- 搜索 ---------- */
@@ -93,6 +96,69 @@ function pick(r) {
   $('searchHint').textContent = `已选中《${r.collectionName}》。年份与厂牌可以改，拿不准就留空。`;
   $('genBtn').disabled = false;
   $('stepPick').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  state.sources = [];
+  state.digest = '';
+  $('sources').hidden = true;
+  $('useMaterialRow').hidden = true;
+  fetchMaterials();   // 选中即自动抓资料
+}
+
+/* ---------- 资料抓取 ---------- */
+function renderSources(sources) {
+  const box = $('sources');
+  if (!sources.length) {
+    box.hidden = true;
+    return;
+  }
+  box.innerHTML = sources.map((s, i) => `
+    <div class="source" data-i="${i}">
+      <div class="source-head">
+        <span class="source-name">${esc(s.name)}</span>
+        <span class="source-meta">${s.text.length} 字</span>
+        <a href="${esc(s.url)}" target="_blank" rel="noopener">原文 ↗</a>
+        <button class="source-toggle" type="button">展开</button>
+      </div>
+      <div class="source-preview">${esc(s.text.slice(0, 1200))}${s.text.length > 1200 ? '…' : ''}</div>
+    </div>`).join('');
+  box.hidden = false;
+  box.querySelectorAll('.source').forEach(el => {
+    const btn = el.querySelector('.source-toggle');
+    btn.addEventListener('click', () => {
+      el.classList.toggle('is-open');
+      btn.textContent = el.classList.contains('is-open') ? '收起' : '展开';
+    });
+  });
+}
+
+async function fetchMaterials() {
+  const a = state.album;
+  if (!a) return;
+  const btn = $('fetchMaterial');
+  btn.disabled = true;
+  $('materialHint').textContent = '正在抓取维基百科与 MusicBrainz…';
+  $('materialHint').className = 'model-hint';
+  try {
+    const { sources, digest } = await gatherMaterials(a);
+    state.sources = sources;
+    state.digest = digest;
+    renderSources(sources);
+    if (sources.length) {
+      $('useMaterialRow').hidden = false;
+      $('useMaterial').checked = true;
+      const chars = digest.length;
+      $('materialHint').textContent = `抓到 ${sources.length} 个来源，共 ${chars} 字，会作为写作依据。`;
+      $('materialHint').className = 'model-hint is-ok';
+    } else {
+      $('materialHint').textContent = '没抓到资料（网络或条目问题），生成时只能依靠模型自身知识，事实需谨慎。';
+      $('materialHint').className = 'model-hint is-error';
+    }
+  } catch (err) {
+    $('materialHint').textContent = `抓取失败：${err.message}。可重试，或直接生成（事实风险更高）。`;
+    $('materialHint').className = 'model-hint is-error';
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 /* ---------- 设置 ---------- */
@@ -227,8 +293,16 @@ function buildPrompt() {
 
   const extra = note ? `\n\n作者希望重点涉及：${note}` : '';
 
+  const useMaterials = $('useMaterial')?.checked && state.digest;
+  const materialBlock = useMaterials
+    ? '\n\n=== 参考材料（真实抓取，优先采信）===\n\n' + state.digest
+      + '\n\n=== 材料结束 ===\n\n写作要求：材料里出现的具体事实（发行日期、厂牌、曲目顺序、曲长、人员、榜单成绩）可以直接使用，不必犹豫；'
+      + '材料没有的具体数字一律不补。曲目顺序照材料的曲目表走。'
+      + '引用材料内容时在「参考出处」列出对应链接，并注明维基百科部分依据 CC BY-SA。'
+    : '\n\n（本次没有可用参考材料，只能依靠你自身知识。请格外保守：不确定的事实一律不写。）';
+
   return state.prompt
-    + '\n\n---\n\n现在请为下面这张唱片写一篇解析：\n\n' + facts + extra
+    + '\n\n---\n\n现在请为下面这张唱片写一篇解析：\n\n' + facts + extra + materialBlock
     + '\n\n以上元数据可能不完整或有误；与你确知的可靠事实冲突时以可靠事实为准，但任何不确证的内容一律不写。';
 }
 
@@ -465,6 +539,15 @@ function wire() {
     $('modelOptions').innerHTML = '';
   });
   $('loadModels').addEventListener('click', loadModels);
+  $('fetchMaterial').addEventListener('click', fetchMaterials);
+
+  // 展开时再拼完整 prompt，保证看到的就是这次实际会发送的内容
+  const pv = document.querySelector('.prompt-view');
+  if (pv) {
+    pv.addEventListener('toggle', () => {
+      if (pv.open) $('promptBox').textContent = buildPrompt();
+    });
+  }
   $('fKey').addEventListener('blur', () => {
     if ($('modelOptions').children.length === 0 && $('fKey').value.trim() && $('fBase').value.trim()) {
       modelHint('可以点「获取可用模型」看看这个 Key 能用哪些模型。');
@@ -490,7 +573,7 @@ async function init() {
   $('fKey').value = localStorage.getItem(LS.key) || $('fKey').value;
   try {
     state.prompt = await fetchText('data/prompts/album-analysis.md');
-    $('promptBox').textContent = state.prompt;
+    $('promptBox').textContent = '展开这里会显示本次实际发送给模型的完整 prompt（含资料与元数据）。';
   } catch (e) {
     $('promptBox').textContent = 'prompt 载入失败：' + e.message;
     setStatus('prompt 载入失败，生成会不可用。', true);
