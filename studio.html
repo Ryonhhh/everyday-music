@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/site.css?v=20261104">
 <link rel="stylesheet" href="assets/site-extra.css?v=20261104">
 <link rel="stylesheet" href="assets/reading.css?v=20261104">
-<link rel="stylesheet" href="assets/studio.css?v=20261104b">
+<link rel="stylesheet" href="assets/studio.css?v=20261106">
 </head>
 <body style="background:var(--ground)">
 <div class="studio-shell">
@@ -53,7 +53,14 @@
         </select>
       </label>
       <label class="field">Base URL<input id="fBase" type="text" placeholder="https://api.deepseek.com/v1"></label>
-      <label class="field">模型<input id="fModel" type="text" placeholder="deepseek-chat"></label>
+      <label class="field field--wide">模型
+        <span class="model-row">
+          <input id="fModel" type="text" list="modelOptions" placeholder="先点「获取可用模型」，或手动填写" autocomplete="off">
+          <button class="btn btn-mini" id="loadModels" type="button">获取可用模型</button>
+        </span>
+        <datalist id="modelOptions"></datalist>
+        <span class="model-hint" id="modelHint">填好 Base URL 与 Key 后，点右侧按钮向服务商查询可用模型；也可以直接手动填模型名。</span>
+      </label>
       <label class="field field--wide">API Key<input id="fKey" type="password" placeholder="sk-…（只保存在本机）" autocomplete="off"></label>
     </div>
     <div class="row-inline">
@@ -87,6 +94,6 @@
     </details>
   </section>
 </div>
-<script type="module" src="assets/studio.js?v=20261104b"></script>
+<script type="module" src="assets/studio.js?v=20261106"></script>
 </body>
 </html>

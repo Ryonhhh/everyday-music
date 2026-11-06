@@ -133,6 +133,82 @@ function loadSettings() {
   $('fRemember').checked = localStorage.getItem(LS.remember) !== 'false';
 }
 
+/* ---------- 查询可用模型 ---------- */
+const CHAT_HINTS = ['gpt-4', 'gpt-5', 'gpt-3.5', 'o3', 'o4', 'claude', 'deepseek', 'kimi', 'qwen', 'glm',
+  'moonshot', 'llama', 'mistral', 'gemini', 'grok'];
+
+function modelHint(msg, kind = '') {
+  const el = $('modelHint');
+  el.textContent = msg;
+  el.classList.toggle('is-ok', kind === 'ok');
+  el.classList.toggle('is-error', kind === 'error');
+}
+
+/** 给模型名打分：对话模型优先，向量/语音/图像类排到最后 */
+function rankModel(id) {
+  const s = String(id).toLowerCase();
+  if (/embed|whisper|tts|dall|audio|image|vision-only|moderation|rerank|transcribe|ocr/.test(s)) return -1;
+  let score = 0;
+  CHAT_HINTS.forEach((h, i) => { if (s.includes(h)) score += 100 - i; });
+  if (/chat|instruct|sonnet|opus|pro|max|large|turbo|preview/.test(s)) score += 20;
+  return score;
+}
+
+async function fetchModels(cfg) {
+  const base = cfg.base.replace(/\/+$/, '');
+  let url;
+  let headers;
+  if (cfg.provider === 'anthropic') {
+    url = base + '/v1/models?limit=100';
+    headers = {
+      'x-api-key': cfg.key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true',
+    };
+  } else {
+    url = base + '/models';
+    headers = { Authorization: `Bearer ${cfg.key}` };
+  }
+  const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error(await errorText(res));
+  const data = await res.json();
+  const rows = Array.isArray(data.data) ? data.data
+    : Array.isArray(data.models) ? data.models : [];
+  return rows.map(r => (typeof r === 'string' ? r : (r.id || r.name))).filter(Boolean);
+}
+
+async function loadModels() {
+  const provider = $('fProvider').value;
+  const base = $('fBase').value.trim();
+  const key = $('fKey').value.trim();
+  if (!base) return modelHint('先填 Base URL。', 'error');
+  if (!key) return modelHint('先填 API Key（只存在本机）。', 'error');
+
+  const btn = $('loadModels');
+  btn.disabled = true;
+  modelHint('正在向服务商查询…');
+  try {
+    const ids = await fetchModels({ provider, base, key });
+    if (!ids.length) throw new Error('返回了空列表');
+    const sorted = ids
+      .map(id => ({ id, r: rankModel(id) }))
+      .sort((a, b) => (b.r - a.r) || a.id.localeCompare(b.id))
+      .map(x => x.id);
+    $('modelOptions').innerHTML = sorted.map(id => `<option value="${esc(id)}"></option>`).join('');
+    const cur = $('fModel').value.trim();
+    if (!cur || !sorted.includes(cur)) $('fModel').value = sorted[0];
+    saveSettings();
+    modelHint(`连接正常，可用 ${sorted.length} 个模型（对话模型已排前）。点输入框可从列表选择。`, 'ok');
+  } catch (err) {
+    const msg = /Failed to fetch|NetworkError|Load failed/i.test(err.message)
+      ? '请求失败：可能断网、被拦截，或该服务商不允许浏览器直连（CORS）。仍可手动填写模型名。'
+      : `查询失败：${err.message}。仍可手动填写模型名。`;
+    modelHint(msg, 'error');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 /* ---------- prompt 拼装 ---------- */
 function buildPrompt() {
   const a = state.album || {};
@@ -377,10 +453,22 @@ function wire() {
 
   $('fProvider').addEventListener('change', () => {
     applyProviderDefaults();
+    $('modelOptions').innerHTML = '';
+    modelHint('换了服务商，重新点「获取可用模型」。');
     saveSettings();
   });
   ['fBase', 'fModel', 'fKey', 'fRemember'].forEach(id => {
     $(id).addEventListener('change', saveSettings);
+  });
+  // Base URL 变了，旧的模型列表就不作数了
+  $('fBase').addEventListener('input', () => {
+    $('modelOptions').innerHTML = '';
+  });
+  $('loadModels').addEventListener('click', loadModels);
+  $('fKey').addEventListener('blur', () => {
+    if ($('modelOptions').children.length === 0 && $('fKey').value.trim() && $('fBase').value.trim()) {
+      modelHint('可以点「获取可用模型」看看这个 Key 能用哪些模型。');
+    }
   });
   $('clearKey').addEventListener('click', () => {
     localStorage.removeItem(LS.key);

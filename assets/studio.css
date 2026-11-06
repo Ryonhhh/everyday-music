@@ -204,6 +204,26 @@
 }
 .field input:focus, .field select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 
+/* 模型选择行 */
+.model-row { display: flex; gap: 8px; }
+.model-row input { flex: 1; min-width: 0; }
+.btn-mini {
+  height: 40px;
+  padding: 0 14px;
+  font-size: 13px;
+  white-space: nowrap;
+  flex: none;
+}
+.model-hint {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--faint);
+  letter-spacing: 0;
+  margin-top: 2px;
+}
+.model-hint.is-ok { color: #15803d; }
+.model-hint.is-error { color: #b91c1c; }
+
 .row-inline {
   display: flex;
   flex-wrap: wrap;
