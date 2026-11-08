@@ -47,6 +47,9 @@
         <button class="btn btn-mini" id="fetchMaterial" type="button">抓取资料</button>
         <span class="model-hint" id="materialHint">从维基百科（中/英）与 MusicBrainz 抓发行信息、曲目表和背景，作为写作依据。</span>
       </div>
+      <label class="check material-toggle">
+        <input type="checkbox" id="fetchReviews" checked> 同时抓取乐评原文（Guardian / AllMusic 等，每篇约 3–10 秒）
+      </label>
       <div class="sources" id="sources" hidden></div>
       <label class="check material-toggle" id="useMaterialRow" hidden>
         <input type="checkbox" id="useMaterial" checked> 把这些资料作为写作依据（强烈建议）
@@ -112,6 +115,6 @@
     </details>
   </section>
 </div>
-<script type="module" src="assets/studio.js?v=20261108"></script>
+<script type="module" src="assets/studio.js?v=20261108d"></script>
 </body>
 </html>

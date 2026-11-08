@@ -166,8 +166,105 @@ async function gatherMusicBrainz(albumTitle, artist) {
   };
 }
 
+/* ---------- 乐评原文（经 r.jina.ai 转文本，绕过 CORS） ---------- */
+const READER = 'https://r.jina.ai/';
+const REVIEW_HOSTS = [
+  'theguardian.com', 'allmusic.com', 'pitchfork.com', 'rollingstone.com', 'nme.com',
+  'bbc.co.uk', 'popmatters.com', 'thequietus.com', 'uncut.co.uk', 'stereogum.com',
+  'consequence.net', 'spin.com', 'metacritic.com', 'discogs.com', 'rateyourmusic.com',
+  'thelineofbestfit.com', 'drownedinsound.com', 'musicomh.com', 'clashmusic.com',
+  'loudersound.com', 'recordcollectormag.com', 'paste magazine.com', 'pastemagazine.com',
+];
+
+function hostOf(url) {
+  try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return ''; }
+}
+
+function isReviewHost(url) {
+  const h = hostOf(url);
+  return !!h && REVIEW_HOSTS.some(d => h === d || h.endsWith('.' + d));
+}
+
+async function readPage(url) {
+  const res = await fetch(READER + url, { headers: { Accept: 'text/plain' } });
+  if (res.status === 429) {
+    const e = new Error('RATE_LIMIT');
+    e.code = 'RATE_LIMIT';
+    throw e;
+  }
+  if (!res.ok) throw new Error(`reader HTTP ${res.status}`);
+  let text = await res.text();
+  // jina 会在开头加几行元信息，去掉
+  text = text.replace(/^(Title|URL Source|Published Time|Markdown Content):.*\n/gm, '').trim();
+  // Cloudflare 拦截页的特征：内容极短且以 Just a moment 开头
+  if (/^Just a moment\.\.\./.test(text) || text.length < 500) return '';
+  return text;
+}
+
+function extractUrls(text) {
+  return [...new Set([...text.matchAll(/https?:\/\/[^\s)\]"'<>,]+/g)].map(m => m[0].replace(/[.。]$/, '')))];
+}
+
+/** 从维基页面里挑出乐评站外链 */
+async function reviewLinksFromWiki(wikiUrl) {
+  if (!wikiUrl) return [];
+  const page = await readPage(wikiUrl);
+  const links = extractUrls(page).filter(isReviewHost);
+  const seen = new Set();
+  return links.filter(u => {
+    const key = hostOf(u) + new URL(u).pathname;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, 4);
+}
+
+/** 没有维基外链时，用 DuckDuckGo 结果页兜底 */
+async function reviewLinksFromSearch(albumTitle, artist) {
+  const q = encodeURIComponent(`${albumTitle} ${artist} album review`);
+  const page = await readPage(`https://html.duckduckgo.com/html/?q=${q}`);
+  const raw = [...page.matchAll(/uddg=([^&\s]+)/g)].map(m => decodeURIComponent(m[1]));
+  const direct = extractUrls(page);
+  const all = [...raw, ...direct].filter(isReviewHost);
+  const seen = new Set();
+  return all.filter(u => {
+    const key = hostOf(u) + new URL(u).pathname;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  }).slice(0, 3);
+}
+
+async function gatherReviews(album, wikiUrl, maxPages = 2) {
+  let links = [];
+  try {
+    links = await reviewLinksFromWiki(wikiUrl);
+  } catch (e) {
+    if (e.code === 'RATE_LIMIT') return { reviews: [], note: 'rate-limit' };
+  }
+  if (!links.length) {
+    try {
+      links = await reviewLinksFromSearch(album.collectionName || '', album.artistName || '');
+    } catch (e) {
+      return { reviews: [], note: e.code === 'RATE_LIMIT' ? 'rate-limit' : 'search-failed' };
+    }
+  }
+  const out = [];
+  let rateLimited = false;
+  for (const url of links.slice(0, maxPages)) {
+    try {
+      const text = await readPage(url);
+      if (!text) continue;
+      out.push({ name: `乐评：${hostOf(url)}`, url, text: trimAtSentence(text, 4000) });
+    } catch (e) {
+      if (e.code === 'RATE_LIMIT') { rateLimited = true; break; }
+    }
+  }
+  return { reviews: out, note: rateLimited ? 'rate-limit' : '' };
+}
+
 /* ---------- 汇总 ---------- */
-export async function gatherMaterials(album) {
+export async function gatherMaterials(album, options = {}) {
   const title = album?.collectionName || '';
   const artist = album?.artistName || '';
   const jobs = [
@@ -177,7 +274,15 @@ export async function gatherMaterials(album) {
   ];
   const results = await Promise.all(jobs);
   const sources = results.filter(Boolean);
-  return { sources, digest: formatDigest(sources) };
+
+  if (options.reviews) {
+    const wiki = sources.find(s => s.name.startsWith('Wikipedia（en）'));
+    const got = await gatherReviews(album, wiki?.url, options.maxReviews ?? 2).catch(() => ({ reviews: [], note: '' }));
+    sources.push(...got.reviews);
+    return { sources, digest: formatDigest(sources), reviewNote: got.note || '', reviewCount: got.reviews.length };
+  }
+
+  return { sources, digest: formatDigest(sources), reviewNote: '', reviewCount: 0 };
 }
 
 export function formatDigest(sources) {

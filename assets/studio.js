@@ -1,5 +1,5 @@
 import { $, esc, renderMarkdown, fetchText } from './core.js';
-import { gatherMaterials } from './grounding.js';
+import { gatherMaterials } from './grounding.js?v=20261108c';
 
 /* ---------- 常量 ---------- */
 const LS = {
@@ -136,10 +136,13 @@ async function fetchMaterials() {
   if (!a) return;
   const btn = $('fetchMaterial');
   btn.disabled = true;
-  $('materialHint').textContent = '正在抓取维基百科与 MusicBrainz…';
+  const wantReviews = $('fetchReviews')?.checked;
+  $('materialHint').textContent = wantReviews
+    ? '正在抓取维基百科、MusicBrainz 与乐评原文（可能要 10–20 秒）…'
+    : '正在抓取维基百科与 MusicBrainz…';
   $('materialHint').className = 'model-hint';
   try {
-    const { sources, digest } = await gatherMaterials(a);
+    const { sources, digest, reviewNote, reviewCount } = await gatherMaterials(a, { reviews: wantReviews, maxReviews: 2 });
     state.sources = sources;
     state.digest = digest;
     renderSources(sources);
@@ -147,7 +150,10 @@ async function fetchMaterials() {
       $('useMaterialRow').hidden = false;
       $('useMaterial').checked = true;
       const chars = digest.length;
-      $('materialHint').textContent = `抓到 ${sources.length} 个来源，共 ${chars} 字，会作为写作依据。`;
+      let extra = '';
+      if (reviewNote === 'rate-limit') extra = '（乐评抓取被限流，等一分钟再点「抓取资料」可补上）';
+      else if (wantReviews && !reviewCount) extra = '（没找到可读的乐评原文）';
+      $('materialHint').textContent = `抓到 ${sources.length} 个来源，共 ${chars} 字${extra}，会作为写作依据。`;
       $('materialHint').className = 'model-hint is-ok';
     } else {
       $('materialHint').textContent = '没抓到资料（网络或条目问题），生成时只能依靠模型自身知识，事实需谨慎。';
