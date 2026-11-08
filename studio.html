@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/site.css?v=20261104">
 <link rel="stylesheet" href="assets/site-extra.css?v=20261104">
 <link rel="stylesheet" href="assets/reading.css?v=20261104">
-<link rel="stylesheet" href="assets/studio.css?v=20261106b">
+<link rel="stylesheet" href="assets/studio.css?v=20261108">
 </head>
 <body style="background:var(--ground)">
 <div class="studio-shell">
@@ -71,8 +71,15 @@
         </span>
         <datalist id="modelOptions"></datalist>
         <span class="model-hint" id="modelHint">填好 Base URL 与 Key 后，点右侧按钮向服务商查询可用模型；也可以直接手动填模型名。</span>
+        <div class="search-models" id="searchModels" hidden></div>
       </label>
       <label class="field field--wide">API Key<input id="fKey" type="password" placeholder="sk-…（只保存在本机）" autocomplete="off"></label>
+    </div>
+    <div class="row-inline">
+      <label class="check" id="webSearchRow">
+        <input type="checkbox" id="useWebSearch"> 尝试让服务商联网搜索
+      </label>
+      <span class="model-hint" id="webSearchHint" style="margin:0">当前服务商/模型是否支持联网，见上方说明。</span>
     </div>
     <div class="row-inline">
       <span class="hint" style="margin:0">常用预设：</span>
@@ -105,6 +112,6 @@
     </details>
   </section>
 </div>
-<script type="module" src="assets/studio.js?v=20261106f"></script>
+<script type="module" src="assets/studio.js?v=20261108"></script>
 </body>
 </html>

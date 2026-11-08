@@ -243,8 +243,7 @@ async function fetchModels(cfg) {
   return rows.map(r => (typeof r === 'string' ? r : (r.id || r.name))).filter(Boolean);
 }
 
-async function loadModels() {
-  const provider = $('fProvider').value;
+async function loadModels() {  const provider = $('fProvider').value;
   const base = $('fBase').value.trim();
   const key = $('fKey').value.trim();
   if (!base) return modelHint('先填 Base URL。', 'error');
@@ -264,7 +263,11 @@ async function loadModels() {
     const cur = $('fModel').value.trim();
     if (!cur || !sorted.includes(cur)) $('fModel').value = sorted[0];
     saveSettings();
-    modelHint(`连接正常，可用 ${sorted.length} 个模型（对话模型已排前）。点输入框可从列表选择。`, 'ok');
+    renderSearchModels(sorted);
+    updateSearchUI();
+    const nSearch = sorted.filter(id => SEARCH_MODEL_RE.test(id)).length;
+    modelHint(`连接正常，可用 ${sorted.length} 个模型（对话模型已排前）`
+      + (nSearch ? `，其中 ${nSearch} 个支持联网。` : '。'), 'ok');
   } catch (err) {
     const msg = /Failed to fetch|NetworkError|Load failed/i.test(err.message)
       ? '请求失败：可能断网、被拦截，或该服务商不允许浏览器直连（CORS）。仍可手动填写模型名。'
@@ -273,6 +276,60 @@ async function loadModels() {
   } finally {
     btn.disabled = false;
   }
+}
+
+/* ---------- 联网能力判定 ---------- */
+const SEARCH_MODEL_RE = /search-preview|sonar|:online|-online\b|grok-[234]/i;
+
+/** 判断当前配置能否联网，以及用哪种方式 */
+function searchCapability() {
+  const provider = $('fProvider').value;
+  const base = $('fBase').value.toLowerCase();
+  const model = $('fModel').value.trim();
+  if (SEARCH_MODEL_RE.test(model)) return { kind: 'model' };
+  if (provider === 'anthropic') return { kind: 'anthropic', label: 'Anthropic 的 web_search 工具' };
+  if (/x\.ai/.test(base)) return { kind: 'xai', label: 'xAI 的 Live Search' };
+  if (/dashscope|aliyuncs/.test(base)) return { kind: 'qwen', label: '通义千问的 enable_search' };
+  return { kind: 'none' };
+}
+
+function updateSearchUI() {
+  const cap = searchCapability();
+  const box = $('useWebSearch');
+  const row = $('webSearchRow');
+  const hint = $('webSearchHint');
+  if (cap.kind === 'none') {
+    box.disabled = true;
+    box.checked = false;
+    row.style.opacity = '.55';
+    hint.textContent = '当前服务商不支持内置联网：可换成 OpenAI 的 *-search-preview、Perplexity 的 sonar、或 OpenRouter 的 :online 模型。';
+    hint.className = 'model-hint';
+  } else if (cap.kind === 'model') {
+    box.disabled = true;
+    box.checked = true;
+    row.style.opacity = '1';
+    hint.textContent = '这个模型本身就会联网搜索，无需额外开关。';
+    hint.className = 'model-hint is-ok';
+  } else {
+    box.disabled = false;
+    row.style.opacity = '1';
+    hint.textContent = `勾选后会在请求里启用 ${cap.label}。`;
+    hint.className = 'model-hint';
+  }
+}
+
+function renderSearchModels(ids) {
+  const box = $('searchModels');
+  const hits = ids.filter(id => SEARCH_MODEL_RE.test(id));
+  if (!hits.length) { box.hidden = true; return; }
+  box.innerHTML = '<span class="chip-label">可联网：</span>'
+    + hits.map(id => `<button class="chip" type="button" data-model="${esc(id)}"><span class="chip-ico">🌐</span>${esc(id)}</button>`).join('');
+  box.hidden = false;
+  box.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+    $('fModel').value = b.dataset.model;
+    saveSettings();
+    updateSearchUI();
+  }));
 }
 
 /* ---------- prompt 拼装 ---------- */
@@ -341,19 +398,23 @@ async function errorText(res) {
 
 async function* streamOpenAI(cfg, prompt, signal) {
   const url = cfg.base.replace(/\/+$/, '') + '/chat/completions';
+  const body = {
+    model: cfg.model,
+    stream: true,
+    temperature: 0.75,
+    messages: [
+      { role: 'system', content: '你是一位严谨的中文音乐写作者，只写确证的事实。' },
+      { role: 'user', content: prompt },
+    ],
+  };
+  // 各家的联网参数不同：xAI 用 search_parameters，通义用 enable_search
+  if (cfg.search === 'xai') body.search_parameters = { mode: 'auto' };
+  if (cfg.search === 'qwen') body.enable_search = true;
   const res = await fetch(url, {
     method: 'POST',
     signal,
     headers: { 'content-type': 'application/json', Authorization: `Bearer ${cfg.key}` },
-    body: JSON.stringify({
-      model: cfg.model,
-      stream: true,
-      temperature: 0.75,
-      messages: [
-        { role: 'system', content: '你是一位严谨的中文音乐写作者，只写确证的事实。' },
-        { role: 'user', content: prompt },
-      ],
-    }),
+    body: JSON.stringify(body),
   });
   if (!res.ok) throw new Error(await errorText(res));
   yield* readSSE(res, j => j.choices?.[0]?.delta?.content || '');
@@ -361,6 +422,15 @@ async function* streamOpenAI(cfg, prompt, signal) {
 
 async function* streamAnthropic(cfg, prompt, signal) {
   const url = cfg.base.replace(/\/+$/, '') + '/v1/messages';
+  const body = {
+    model: cfg.model,
+    max_tokens: 8192,
+    stream: true,
+    messages: [{ role: 'user', content: prompt }],
+  };
+  if (cfg.search === 'anthropic') {
+    body.tools = [{ type: 'web_search_20250305', name: 'web_search', max_uses: 5 }];
+  }
   const res = await fetch(url, {
     method: 'POST',
     signal,
@@ -370,12 +440,7 @@ async function* streamAnthropic(cfg, prompt, signal) {
       'anthropic-version': '2023-06-01',
       'anthropic-dangerous-direct-browser-access': 'true',
     },
-    body: JSON.stringify({
-      model: cfg.model,
-      max_tokens: 8192,
-      stream: true,
-      messages: [{ role: 'user', content: prompt }],
-    }),
+    body: JSON.stringify(body),
   });
   if (!res.ok) throw new Error(await errorText(res));
   yield* readSSE(res, j => (j.type === 'content_block_delta' ? (j.delta?.text || '') : ''));
@@ -422,9 +487,15 @@ async function generate() {
   };
 
   try {
+    const cap = searchCapability();
+    const wantSearch = $('useWebSearch').checked;
+    const searchMode = cap.kind === 'model' ? 'model'
+      : (wantSearch && cap.kind !== 'none' ? cap.kind : 'none');
+    const cfg = { base, model, key, search: searchMode };
     const stream = provider === 'anthropic'
-      ? streamAnthropic({ base, model, key }, prompt, state.controller.signal)
-      : streamOpenAI({ base, model, key }, prompt, state.controller.signal);
+      ? streamAnthropic(cfg, prompt, state.controller.signal)
+      : streamOpenAI(cfg, prompt, state.controller.signal);
+    if (searchMode !== 'none') setStatus('连接中（已启用联网搜索）…');
 
     for await (const delta of stream) {
       state.markdown += delta;
@@ -534,6 +605,8 @@ function wire() {
   ['fBase', 'fModel', 'fKey', 'fRemember'].forEach(id => {
     $(id).addEventListener('change', saveSettings);
   });
+  ['fBase', 'fModel'].forEach(id => $(id).addEventListener('input', updateSearchUI));
+  $('fProvider').addEventListener('change', updateSearchUI);
   // Base URL 变了，旧的模型列表就不作数了
   $('fBase').addEventListener('input', () => {
     $('modelOptions').innerHTML = '';
@@ -570,6 +643,7 @@ async function init() {
   loadSettings();
   applyProviderDefaults();
   wire();
+  updateSearchUI();
   $('fKey').value = localStorage.getItem(LS.key) || $('fKey').value;
   try {
     state.prompt = await fetchText('data/prompts/album-analysis.md');

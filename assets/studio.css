@@ -275,6 +275,33 @@
 }
 .material-toggle { margin-top: 8px; }
 
+/* 联网模型的快捷入口 */
+.search-models {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+.search-models .chip-label { font-size: 12px; color: var(--faint); margin-right: 2px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: #fff8ef;
+  color: var(--accent);
+  font-size: 12px;
+  font-family: var(--font);
+  cursor: pointer;
+}
+.chip:hover { background: #fdefdc; }
+.chip .chip-ico { font-size: 11px; }
+#webSearchRow { flex-wrap: wrap; }
+
 .row-inline {
   display: flex;
   flex-wrap: wrap;

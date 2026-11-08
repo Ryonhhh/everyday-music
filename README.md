@@ -100,6 +100,7 @@ python rag/run.py list
 - **密钥只存在你的浏览器里。** 请求从浏览器直连服务商（OpenAI / DeepSeek / Kimi / OpenRouter / Anthropic 均可），本站是纯静态页，没有任何服务器能收到它。出门在外别勾「记住密钥」。
 - **会先去抓真资料再写。** 选中唱片后自动从 **MusicBrainz**（发行日期、厂牌、官方曲目表与曲长）和 **维基百科中/英**（背景、评价）拉取材料，拼进 prompt。模型因此不必凭记忆猜曲目顺序与年份。抓不到时会明确提示"事实风险更高"。
 - **模型不用背。** 填好 Base URL 与 Key 后点「获取可用模型」，页面会向服务商查 `GET /models`，把这个 Key 能用的模型列出来（对话模型排前、embedding/语音类排后），点输入框即可选；查不到也可以手动填。
+- **哪些能联网，一眼看得出。** 模型列表里支持联网的会标 🌐：OpenAI 的 `*-search-preview`、Perplexity 的 `sonar`、OpenRouter 的 `:online` 直接选即可。Anthropic（`web_search` 工具）、xAI（`search_parameters`）、通义千问（`enable_search`）则由页面在请求里自动注入，勾选「尝试让服务商联网搜索」生效。
 - **生成是流式的**，边出字边按站内排版渲染，可随时停止。
 - 完成后三个按钮：**下载 .md**、**复制正文**、**复制 index.json 条目**——配合下一节三步就能发布。
 - **prompt 可改**：`data/prompts/album-analysis.md` 就是这个生成器的写作规范（结构、事实纪律、禁用词、自检清单），页面每次加载都会读最新版。
