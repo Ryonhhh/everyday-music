@@ -1,5 +1,5 @@
-import { $, esc, renderMarkdown, fetchText } from './core.js';
-import { gatherMaterials } from './grounding.js?v=20261108c';
+﻿import { $, esc, renderMarkdown, fetchText } from './core.js';
+import { gatherMaterials } from './grounding.js?v=20261108e';
 
 /* ---------- 常量 ---------- */
 const LS = {
@@ -137,12 +137,13 @@ async function fetchMaterials() {
   const btn = $('fetchMaterial');
   btn.disabled = true;
   const wantReviews = $('fetchReviews')?.checked;
+  const reviewCount = Number($('reviewCount')?.value || 2);
   $('materialHint').textContent = wantReviews
-    ? '正在抓取维基百科、MusicBrainz 与乐评原文（可能要 10–20 秒）…'
+    ? `正在抓取维基百科、MusicBrainz 与 ${reviewCount} 篇乐评原文（可能要 ${10 * reviewCount + 10} 秒以内）…`
     : '正在抓取维基百科与 MusicBrainz…';
   $('materialHint').className = 'model-hint';
   try {
-    const { sources, digest, reviewNote, reviewCount } = await gatherMaterials(a, { reviews: wantReviews, maxReviews: 2 });
+    const { sources, digest, reviewNote, reviewCount: gotReviews } = await gatherMaterials(a, { reviews: wantReviews, maxReviews: reviewCount });
     state.sources = sources;
     state.digest = digest;
     renderSources(sources);
@@ -152,7 +153,8 @@ async function fetchMaterials() {
       const chars = digest.length;
       let extra = '';
       if (reviewNote === 'rate-limit') extra = '（乐评抓取被限流，等一分钟再点「抓取资料」可补上）';
-      else if (wantReviews && !reviewCount) extra = '（没找到可读的乐评原文）';
+      else if (wantReviews && !gotReviews) extra = '（没找到可读的乐评原文）';
+      else if (wantReviews && gotReviews < reviewCount) extra = `（只拿到 ${gotReviews}/${reviewCount} 篇乐评）`;
       $('materialHint').textContent = `抓到 ${sources.length} 个来源，共 ${chars} 字${extra}，会作为写作依据。`;
       $('materialHint').className = 'model-hint is-ok';
     } else {

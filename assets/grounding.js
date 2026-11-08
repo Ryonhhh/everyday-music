@@ -205,18 +205,44 @@ function extractUrls(text) {
   return [...new Set([...text.matchAll(/https?:\/\/[^\s)\]"'<>,]+/g)].map(m => m[0].replace(/[.。]$/, '')))];
 }
 
+/** 排序：带 review / interview / feature 的页面优先；同一站点只留一篇，保证来源多样 */
+function rankReviewLinks(links, limit = 8) {
+  const score = u => {
+    const p = u.toLowerCase();
+    let s = 0;
+    if (/interview/.test(p)) s += 3;
+    if (/review/.test(p)) s += 2;
+    if (/feature|profile|oral-history/.test(p)) s += 1;
+    if (/\/album\/|album-|music\//.test(p)) s += 1;
+    if (/discogs\.com\/release|rateyourmusic/.test(p)) s -= 1;   // 数据库条目，不是乐评
+    return s;
+  };
+  const sorted = [...links].sort((a, b) => score(b) - score(a));
+  const hosts = new Set();
+  const out = [];
+  for (const u of sorted) {
+    const h = hostOf(u);
+    if (hosts.has(h)) continue;    // 同一站点只取一篇
+    hosts.add(h);
+    out.push(u);
+    if (out.length >= limit) break;
+  }
+  return out;
+}
+
 /** 从维基页面里挑出乐评站外链 */
 async function reviewLinksFromWiki(wikiUrl) {
   if (!wikiUrl) return [];
   const page = await readPage(wikiUrl);
   const links = extractUrls(page).filter(isReviewHost);
   const seen = new Set();
-  return links.filter(u => {
+  const unique = links.filter(u => {
     const key = hostOf(u) + new URL(u).pathname;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
-  }).slice(0, 4);
+  });
+  return rankReviewLinks(unique);
 }
 
 /** 没有维基外链时，用 DuckDuckGo 结果页兜底 */
