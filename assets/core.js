@@ -84,7 +84,8 @@ export function renderMarkdown(src) {
     .replace(/`([^`]+)`/g, (_, c) => `<code>${c}</code>`)
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<em>$2</em>')
-    .replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>');
+    // URL 里允许出现一层成对括号（维基条目常见，如 Xx_(The_xx_album)）
+    .replace(/\[([^\]]+)\]\((https?:(?:[^()\s]|\([^()\s]*\))+)\)/g, '<a href="$2" rel="noopener noreferrer" target="_blank">$1</a>');
 
   const flushList = () => {
     if (list) { out.push(`<${list}>${items.join('')}</${list}>`); list = null; items = []; }

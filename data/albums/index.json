@@ -1,6 +1,34 @@
 {
   "albums": [
     {
+      "id": "xx",
+      "title": "xx",
+      "artist": "The xx",
+      "year": "2009",
+      "kicker": "专辑解析",
+      "byline": "The xx · 2009",
+      "cover": "data/albums/xx/cover.jpg",
+      "coverAlt": "The xx《xx》专辑封面",
+      "facts": [
+        { "k": "艺人", "v": "The xx" },
+        { "k": "发行", "v": "2009-08-14" },
+        { "k": "厂牌", "v": "Young Turks（XL）" },
+        { "k": "时长", "v": "11 首 · 约 38 分钟" },
+        { "k": "制作", "v": "Jamie Smith、Rodaidh McDonald" },
+        { "k": "评价", "v": "Metacritic 87 / 水星奖 2010" }
+      ],
+      "listen": [
+        { "platform": "Apple Music", "url": "https://music.apple.com/us/album/xx/1850810462" },
+        { "platform": "网易云音乐", "url": "https://music.163.com/#/album?id=350112646" }
+      ],
+      "more": [
+        { "platform": "Wikipedia", "url": "https://en.wikipedia.org/wiki/Xx_(The_xx_album)" },
+        { "platform": "MusicBrainz", "url": "https://musicbrainz.org/release-group/23355caf-a543-4b5f-80fe-449101868fc1" }
+      ],
+      "summary": "四个南伦敦中学生的减法手册：删掉副歌与鼓组，留下房间、回声和两个人的低声对话",
+      "addedAt": "2026-11-09"
+    },
+    {
       "id": "songs-for-drella",
       "title": "Songs for Drella",
       "artist": "Lou Reed & John Cale",

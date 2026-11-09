@@ -1,9 +1,9 @@
-/* 每日音乐学习 · 纯静态前端
+﻿/* 每日音乐学习 · 纯静态前端
    数据全部来自 data/*.json，不依赖任何后端、登录或数据库。 */
 import {
   $, esc, fmtDate, fetchJson, fetchText, loadProgress, markDayComplete,
   completedCount, drawStaff, renderMarkdown,
-} from './core.js';
+} from './core.js?v=20261109';
 
 const VIEW_NAMES = { today: '今日学习', lessons: '课程目录', albums: '专辑解析', library: '资料库' };
 const isDetail = /detail\.html/.test(location.pathname);
