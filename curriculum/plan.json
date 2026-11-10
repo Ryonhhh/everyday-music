@@ -20,108 +20,1002 @@
       "file": "A History of Western Music (Donald Jay Grout, Claude V. Palisca) (Z-Library).pdf",
       "structure": "20章",
       "totalUnits": 36
+    },
+    {
+      "id": "open-music-theory",
+      "title": "Open Music Theory",
+      "author": "Kris Shaffer、Bryn Hughes、Brian Moseley 等",
+      "publisher": "Hybrid Pedagogy Publishing（CC BY-SA 4.0）",
+      "totalUnits": 12,
+      "structure": "chapter"
     }
   ],
   "units": {
-    "T01": {"track": "theory", "lecture": "第一讲 乐音体系", "title": "乐音体系（一）：音及音的性质；乐音与噪音", "sections": ["音及音的性质（音高、音值、音量、音色）", "乐音与噪音", "乐音体系"]},
-    "T02": {"track": "theory", "lecture": "第一讲 乐音体系", "title": "乐音体系（二）：音名与音组；音域与音区", "sections": ["音名与音组（大字组、小字组）", "标准音与中央C的位置", "音域与音区"]},
-    "T03": {"track": "theory", "lecture": "第二讲 音律", "title": "音律（一）：标准音和中央C；复合音与分音列", "sections": ["标准音 a1 与中央C c1", "复合音与分音列（泛音列）", "基音与泛音"]},
-    "T04": {"track": "theory", "lecture": "第二讲 音律", "title": "音律（二）：三种律制；半音与全音", "sections": ["十二平均律", "五度相生律", "纯律", "自然半音与变化半音、自然全音与变化全音"]},
-    "T05": {"track": "theory", "lecture": "第三讲 五线谱记谱法", "title": "记谱法（一）：音符与休止符；增长时值的记号", "sections": ["什么是记谱法", "音符与休止符（全、二分、四分、八分、十六分…）", "附点、延音线、延长记号"]},
-    "T06": {"track": "theory", "lecture": "第三讲 五线谱记谱法", "title": "记谱法（二）：线与间；谱号；变音记号", "sections": ["五线谱的线与间", "谱号（高音、低音、中音、次中音）", "变音记号（升、降、重升、重降、还原）"]},
-    "T07": {"track": "theory", "lecture": "第三讲 五线谱记谱法", "title": "记谱法（三）：省略记号；演奏法记号；装饰音记号", "sections": ["省略记号", "演奏法记号（连音、断音、保持音等）", "装饰音记号（倚音、波音、回音、颤音）", "乐谱的正确写法"]},
-    "T08": {"track": "theory", "lecture": "第四讲 节奏节拍", "title": "节奏节拍（一）：节奏与节拍；各种拍子", "sections": ["节奏与节拍的概念", "拍号", "各种拍子（单拍子、复拍子、混合拍子）"]},
-    "T09": {"track": "theory", "lecture": "第四讲 节奏节拍", "title": "节奏节拍（二）：音值组合法；强弱关系", "sections": ["各种拍子的音值组合法", "节奏中音的强弱关系", "弱起小节"]},
-    "T10": {"track": "theory", "lecture": "第四讲 节奏节拍", "title": "节奏节拍（三）：切分音；特殊划分；表现作用", "sections": ["切分音、切分节奏、切分效果", "音符均分的特殊形式（三连音、五连音等）", "节奏节拍在音乐表现中的作用"]},
-    "T11": {"track": "theory", "lecture": "第五讲 音乐的速度与力度", "title": "速度与力度：标记及其表现意义", "sections": ["速度在音乐表现中的意义", "音乐速度的标记", "力度在音乐表现中的意义", "音乐力度的标记"]},
-    "T12": {"track": "theory", "lecture": "第六讲 音程", "title": "音程（一）：名称与标记；单音程与复音程", "sections": ["什么是音程（旋律音程、和声音程）", "音程的名称与标记（度数、音数）", "单音程与复音程"]},
-    "T13": {"track": "theory", "lecture": "第六讲 音程", "title": "音程（二）：自然与变化音程；协和与不协和", "sections": ["自然音程与变化音程", "度数相同而音数不同的音程的相互关系", "协和音程与不协和音程"]},
-    "T14": {"track": "theory", "lecture": "第六讲 音程", "title": "音程（三）：转位；等音程", "sections": ["音程的转位", "等音程"]},
-    "T15": {"track": "theory", "lecture": "第七讲 和弦", "title": "和弦（一）：三和弦", "sections": ["什么是和弦", "三和弦（大、小、增、减）", "三和弦的转位"]},
-    "T16": {"track": "theory", "lecture": "第七讲 和弦", "title": "和弦（二）：七和弦；和弦转位", "sections": ["七和弦（大七、小七、属七、减七、半减七等）", "七和弦的转位", "和弦的等和弦"]},
-    "T17": {"track": "theory", "lecture": "第八讲 调及调关系", "title": "调及调关系", "sections": ["调与调号", "升号调与降号调", "调的五度循环（等音调）"]},
-    "T18": {"track": "theory", "lecture": "第九讲 调式", "title": "调式（一）：大调式与小调式", "sections": ["调式与音阶", "大调式（自然、和声、旋律）", "小调式（自然、和声、旋律）", "平行大小调与同主音大小调"]},
-    "T19": {"track": "theory", "lecture": "第九讲 调式", "title": "调式（二）：民族调式", "sections": ["五声调式（宫商角徵羽）", "六声调式", "七声调式（雅乐、清乐、燕乐）"]},
-    "T20": {"track": "theory", "lecture": "第十讲 调与调式", "title": "调与调式：调性分析", "sections": ["调与调式的区别", "调性判断（调号与主音的确定）"]},
-    "T21": {"track": "theory", "lecture": "第十一讲 调式中的音程", "title": "调式中的音程", "sections": ["调式中音程的构成", "稳定音程与不稳定音程", "音程的解决"]},
-    "T22": {"track": "theory", "lecture": "第十二讲 调式中的和弦", "title": "调式中的和弦", "sections": ["调式正三和弦与副三和弦", "正三和弦的功能（T-S-D）", "属七和弦与导七和弦的解决"]},
-    "T23": {"track": "theory", "lecture": "第十三讲 转调", "title": "转调", "sections": ["什么是转调", "转调的类型（近关系调、远关系调）", "转调的识别"]},
-    "T24": {"track": "theory", "lecture": "第十四讲 调式变音及半音音阶", "title": "调式变音及半音音阶", "sections": ["调式变音（辅助音、经过音）", "半音音阶"]},
-    "T25": {"track": "theory", "lecture": "第十五讲 移调", "title": "移调", "sections": ["移调的概念与用途", "移调的方法（按音程移调、改调号移调）", "移调乐器"]},
-    "T26": {"track": "theory", "lecture": "第十六讲 关于旋律的基础知识", "title": "旋律的基础知识", "sections": ["旋律的定义与形态", "旋律的发展手法", "乐曲的基本形式"]},
-    "H01": {"track": "history", "chapter": "Ch.1 The State of Music at the End of the Ancient World (p.1-41)", "title": "古代世界结束时的音乐状况", "sections": ["The Greek Heritage（希腊遗产：音乐与神话、哲学、教育）", "The Greek Musical System（希腊音乐体系：调式、音阶理论）", "The Early Christian Church（早期基督教会）"]},
-    "H02": {"track": "history", "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)", "title": "中世纪圣咏（一）：罗马圣咏与宗教礼仪", "sections": ["Roman Chant and Liturgy（罗马圣咏与礼仪：日课、弥撒）", "Classes, Forms and Types of Chant（圣咏的类型、形式与分类）"]},
-    "H03": {"track": "history", "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)", "title": "中世纪圣咏（二）：晚期发展与音乐理论", "sections": ["Later Developments of the Chant（附加段、继叙咏、宗教剧）", "Medieval Musical Theory and Practice（中世纪音乐理论与记谱法、圭多）"]},
-    "H04": {"track": "history", "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)", "title": "中世纪圣咏（三）：世俗单声歌曲与乐器", "sections": ["Nonliturgical and Secular Monody（游吟诗人、恋诗歌手）", "Medieval Instrumental Music and Instruments（中世纪器乐与乐器）"]},
-    "H05": {"track": "history", "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)", "title": "复调的开端（一）：早期奥尔加农", "sections": ["Historical Background of Early Polyphony（复调的历史背景）", "Early Organum（早期奥尔加农）", "Florid Organum（华丽奥尔加农）"]},
-    "H06": {"track": "history", "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)", "title": "复调的开端（二）：节奏模式与圣母院乐派", "sections": ["The Rhythmic Modes（节奏模式）", "Notre Dame Organum（圣母院奥尔加农：莱奥南与佩罗坦）"]},
-    "H07": {"track": "history", "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)", "title": "复调的开端（三）：孔杜克图斯与经文歌", "sections": ["Polyphonic Conductus（复调孔杜克图斯）", "The Motet（经文歌的诞生与13世纪发展）"]},
-    "H08": {"track": "history", "chapter": "Ch.4 French and Italian Music of the 14th Century (p.137-171)", "title": "14世纪音乐（一）：法国新艺术", "sections": ["General Background（时代背景：14世纪的社会与文化）", "The Ars Nova in France（法国新艺术：维特里、马肖）", "等节奏技术"]},
-    "H09": {"track": "history", "chapter": "Ch.4 French and Italian Music of the 14th Century (p.137-171)", "title": "14世纪音乐（二）：意大利与法国晚期", "sections": ["Italian Trecento Music（意大利14世纪音乐：兰迪尼）", "French Music of the Late Fourteenth Century（14世纪末法国音乐）", "Musica Ficta（伪音）"]},
-    "H10": {"track": "history", "chapter": "Ch.5 Medieval to Renaissance: England and the Burgundian Lands (p.172-198)", "title": "15世纪：英国音乐与勃艮第乐派", "sections": ["English Music（英国音乐：邓斯泰布尔）", "Music in the Burgundian Lands（勃艮第乐派：迪费、班舒瓦）"]},
-    "H11": {"track": "history", "chapter": "Ch.6 The Age of the Renaissance: Ockeghem to Josquin (p.199-241)", "title": "文艺复兴（一）：奥克冈到若斯坎", "sections": ["General Characteristics（文艺复兴音乐总体特征）", "Ockeghem and Busnois（奥克冈与比斯努瓦）", "Josquin des Prez（若斯坎·德·普雷）", "Obrecht 与同代作曲家"]},
-    "H12": {"track": "history", "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)", "title": "16世纪新趋势（一）：法-佛兰德一代与民族风格", "sections": ["The Franco-Flemish Generation of 1520-1550（贡贝尔、克莱芒等）", "The Rise of National Styles（民族风格的兴起：意大利、法国、德国、西班牙、英国）"]},
-    "H13": {"track": "history", "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)", "title": "16世纪新趋势（二）：牧歌与相关体裁", "sections": ["The Madrigal and Related Forms（意大利牧歌：杰苏阿尔多、蒙特威尔第早期）", "法国尚松", "英国牧歌"]},
-    "H14": {"track": "history", "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)", "title": "16世纪新趋势（三）：器乐的兴起", "sections": ["Instrumental Music of the Sixteenth Century（16世纪器乐）", "琉特琴、键盘乐器", "变奏曲、托卡塔、利切卡尔"]},
-    "H15": {"track": "history", "chapter": "Ch.8 Church Music in the Late Renaissance (p.310-344)", "title": "文艺复兴后期教会音乐（一）：宗教改革", "sections": ["The Music of the Reformation in Germany（路德教音乐、众赞歌）", "Reformation Church Music Outside Germany（加尔文教、英国国教音乐）"]},
-    "H16": {"track": "history", "chapter": "Ch.8 Church Music in the Late Renaissance (p.310-344)", "title": "文艺复兴后期教会音乐（二）：反宗教改革与威尼斯乐派", "sections": ["The Counter-Reformation（反宗教改革、特伦托公会议）", "Palestrina（帕莱斯特里那）", "The Venetian School（威尼斯乐派：维拉尔特、加布里埃利）"]},
-    "H17": {"track": "history", "chapter": "Ch.9 Music of the Early Baroque Period (p.345-404)", "title": "早期巴洛克（一）：总体特征与歌剧的诞生", "sections": ["General Characteristics（通奏低音、第二实践）", "Early Opera（歌剧的诞生：佛罗伦萨卡梅拉塔、蒙特威尔第《奥菲欧》）"]},
-    "H18": {"track": "history", "chapter": "Ch.9 Music of the Early Baroque Period (p.345-404)", "title": "早期巴洛克（二）：声乐室内乐、教会音乐与器乐", "sections": ["Vocal Chamber Music（独唱牧歌、康塔塔）", "Church Music（大协奏风格）", "Instrumental Music（奏鸣曲、托卡塔、里切尔卡）"]},
-    "H19": {"track": "history", "chapter": "Ch.10 Opera and Vocal Music in the Late 17th Century (p.405-443)", "title": "17世纪晚期（一）：歌剧", "sections": ["Opera（意大利歌剧：威尼斯、那不勒斯乐派）", "法国歌剧（吕利）", "英国歌剧（普赛尔）", "德国歌剧"]},
-    "H20": {"track": "history", "chapter": "Ch.10 Opera and Vocal Music in the Late 17th Century (p.405-443)", "title": "17世纪晚期（二）：康塔塔、歌曲与清唱剧", "sections": ["Cantata and Song（康塔塔与歌曲：许茨）", "Church Music and Oratorio（教会音乐与清唱剧：卡里西米）"]},
-    "H21": {"track": "history", "chapter": "Ch.11 Instrumental Music in the Late Baroque Period (p.444-479)", "title": "巴洛克晚期器乐", "sections": ["Keyboard Music（键盘音乐：库普兰、组曲、赋格）", "Ensemble Music（合奏音乐：科雷利、三重奏鸣曲、大协奏曲）"]},
-    "H22": {"track": "history", "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)", "title": "18世纪早期（一）：维瓦尔第与拉莫", "sections": ["Antonio Vivaldi（维瓦尔第与协奏曲）", "Jean-Philippe Rameau（拉莫：歌剧与和声理论）"]},
-    "H23": {"track": "history", "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)", "title": "18世纪早期（二）：巴赫", "sections": ["J. S. Bach 生平", "Bach's Instrumental Music（器乐：赋格、勃兰登堡协奏曲、平均律）", "Bach's Vocal Music（声乐：康塔塔、受难曲、b小调弥撒）"]},
-    "H24": {"track": "history", "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)", "title": "18世纪早期（三）：亨德尔", "sections": ["George Frideric Handel 生平", "歌剧与清唱剧（《弥赛亚》）", "管弦乐与器乐"]},
-    "H25": {"track": "history", "chapter": "Ch.13 Sources of the Classic Style (p.541-583)", "title": "古典风格的源泉（一）：启蒙运动与器乐", "sections": ["The Enlightenment（启蒙运动与音乐趣味）", "Instrumental Music: Sonata, Symphony, and Concerto（奏鸣曲、交响曲、协奏曲：曼海姆乐派、C.P.E.巴赫）"]},
-    "H26": {"track": "history", "chapter": "Ch.13 Sources of the Classic Style (p.541-583)", "title": "古典风格的源泉（二）：歌剧与歌曲", "sections": ["Opera, Song, and Church Music（喜歌剧之争、格鲁克改革）", "J. C. 巴赫与交响曲的成熟"]},
-    "H27": {"track": "history", "chapter": "Ch.14 The Late Eighteenth Century (p.584-623)", "title": "18世纪晚期（一）：海顿", "sections": ["Franz Josef Haydn 生平", "Haydn's Instrumental Works（交响曲、弦乐四重奏）", "Haydn's Vocal Works（清唱剧《创世纪》）"]},
-    "H28": {"track": "history", "chapter": "Ch.14 The Late Eighteenth Century (p.584-623)", "title": "18世纪晚期（二）：莫扎特", "sections": ["Wolfgang Amadeus Mozart 生平", "Mozart's First Masterworks（早期杰作）", "The Vienna Period（维也纳时期：歌剧、交响曲、协奏曲、安魂曲）"]},
-    "H29": {"track": "history", "chapter": "Ch.15 Ludwig van Beethoven (p.624-655)", "title": "贝多芬（1770-1827）", "sections": ["The Man and His Music（其人其乐）", "First Period（第一时期：模仿与探索）", "Second Period（第二时期：英雄风格）", "Third Period（第三时期：晚期风格）"]},
-    "H30": {"track": "history", "chapter": "Ch.16 The 19th Century: Romanticism; Vocal Music (p.656-679)", "title": "19世纪（一）：浪漫主义与声乐", "sections": ["Classicism and Romanticism（古典主义与浪漫主义）", "Characteristics of Romantic Music（浪漫主义音乐特征）", "The Lied（艺术歌曲：舒伯特、舒曼）", "Choral Music（合唱音乐）"]},
-    "H31": {"track": "history", "chapter": "Ch.17 The 19th Century: Instrumental Music (p.680-724)", "title": "19世纪（二）：器乐", "sections": ["The Piano（钢琴与钢琴音乐：肖邦、李斯特）", "Chamber Music（室内乐）", "Music for Orchestra（管弦乐：柏辽兹、门德尔松、勃拉姆斯）"]},
-    "H32": {"track": "history", "chapter": "Ch.18 The 19th Century: Opera and Music Drama (p.725-754)", "title": "19世纪（三）：歌剧（上）法国、意大利与威尔第", "sections": ["France（法国大歌剧、喜歌剧）", "Italy（意大利歌剧：罗西尼、贝里尼、多尼采蒂）", "Giuseppe Verdi（威尔第）"]},
-    "H33": {"track": "history", "chapter": "Ch.18 The 19th Century: Opera and Music Drama (p.725-754)", "title": "19世纪（四）：歌剧（下）德国与瓦格纳", "sections": ["German Romantic Opera（德国浪漫主义歌剧：韦伯）", "Richard Wagner: The Music Drama（瓦格纳与乐剧：主导动机、特里斯坦与伊索尔德、指环）"]},
-    "H34": {"track": "history", "chapter": "Ch.19 The End of an Era (p.755-806)", "title": "一个时代的终结", "sections": ["Post-Romanticism（后浪漫主义：马勒、理查·施特劳斯）", "Nationalism（民族主义：俄罗斯五人团、格里格、德沃夏克等）", "New Currents in France（法国新潮流：德彪西的印象主义）", "Italian Opera（意大利歌剧：真实主义）"]},
-    "H35": {"track": "history", "chapter": "Ch.20 The Twentieth Century (p.807-884)", "title": "20世纪（一）：斯特拉文斯基与多元潮流", "sections": ["Introduction（20世纪总论）", "Musical Styles Related to Folk Idioms（民间音乐风格：巴托克）", "Neo-Classicism and Related Movements（新古典主义）", "Stravinsky（斯特拉文斯基：《春之祭》到新古典）"]},
-    "H36": {"track": "history", "chapter": "Ch.20 The Twentieth Century (p.807-884)", "title": "20世纪（二）：勋伯格与韦伯恩之后", "sections": ["Schoenberg and His Followers（勋伯格与追随者：无调性、十二音体系、贝尔格、韦伯恩）", "After Webern（韦伯恩之后：整体序列主义）", "Conclusion（结论）"]}
+    "T01": {
+      "track": "theory",
+      "lecture": "第一讲 乐音体系",
+      "title": "乐音体系（一）：音及音的性质；乐音与噪音",
+      "sections": [
+        "音及音的性质（音高、音值、音量、音色）",
+        "乐音与噪音",
+        "乐音体系"
+      ]
+    },
+    "T02": {
+      "track": "theory",
+      "lecture": "第一讲 乐音体系",
+      "title": "乐音体系（二）：音名与音组；音域与音区",
+      "sections": [
+        "音名与音组（大字组、小字组）",
+        "标准音与中央C的位置",
+        "音域与音区"
+      ]
+    },
+    "T03": {
+      "track": "theory",
+      "lecture": "第二讲 音律",
+      "title": "音律（一）：标准音和中央C；复合音与分音列",
+      "sections": [
+        "标准音 a1 与中央C c1",
+        "复合音与分音列（泛音列）",
+        "基音与泛音"
+      ]
+    },
+    "T04": {
+      "track": "theory",
+      "lecture": "第二讲 音律",
+      "title": "音律（二）：三种律制；半音与全音",
+      "sections": [
+        "十二平均律",
+        "五度相生律",
+        "纯律",
+        "自然半音与变化半音、自然全音与变化全音"
+      ]
+    },
+    "T05": {
+      "track": "theory",
+      "lecture": "第三讲 五线谱记谱法",
+      "title": "记谱法（一）：音符与休止符；增长时值的记号",
+      "sections": [
+        "什么是记谱法",
+        "音符与休止符（全、二分、四分、八分、十六分…）",
+        "附点、延音线、延长记号"
+      ]
+    },
+    "T06": {
+      "track": "theory",
+      "lecture": "第三讲 五线谱记谱法",
+      "title": "记谱法（二）：线与间；谱号；变音记号",
+      "sections": [
+        "五线谱的线与间",
+        "谱号（高音、低音、中音、次中音）",
+        "变音记号（升、降、重升、重降、还原）"
+      ]
+    },
+    "T07": {
+      "track": "theory",
+      "lecture": "第三讲 五线谱记谱法",
+      "title": "记谱法（三）：省略记号；演奏法记号；装饰音记号",
+      "sections": [
+        "省略记号",
+        "演奏法记号（连音、断音、保持音等）",
+        "装饰音记号（倚音、波音、回音、颤音）",
+        "乐谱的正确写法"
+      ]
+    },
+    "T08": {
+      "track": "theory",
+      "lecture": "第四讲 节奏节拍",
+      "title": "节奏节拍（一）：节奏与节拍；各种拍子",
+      "sections": [
+        "节奏与节拍的概念",
+        "拍号",
+        "各种拍子（单拍子、复拍子、混合拍子）"
+      ]
+    },
+    "T09": {
+      "track": "theory",
+      "lecture": "第四讲 节奏节拍",
+      "title": "节奏节拍（二）：音值组合法；强弱关系",
+      "sections": [
+        "各种拍子的音值组合法",
+        "节奏中音的强弱关系",
+        "弱起小节"
+      ]
+    },
+    "T10": {
+      "track": "theory",
+      "lecture": "第四讲 节奏节拍",
+      "title": "节奏节拍（三）：切分音；特殊划分；表现作用",
+      "sections": [
+        "切分音、切分节奏、切分效果",
+        "音符均分的特殊形式（三连音、五连音等）",
+        "节奏节拍在音乐表现中的作用"
+      ]
+    },
+    "T11": {
+      "track": "theory",
+      "lecture": "第五讲 音乐的速度与力度",
+      "title": "速度与力度：标记及其表现意义",
+      "sections": [
+        "速度在音乐表现中的意义",
+        "音乐速度的标记",
+        "力度在音乐表现中的意义",
+        "音乐力度的标记"
+      ]
+    },
+    "T12": {
+      "track": "theory",
+      "lecture": "第六讲 音程",
+      "title": "音程（一）：名称与标记；单音程与复音程",
+      "sections": [
+        "什么是音程（旋律音程、和声音程）",
+        "音程的名称与标记（度数、音数）",
+        "单音程与复音程"
+      ]
+    },
+    "T13": {
+      "track": "theory",
+      "lecture": "第六讲 音程",
+      "title": "音程（二）：自然与变化音程；协和与不协和",
+      "sections": [
+        "自然音程与变化音程",
+        "度数相同而音数不同的音程的相互关系",
+        "协和音程与不协和音程"
+      ]
+    },
+    "T14": {
+      "track": "theory",
+      "lecture": "第六讲 音程",
+      "title": "音程（三）：转位；等音程",
+      "sections": [
+        "音程的转位",
+        "等音程"
+      ]
+    },
+    "T15": {
+      "track": "theory",
+      "lecture": "第七讲 和弦",
+      "title": "和弦（一）：三和弦",
+      "sections": [
+        "什么是和弦",
+        "三和弦（大、小、增、减）",
+        "三和弦的转位"
+      ]
+    },
+    "T16": {
+      "track": "theory",
+      "lecture": "第七讲 和弦",
+      "title": "和弦（二）：七和弦；和弦转位",
+      "sections": [
+        "七和弦（大七、小七、属七、减七、半减七等）",
+        "七和弦的转位",
+        "和弦的等和弦"
+      ]
+    },
+    "T17": {
+      "track": "theory",
+      "lecture": "第八讲 调及调关系",
+      "title": "调及调关系",
+      "sections": [
+        "调与调号",
+        "升号调与降号调",
+        "调的五度循环（等音调）"
+      ]
+    },
+    "T18": {
+      "track": "theory",
+      "lecture": "第九讲 调式",
+      "title": "调式（一）：大调式与小调式",
+      "sections": [
+        "调式与音阶",
+        "大调式（自然、和声、旋律）",
+        "小调式（自然、和声、旋律）",
+        "平行大小调与同主音大小调"
+      ]
+    },
+    "T19": {
+      "track": "theory",
+      "lecture": "第九讲 调式",
+      "title": "调式（二）：民族调式",
+      "sections": [
+        "五声调式（宫商角徵羽）",
+        "六声调式",
+        "七声调式（雅乐、清乐、燕乐）"
+      ]
+    },
+    "T20": {
+      "track": "theory",
+      "lecture": "第十讲 调与调式",
+      "title": "调与调式：调性分析",
+      "sections": [
+        "调与调式的区别",
+        "调性判断（调号与主音的确定）"
+      ]
+    },
+    "T21": {
+      "track": "theory",
+      "lecture": "第十一讲 调式中的音程",
+      "title": "调式中的音程",
+      "sections": [
+        "调式中音程的构成",
+        "稳定音程与不稳定音程",
+        "音程的解决"
+      ]
+    },
+    "T22": {
+      "track": "theory",
+      "lecture": "第十二讲 调式中的和弦",
+      "title": "调式中的和弦",
+      "sections": [
+        "调式正三和弦与副三和弦",
+        "正三和弦的功能（T-S-D）",
+        "属七和弦与导七和弦的解决"
+      ]
+    },
+    "T23": {
+      "track": "theory",
+      "lecture": "第十三讲 转调",
+      "title": "转调",
+      "sections": [
+        "什么是转调",
+        "转调的类型（近关系调、远关系调）",
+        "转调的识别"
+      ]
+    },
+    "T24": {
+      "track": "theory",
+      "lecture": "第十四讲 调式变音及半音音阶",
+      "title": "调式变音及半音音阶",
+      "sections": [
+        "调式变音（辅助音、经过音）",
+        "半音音阶"
+      ]
+    },
+    "T25": {
+      "track": "theory",
+      "lecture": "第十五讲 移调",
+      "title": "移调",
+      "sections": [
+        "移调的概念与用途",
+        "移调的方法（按音程移调、改调号移调）",
+        "移调乐器"
+      ]
+    },
+    "T26": {
+      "track": "theory",
+      "lecture": "第十六讲 关于旋律的基础知识",
+      "title": "旋律的基础知识",
+      "sections": [
+        "旋律的定义与形态",
+        "旋律的发展手法",
+        "乐曲的基本形式"
+      ]
+    },
+    "H01": {
+      "track": "history",
+      "chapter": "Ch.1 The State of Music at the End of the Ancient World (p.1-41)",
+      "title": "古代世界结束时的音乐状况",
+      "sections": [
+        "The Greek Heritage（希腊遗产：音乐与神话、哲学、教育）",
+        "The Greek Musical System（希腊音乐体系：调式、音阶理论）",
+        "The Early Christian Church（早期基督教会）"
+      ]
+    },
+    "H02": {
+      "track": "history",
+      "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)",
+      "title": "中世纪圣咏（一）：罗马圣咏与宗教礼仪",
+      "sections": [
+        "Roman Chant and Liturgy（罗马圣咏与礼仪：日课、弥撒）",
+        "Classes, Forms and Types of Chant（圣咏的类型、形式与分类）"
+      ]
+    },
+    "H03": {
+      "track": "history",
+      "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)",
+      "title": "中世纪圣咏（二）：晚期发展与音乐理论",
+      "sections": [
+        "Later Developments of the Chant（附加段、继叙咏、宗教剧）",
+        "Medieval Musical Theory and Practice（中世纪音乐理论与记谱法、圭多）"
+      ]
+    },
+    "H04": {
+      "track": "history",
+      "chapter": "Ch.2 Chant and Secular Song in the Middle Ages (p.42-96)",
+      "title": "中世纪圣咏（三）：世俗单声歌曲与乐器",
+      "sections": [
+        "Nonliturgical and Secular Monody（游吟诗人、恋诗歌手）",
+        "Medieval Instrumental Music and Instruments（中世纪器乐与乐器）"
+      ]
+    },
+    "H05": {
+      "track": "history",
+      "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)",
+      "title": "复调的开端（一）：早期奥尔加农",
+      "sections": [
+        "Historical Background of Early Polyphony（复调的历史背景）",
+        "Early Organum（早期奥尔加农）",
+        "Florid Organum（华丽奥尔加农）"
+      ]
+    },
+    "H06": {
+      "track": "history",
+      "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)",
+      "title": "复调的开端（二）：节奏模式与圣母院乐派",
+      "sections": [
+        "The Rhythmic Modes（节奏模式）",
+        "Notre Dame Organum（圣母院奥尔加农：莱奥南与佩罗坦）"
+      ]
+    },
+    "H07": {
+      "track": "history",
+      "chapter": "Ch.3 The Beginnings of Polyphony (p.97-136)",
+      "title": "复调的开端（三）：孔杜克图斯与经文歌",
+      "sections": [
+        "Polyphonic Conductus（复调孔杜克图斯）",
+        "The Motet（经文歌的诞生与13世纪发展）"
+      ]
+    },
+    "H08": {
+      "track": "history",
+      "chapter": "Ch.4 French and Italian Music of the 14th Century (p.137-171)",
+      "title": "14世纪音乐（一）：法国新艺术",
+      "sections": [
+        "General Background（时代背景：14世纪的社会与文化）",
+        "The Ars Nova in France（法国新艺术：维特里、马肖）",
+        "等节奏技术"
+      ]
+    },
+    "H09": {
+      "track": "history",
+      "chapter": "Ch.4 French and Italian Music of the 14th Century (p.137-171)",
+      "title": "14世纪音乐（二）：意大利与法国晚期",
+      "sections": [
+        "Italian Trecento Music（意大利14世纪音乐：兰迪尼）",
+        "French Music of the Late Fourteenth Century（14世纪末法国音乐）",
+        "Musica Ficta（伪音）"
+      ]
+    },
+    "H10": {
+      "track": "history",
+      "chapter": "Ch.5 Medieval to Renaissance: England and the Burgundian Lands (p.172-198)",
+      "title": "15世纪：英国音乐与勃艮第乐派",
+      "sections": [
+        "English Music（英国音乐：邓斯泰布尔）",
+        "Music in the Burgundian Lands（勃艮第乐派：迪费、班舒瓦）"
+      ]
+    },
+    "H11": {
+      "track": "history",
+      "chapter": "Ch.6 The Age of the Renaissance: Ockeghem to Josquin (p.199-241)",
+      "title": "文艺复兴（一）：奥克冈到若斯坎",
+      "sections": [
+        "General Characteristics（文艺复兴音乐总体特征）",
+        "Ockeghem and Busnois（奥克冈与比斯努瓦）",
+        "Josquin des Prez（若斯坎·德·普雷）",
+        "Obrecht 与同代作曲家"
+      ]
+    },
+    "H12": {
+      "track": "history",
+      "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)",
+      "title": "16世纪新趋势（一）：法-佛兰德一代与民族风格",
+      "sections": [
+        "The Franco-Flemish Generation of 1520-1550（贡贝尔、克莱芒等）",
+        "The Rise of National Styles（民族风格的兴起：意大利、法国、德国、西班牙、英国）"
+      ]
+    },
+    "H13": {
+      "track": "history",
+      "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)",
+      "title": "16世纪新趋势（二）：牧歌与相关体裁",
+      "sections": [
+        "The Madrigal and Related Forms（意大利牧歌：杰苏阿尔多、蒙特威尔第早期）",
+        "法国尚松",
+        "英国牧歌"
+      ]
+    },
+    "H14": {
+      "track": "history",
+      "chapter": "Ch.7 New Currents in the 16th Century (p.242-309)",
+      "title": "16世纪新趋势（三）：器乐的兴起",
+      "sections": [
+        "Instrumental Music of the Sixteenth Century（16世纪器乐）",
+        "琉特琴、键盘乐器",
+        "变奏曲、托卡塔、利切卡尔"
+      ]
+    },
+    "H15": {
+      "track": "history",
+      "chapter": "Ch.8 Church Music in the Late Renaissance (p.310-344)",
+      "title": "文艺复兴后期教会音乐（一）：宗教改革",
+      "sections": [
+        "The Music of the Reformation in Germany（路德教音乐、众赞歌）",
+        "Reformation Church Music Outside Germany（加尔文教、英国国教音乐）"
+      ]
+    },
+    "H16": {
+      "track": "history",
+      "chapter": "Ch.8 Church Music in the Late Renaissance (p.310-344)",
+      "title": "文艺复兴后期教会音乐（二）：反宗教改革与威尼斯乐派",
+      "sections": [
+        "The Counter-Reformation（反宗教改革、特伦托公会议）",
+        "Palestrina（帕莱斯特里那）",
+        "The Venetian School（威尼斯乐派：维拉尔特、加布里埃利）"
+      ]
+    },
+    "H17": {
+      "track": "history",
+      "chapter": "Ch.9 Music of the Early Baroque Period (p.345-404)",
+      "title": "早期巴洛克（一）：总体特征与歌剧的诞生",
+      "sections": [
+        "General Characteristics（通奏低音、第二实践）",
+        "Early Opera（歌剧的诞生：佛罗伦萨卡梅拉塔、蒙特威尔第《奥菲欧》）"
+      ]
+    },
+    "H18": {
+      "track": "history",
+      "chapter": "Ch.9 Music of the Early Baroque Period (p.345-404)",
+      "title": "早期巴洛克（二）：声乐室内乐、教会音乐与器乐",
+      "sections": [
+        "Vocal Chamber Music（独唱牧歌、康塔塔）",
+        "Church Music（大协奏风格）",
+        "Instrumental Music（奏鸣曲、托卡塔、里切尔卡）"
+      ]
+    },
+    "H19": {
+      "track": "history",
+      "chapter": "Ch.10 Opera and Vocal Music in the Late 17th Century (p.405-443)",
+      "title": "17世纪晚期（一）：歌剧",
+      "sections": [
+        "Opera（意大利歌剧：威尼斯、那不勒斯乐派）",
+        "法国歌剧（吕利）",
+        "英国歌剧（普赛尔）",
+        "德国歌剧"
+      ]
+    },
+    "H20": {
+      "track": "history",
+      "chapter": "Ch.10 Opera and Vocal Music in the Late 17th Century (p.405-443)",
+      "title": "17世纪晚期（二）：康塔塔、歌曲与清唱剧",
+      "sections": [
+        "Cantata and Song（康塔塔与歌曲：许茨）",
+        "Church Music and Oratorio（教会音乐与清唱剧：卡里西米）"
+      ]
+    },
+    "H21": {
+      "track": "history",
+      "chapter": "Ch.11 Instrumental Music in the Late Baroque Period (p.444-479)",
+      "title": "巴洛克晚期器乐",
+      "sections": [
+        "Keyboard Music（键盘音乐：库普兰、组曲、赋格）",
+        "Ensemble Music（合奏音乐：科雷利、三重奏鸣曲、大协奏曲）"
+      ]
+    },
+    "H22": {
+      "track": "history",
+      "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)",
+      "title": "18世纪早期（一）：维瓦尔第与拉莫",
+      "sections": [
+        "Antonio Vivaldi（维瓦尔第与协奏曲）",
+        "Jean-Philippe Rameau（拉莫：歌剧与和声理论）"
+      ]
+    },
+    "H23": {
+      "track": "history",
+      "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)",
+      "title": "18世纪早期（二）：巴赫",
+      "sections": [
+        "J. S. Bach 生平",
+        "Bach's Instrumental Music（器乐：赋格、勃兰登堡协奏曲、平均律）",
+        "Bach's Vocal Music（声乐：康塔塔、受难曲、b小调弥撒）"
+      ]
+    },
+    "H24": {
+      "track": "history",
+      "chapter": "Ch.12 The Early Eighteenth Century (p.480-540)",
+      "title": "18世纪早期（三）：亨德尔",
+      "sections": [
+        "George Frideric Handel 生平",
+        "歌剧与清唱剧（《弥赛亚》）",
+        "管弦乐与器乐"
+      ]
+    },
+    "H25": {
+      "track": "history",
+      "chapter": "Ch.13 Sources of the Classic Style (p.541-583)",
+      "title": "古典风格的源泉（一）：启蒙运动与器乐",
+      "sections": [
+        "The Enlightenment（启蒙运动与音乐趣味）",
+        "Instrumental Music: Sonata, Symphony, and Concerto（奏鸣曲、交响曲、协奏曲：曼海姆乐派、C.P.E.巴赫）"
+      ]
+    },
+    "H26": {
+      "track": "history",
+      "chapter": "Ch.13 Sources of the Classic Style (p.541-583)",
+      "title": "古典风格的源泉（二）：歌剧与歌曲",
+      "sections": [
+        "Opera, Song, and Church Music（喜歌剧之争、格鲁克改革）",
+        "J. C. 巴赫与交响曲的成熟"
+      ]
+    },
+    "H27": {
+      "track": "history",
+      "chapter": "Ch.14 The Late Eighteenth Century (p.584-623)",
+      "title": "18世纪晚期（一）：海顿",
+      "sections": [
+        "Franz Josef Haydn 生平",
+        "Haydn's Instrumental Works（交响曲、弦乐四重奏）",
+        "Haydn's Vocal Works（清唱剧《创世纪》）"
+      ]
+    },
+    "H28": {
+      "track": "history",
+      "chapter": "Ch.14 The Late Eighteenth Century (p.584-623)",
+      "title": "18世纪晚期（二）：莫扎特",
+      "sections": [
+        "Wolfgang Amadeus Mozart 生平",
+        "Mozart's First Masterworks（早期杰作）",
+        "The Vienna Period（维也纳时期：歌剧、交响曲、协奏曲、安魂曲）"
+      ]
+    },
+    "H29": {
+      "track": "history",
+      "chapter": "Ch.15 Ludwig van Beethoven (p.624-655)",
+      "title": "贝多芬（1770-1827）",
+      "sections": [
+        "The Man and His Music（其人其乐）",
+        "First Period（第一时期：模仿与探索）",
+        "Second Period（第二时期：英雄风格）",
+        "Third Period（第三时期：晚期风格）"
+      ]
+    },
+    "H30": {
+      "track": "history",
+      "chapter": "Ch.16 The 19th Century: Romanticism; Vocal Music (p.656-679)",
+      "title": "19世纪（一）：浪漫主义与声乐",
+      "sections": [
+        "Classicism and Romanticism（古典主义与浪漫主义）",
+        "Characteristics of Romantic Music（浪漫主义音乐特征）",
+        "The Lied（艺术歌曲：舒伯特、舒曼）",
+        "Choral Music（合唱音乐）"
+      ]
+    },
+    "H31": {
+      "track": "history",
+      "chapter": "Ch.17 The 19th Century: Instrumental Music (p.680-724)",
+      "title": "19世纪（二）：器乐",
+      "sections": [
+        "The Piano（钢琴与钢琴音乐：肖邦、李斯特）",
+        "Chamber Music（室内乐）",
+        "Music for Orchestra（管弦乐：柏辽兹、门德尔松、勃拉姆斯）"
+      ]
+    },
+    "H32": {
+      "track": "history",
+      "chapter": "Ch.18 The 19th Century: Opera and Music Drama (p.725-754)",
+      "title": "19世纪（三）：歌剧（上）法国、意大利与威尔第",
+      "sections": [
+        "France（法国大歌剧、喜歌剧）",
+        "Italy（意大利歌剧：罗西尼、贝里尼、多尼采蒂）",
+        "Giuseppe Verdi（威尔第）"
+      ]
+    },
+    "H33": {
+      "track": "history",
+      "chapter": "Ch.18 The 19th Century: Opera and Music Drama (p.725-754)",
+      "title": "19世纪（四）：歌剧（下）德国与瓦格纳",
+      "sections": [
+        "German Romantic Opera（德国浪漫主义歌剧：韦伯）",
+        "Richard Wagner: The Music Drama（瓦格纳与乐剧：主导动机、特里斯坦与伊索尔德、指环）"
+      ]
+    },
+    "H34": {
+      "track": "history",
+      "chapter": "Ch.19 The End of an Era (p.755-806)",
+      "title": "一个时代的终结",
+      "sections": [
+        "Post-Romanticism（后浪漫主义：马勒、理查·施特劳斯）",
+        "Nationalism（民族主义：俄罗斯五人团、格里格、德沃夏克等）",
+        "New Currents in France（法国新潮流：德彪西的印象主义）",
+        "Italian Opera（意大利歌剧：真实主义）"
+      ]
+    },
+    "H35": {
+      "track": "history",
+      "chapter": "Ch.20 The Twentieth Century (p.807-884)",
+      "title": "20世纪（一）：斯特拉文斯基与多元潮流",
+      "sections": [
+        "Introduction（20世纪总论）",
+        "Musical Styles Related to Folk Idioms（民间音乐风格：巴托克）",
+        "Neo-Classicism and Related Movements（新古典主义）",
+        "Stravinsky（斯特拉文斯基：《春之祭》到新古典）"
+      ]
+    },
+    "H36": {
+      "track": "history",
+      "chapter": "Ch.20 The Twentieth Century (p.807-884)",
+      "title": "20世纪（二）：勋伯格与韦伯恩之后",
+      "sections": [
+        "Schoenberg and His Followers（勋伯格与追随者：无调性、十二音体系、贝尔格、韦伯恩）",
+        "After Webern（韦伯恩之后：整体序列主义）",
+        "Conclusion（结论）"
+      ]
+    },
+    "T37": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Harmonic functions / Harmonic syntax",
+      "title": "和声功能：从「三个和弦」到语法",
+      "sections": [
+        "功能（T/S/D）如何构成语法",
+        "乐句的和声框架",
+        "延长（prolongation）与装饰"
+      ]
+    },
+    "T38": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Classical cadence types",
+      "title": "终止式：乐句如何结束",
+      "sections": [
+        "正格终止与变格终止",
+        "半终止与阻碍终止",
+        "终止式在乐句中的位置"
+      ]
+    },
+    "T39": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Applied chords",
+      "title": "副属和弦：把 V 借给任何人",
+      "sections": [
+        "副属和弦的构成与标记",
+        "链条式副属进行",
+        "副属和弦与转调的界线"
+      ]
+    },
+    "T40": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Modal mixture",
+      "title": "调式交替：借用同名调的色彩",
+      "sections": [
+        "同名大小调互借",
+        "下属功能的变化和弦",
+        "那不勒斯和弦与增六和弦"
+      ]
+    },
+    "T41": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Modulation",
+      "title": "转调：枢纽和弦与共同音",
+      "sections": [
+        "枢纽和弦法",
+        "共同音与等音转调",
+        "转调还是离调：判据"
+      ]
+    },
+    "T42": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · The sentence",
+      "title": "乐句结构（一）：sentence",
+      "sections": [
+        "基本型与延续型",
+        "4+4 结构如何铺开",
+        "在古典作品中的实例"
+      ]
+    },
+    "T43": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · The period / Hybrid themes",
+      "title": "乐句结构（二）：period 与混合型",
+      "sections": [
+        "前句与后句",
+        "混合型主题",
+        "复合乐段与复合乐句"
+      ]
+    },
+    "T44": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · The small binary / The small ternary",
+      "title": "小型曲式：二部与三部",
+      "sections": [
+        "小型二部",
+        "小型三部与再现",
+        "与李重光「一段体/两段体」的对照"
+      ]
+    },
+    "T45": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Sonata form: exposition types",
+      "title": "奏鸣曲式（一）：呈示部",
+      "sections": [
+        "主题群与调性布局",
+        "连接部的功能",
+        "呈示部的类型"
+      ]
+    },
+    "T46": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Sonata form: development / recapitulation",
+      "title": "奏鸣曲式（二）：发展部与再现部",
+      "sections": [
+        "发展部的展开手法",
+        "再现部的调性解决",
+        "尾声的独立意义"
+      ]
+    },
+    "T47": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Harmony in pop/rock music",
+      "title": "流行音乐和声：循环进行",
+      "sections": [
+        "doo-wop 进行",
+        "四五一与卡农进行",
+        "循环和声与形式的关系"
+      ]
+    },
+    "T48": {
+      "track": "theory",
+      "book": "open-music-theory",
+      "chapter": "Open Music Theory · Post-tonal: set theory / twelve-tone",
+      "title": "后调性入门：音级集合与十二音",
+      "sections": [
+        "音级与音程级",
+        "标准序与原型",
+        "音列与四种基本操作"
+      ]
+    }
   },
   "days": [
-    {"day": 1, "theory": "T01", "history": "H01"},
-    {"day": 2, "theory": "T02", "history": "H02"},
-    {"day": 3, "theory": "T03", "history": "H03"},
-    {"day": 4, "theory": "T04", "history": "H04"},
-    {"day": 5, "theory": "T05", "history": "H05"},
-    {"day": 6, "theory": "T06", "history": "H06"},
-    {"day": 7, "theory": "T07", "history": "H07"},
-    {"day": 8, "theory": "T08", "history": "H08"},
-    {"day": 9, "theory": "T09", "history": "H09"},
-    {"day": 10, "theory": "T10", "history": "H10"},
-    {"day": 11, "theory": "T11", "history": "H11"},
-    {"day": 12, "theory": "T12", "history": "H12"},
-    {"day": 13, "theory": "T13", "history": "H13"},
-    {"day": 14, "theory": "T14", "history": "H14"},
-    {"day": 15, "theory": "T15", "history": "H15"},
-    {"day": 16, "theory": "T16", "history": "H16"},
-    {"day": 17, "theory": "T17", "history": "H17"},
-    {"day": 18, "theory": "T18", "history": "H18"},
-    {"day": 19, "theory": "T19", "history": "H19"},
-    {"day": 20, "theory": "T20", "history": "H20"},
-    {"day": 21, "theory": "T21", "history": "H21"},
-    {"day": 22, "theory": "T22", "history": "H22"},
-    {"day": 23, "theory": "T23", "history": "H23"},
-    {"day": 24, "theory": "T24", "history": "H24"},
-    {"day": 25, "theory": "T25", "history": "H25"},
-    {"day": 26, "theory": "T26", "history": "H26"},
-    {"day": 27, "theory": null, "history": "H27"},
-    {"day": 28, "theory": null, "history": "H28"},
-    {"day": 29, "theory": null, "history": "H29"},
-    {"day": 30, "theory": null, "history": "H30"},
-    {"day": 31, "theory": null, "history": "H31"},
-    {"day": 32, "theory": null, "history": "H32"},
-    {"day": 33, "theory": null, "history": "H33"},
-    {"day": 34, "theory": null, "history": "H34"},
-    {"day": 35, "theory": null, "history": "H35"},
-    {"day": 36, "theory": null, "history": "H36"}
+    {
+      "day": 1,
+      "theory": "T01",
+      "history": "H01"
+    },
+    {
+      "day": 2,
+      "theory": "T02",
+      "history": "H02"
+    },
+    {
+      "day": 3,
+      "theory": "T03",
+      "history": "H03"
+    },
+    {
+      "day": 4,
+      "theory": "T04",
+      "history": "H04"
+    },
+    {
+      "day": 5,
+      "theory": "T05",
+      "history": "H05"
+    },
+    {
+      "day": 6,
+      "theory": "T06",
+      "history": "H06"
+    },
+    {
+      "day": 7,
+      "theory": "T07",
+      "history": "H07"
+    },
+    {
+      "day": 8,
+      "theory": "T08",
+      "history": "H08"
+    },
+    {
+      "day": 9,
+      "theory": "T09",
+      "history": "H09"
+    },
+    {
+      "day": 10,
+      "theory": "T10",
+      "history": "H10"
+    },
+    {
+      "day": 11,
+      "theory": "T11",
+      "history": "H11"
+    },
+    {
+      "day": 12,
+      "theory": "T12",
+      "history": "H12"
+    },
+    {
+      "day": 13,
+      "theory": "T13",
+      "history": "H13"
+    },
+    {
+      "day": 14,
+      "theory": "T14",
+      "history": "H14"
+    },
+    {
+      "day": 15,
+      "theory": "T15",
+      "history": "H15"
+    },
+    {
+      "day": 16,
+      "theory": "T16",
+      "history": "H16"
+    },
+    {
+      "day": 17,
+      "theory": "T17",
+      "history": "H17"
+    },
+    {
+      "day": 18,
+      "theory": "T18",
+      "history": "H18"
+    },
+    {
+      "day": 19,
+      "theory": "T19",
+      "history": "H19"
+    },
+    {
+      "day": 20,
+      "theory": "T20",
+      "history": "H20"
+    },
+    {
+      "day": 21,
+      "theory": "T21",
+      "history": "H21"
+    },
+    {
+      "day": 22,
+      "theory": "T22",
+      "history": "H22"
+    },
+    {
+      "day": 23,
+      "theory": "T23",
+      "history": "H23"
+    },
+    {
+      "day": 24,
+      "theory": "T24",
+      "history": "H24"
+    },
+    {
+      "day": 25,
+      "theory": "T25",
+      "history": "H25"
+    },
+    {
+      "day": 26,
+      "theory": "T26",
+      "history": "H26"
+    },
+    {
+      "day": 27,
+      "theory": null,
+      "history": "H27"
+    },
+    {
+      "day": 28,
+      "theory": null,
+      "history": "H28"
+    },
+    {
+      "day": 29,
+      "theory": null,
+      "history": "H29"
+    },
+    {
+      "day": 30,
+      "theory": null,
+      "history": "H30"
+    },
+    {
+      "day": 31,
+      "theory": null,
+      "history": "H31"
+    },
+    {
+      "day": 32,
+      "theory": null,
+      "history": "H32"
+    },
+    {
+      "day": 33,
+      "theory": null,
+      "history": "H33"
+    },
+    {
+      "day": 34,
+      "theory": null,
+      "history": "H34"
+    },
+    {
+      "day": 35,
+      "theory": null,
+      "history": "H35"
+    },
+    {
+      "day": 36,
+      "theory": null,
+      "history": "H36"
+    },
+    {
+      "day": 37,
+      "theory": "T37",
+      "history": null
+    },
+    {
+      "day": 38,
+      "theory": "T38",
+      "history": null
+    },
+    {
+      "day": 39,
+      "theory": "T39",
+      "history": null
+    },
+    {
+      "day": 40,
+      "theory": "T40",
+      "history": null
+    },
+    {
+      "day": 41,
+      "theory": "T41",
+      "history": null
+    },
+    {
+      "day": 42,
+      "theory": "T42",
+      "history": null
+    },
+    {
+      "day": 43,
+      "theory": "T43",
+      "history": null
+    },
+    {
+      "day": 44,
+      "theory": "T44",
+      "history": null
+    },
+    {
+      "day": 45,
+      "theory": "T45",
+      "history": null
+    },
+    {
+      "day": 46,
+      "theory": "T46",
+      "history": null
+    },
+    {
+      "day": 47,
+      "theory": "T47",
+      "history": null
+    },
+    {
+      "day": 48,
+      "theory": "T48",
+      "history": null
+    }
   ]
 }

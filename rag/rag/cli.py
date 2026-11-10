@@ -102,18 +102,29 @@ def cmd_search(args):
         if not hits:
             print('没有命中。')
             return 0
-        offsets = {}
-        def offset_of(book_name):
-            if book_name not in offsets:
+        meta = {}
+        def meta_of(book_name):
+            if book_name not in meta:
                 row = store.get_book(conn, book_name)
-                offsets[book_name] = store.book_page_offset(conn, row['id']) if row else 0
-            return offsets[book_name]
+                if row:
+                    meta[book_name] = {
+                        'offset': store.book_page_offset(conn, row['id']),
+                        'page_less': '无页码' in (row['tags'] or ''),
+                    }
+                else:
+                    meta[book_name] = {'offset': 0, 'page_less': False}
+            return meta[book_name]
 
         for i, h in enumerate(hits, 1):
             # 库里存的是 PDF 物理页；显示时换算成书上的印刷页，避免引用页码错位
-            off = offset_of(h['book'])
-            a, b = h['pageStart'] - off, h['pageEnd'] - off
-            print(f'--- {i}. [{h["book"]}] 印刷页 p.{a}-{b}（PDF 页 {h["pageStart"]}-{h["pageEnd"]}）  score={h["score"]}')
+            m = meta_of(h['book'])
+            if m['page_less']:
+                # 网页教材没有印刷页码，这里的「页」是章节序号
+                where = f'节 {h["pageStart"]}-{h["pageEnd"]}'
+            else:
+                a, b = h['pageStart'] - m['offset'], h['pageEnd'] - m['offset']
+                where = f'印刷页 p.{a}-{b}（PDF 页 {h["pageStart"]}-{h["pageEnd"]}）'
+            print(f'--- {i}. [{h["book"]}] {where}  score={h["score"]}')
             if getattr(args, 'full', False):
                 print(h['text'])
             else:

@@ -21,6 +21,12 @@ BOOK_META = {
         'note': '中文教材，按「讲」组织，共 16 讲',
         'label': '李重光《基本乐理通用教材》',
     },
+    'open-music-theory': {
+        'slug': 'open-music-theory',
+        'subtitle': 'Open Music Theory',
+        'note': '开放教材（CC BY-SA 4.0），网页版，按章节组织',
+        'label': 'Open Music Theory',
+    },
     'history': {
         'slug': 'western-music-history',
         'subtitle': 'A History of Western Music',
@@ -95,11 +101,17 @@ def main():
                 continue
             track = u.get('track', 'theory')
             book = next((b for b in books if b['id'] == track), None)
+            slug = u.get('book')
+            if slug:
+                b2 = next((b for b in books if b.get('slug') == slug or b['id'] == slug), None)
+                if b2:
+                    book = b2
             resolved.append({
                 'id': uid,
                 'track': track,
                 'title': u.get('title', ''),
                 'book': book['title'] if book else '',
+                'bookSlug': (u.get('book') or (book or {}).get('slug', '')),
                 'source': {
                     'lecture': u.get('lecture', ''),
                     'chapter': u.get('chapter', ''),

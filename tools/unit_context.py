@@ -72,10 +72,12 @@ def main():
             lines.append(f'!! 未找到单元 {uid}')
             continue
         track = u.get('track')
-        book = TRACK_BOOK.get(track)
-        english = track == 'history'
+        # 单元可以指定自己的教材（如进阶乐理用 Open Music Theory）
+        book = u.get('book') or TRACK_BOOK.get(track)
+        english = track == 'history' or (u.get('book') or '') == 'open-music-theory'
         printed = page_range_of(u)
-        book_id = resolve_book_id(conn, track)
+        book_id = store.get_book(conn, book)['id'] if (book and store.get_book(conn, book)) else None
+        page_less = bool(book_id) and '无页码' in (store.get_book(conn, book)['tags'] or '')
         offset = store.book_page_offset(conn, book_id) if book_id else 0
         prange = (printed[0] + offset, printed[1] + offset) if printed else None
         lines.append('=' * 78)
@@ -91,6 +93,11 @@ def main():
             lines.append(f'  · {sec}')
 
         raw_queries = [u.get('title', '')] + list(u.get('sections') or [])
+        # 英文教材：中文章节名清空后没词可用，就从 chapter 里拆英文关键词
+        if english and u.get('chapter'):
+            raw_queries.append(u['chapter'].split('·')[-1])
+            for part in re.split(r'[/、]', u['chapter'].split('·')[-1]):
+                raw_queries.append(part)
         queries = []
         for q in raw_queries:
             cq = clean_query(q, english)
@@ -117,8 +124,11 @@ def main():
                 tag = '（承接上文）' if h.get('follower') else ''
                 lines.append('')
                 pp = f'{h["pageStart"] - offset}-{h["pageEnd"] - offset}'
-                lines.append(f'--- 检索「{q}」{tag} → {h["book"]} '
-                             f'印刷页 p.{pp}（PDF 页 {h["pageStart"]}-{h["pageEnd"]}）'
+                # 网页教材没有印刷页码，这里标「节」
+                where = (f'节 {h["pageStart"]}-{h["pageEnd"]}'
+                         if page_less else
+                         f'印刷页 p.{pp}（PDF 页 {h["pageStart"]}-{h["pageEnd"]}）')
+                lines.append(f'--- 检索「{q}」{tag} → {h["book"]} {where}'
                              f' (score {h["score"]})')
                 body = h['text']
                 if args.digest and len(body) > 900:
